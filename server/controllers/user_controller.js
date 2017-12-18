@@ -1,4 +1,4 @@
-import axios from "axios";
+const axios = require("axios");
 
 module.exports = {
   Get_Flights: (req, res, next) => {

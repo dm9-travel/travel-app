@@ -5,23 +5,22 @@ const session = require("express-session");
 const massive = require("massive");
 const passport = require("passport");
 const Auth0Strategy = require("passport-auth0");
-const user_controller = require("./user_controller.js");
+const user_controller = require("./controllers/user_controller.js");
+const app = express();
 
 require("dotenv").config();
-
-const { secret } = require("../config.js").passportAuth0;
 
 const port = 3001;
 
 app.use(
   session({
-    secret,
+    secret: process.env.SECRET,
     resave: false,
     saveUninitialized: false
   })
 );
 
-massive(process.env.CONNECTION_STRING)
+massive(process.env.CONNECTIONSTRING)
   .then(dbInstance => {
     app.set("db", dbInstance);
   })
@@ -39,9 +38,9 @@ app.use(passport.session());
 passport.use(
   new Auth0Strategy(
     {
-      domain,
-      clientID,
-      clientSecret,
+      domain: process.env.DOMAIN,
+      clientID: process.env.CLIENTID,
+      clientSecret: process.env.CLIENTSECRET,
       callbackURL: "/api/login"
     },
     function(accessToken, refreshToken, extraParams, profile, done) {
@@ -112,4 +111,8 @@ app.get("/api/test", (req, res, next) => {
       res.json(response);
     })
     .catch(console.log);
+});
+
+app.listen(port, () => {
+  console.log(`Listening at port: ${port}`);
 });
