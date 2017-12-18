@@ -22,7 +22,16 @@
   font-size: large;
 }
 
+.jumbotron {
+  background-image: url('https://images.unsplash.com/photo-1468296320602-73cc55315f25?auto=format&fit=crop&w=1212&q=80');
+  background-size: cover;
+  height: 70vh;
+}
+
+
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+

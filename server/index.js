@@ -10,7 +10,7 @@ require('dotenv').config();
 const {secret} = require('../config.js').passportAuth0;
 
 const port = 3001;
-
+const app = express();
 app.use(
     session({
       secret,
@@ -18,22 +18,22 @@ app.use(
       saveUninitialized: false
     })
   );
-  
+
  massive(process.env.CONNECTION_STRING)
   .then(dbInstance => {
       app.set('db', dbInstance)
   })
   .catch(console.log);
-  
+
 // require controllers
 const userCtrl = require('./controllers/user_controller');
-  
+
   app.use(json());
   app.use(cors());
-  
+
   app.use(passport.initialize());
   app.use(passport.session());
-  
+
   passport.use(
     new Auth0Strategy(
       {
@@ -63,11 +63,11 @@ const userCtrl = require('./controllers/user_controller');
       }
     )
   );
-  
+
   passport.serializeUser(function(user, done) {
     done(null, user);
   });
-  
+
   passport.deserializeUser(function(obj, done) {
     done(null, obj);
   });
@@ -83,18 +83,18 @@ const userCtrl = require('./controllers/user_controller');
     req.logout();
     res.redirect('/');
   })
-  
-  
-  
+
+
+
   app.get("/api/me", function(req, res) {
     if (!req.user) return res.status(404);
       req.app.get('db').get_user_by_auth_id([req.user.authid])
       .then((user) => res.status(200).send(user[0] ))
       .catch(() => res.status(500).send());
-  
-    
+
+
   });
-  
+
   app.get("/api/test", (req, res, next) => {
     req.app
       .get("db")
