@@ -1,3 +1,5 @@
+import axios from "axios";
+
 module.exports = {
   Get_Flights: (req, res, next) => {
     const {
@@ -17,7 +19,8 @@ module.exports = {
       )
       .then(response => {
         return response.data;
-      });
+      })
+      .catch(err => err);
   },
 
   Get_Watchlist: (req, res, next) => {
