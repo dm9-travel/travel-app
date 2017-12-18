@@ -6,11 +6,14 @@ const massive = require("massive");
 const passport = require("passport");
 const Auth0Strategy = require("passport-auth0");
 require('dotenv').config();
-
-const {secret} = require('../config.js').passportAuth0;
-
+const {secret}=require("../config.js").session;
+const {
+  domain,
+  clientID,
+  clientSecret
+} = require("../config.js").passportAuth0;
 const port = 3001;
-
+const app = express();
 app.use(
     session({
       secret,
