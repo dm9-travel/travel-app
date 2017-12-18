@@ -5,6 +5,7 @@ const session = require("express-session");
 const massive = require("massive");
 const passport = require("passport");
 const Auth0Strategy = require("passport-auth0");
+require('dotenv').config();
 
 const {secret} = require('../config.js').passportAuth0;
 
@@ -18,9 +19,11 @@ app.use(
     })
   );
   
-  massive(connectionString)
-    .then(db => app.set("db", db))
-    .catch(console.log);
+ massive(process.env.CONNECTION_STRING)
+  .then(dbInstance => {
+      app.set('db', dbInstance)
+  })
+  .catch(console.log);
   
 // require controllers
 const userCtrl = require('./controllers/user_controller');
