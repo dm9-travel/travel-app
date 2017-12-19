@@ -22,9 +22,15 @@ class ResultsView extends Component {
           });
           mapDiv.style.height = "90vh";
           mapDiv.style.width = "50vw";
+<<<<<<< HEAD
           
           mapDiv.style.right = "0vw";
           mapDiv.style.top = "0vh";
+=======
+
+          mapDiv.style.right = "0px";
+          mapDiv.style.top = "0px";
+>>>>>>> master
 
         //   mapDiv.style.resetBoundsOnResize = "magic";
           console.log(marker)
@@ -37,7 +43,7 @@ class ResultsView extends Component {
                 <div className="resultsList" >
                     List here
                 </div>
-                <div id='gmap' ref={ref => this.gmap =ref} />   
+                <div id='gmap' ref={ref => this.gmap =ref} />
             </div>
         )
     }
