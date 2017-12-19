@@ -26,13 +26,16 @@ class App extends Component {
     if ("geolocation" in navigator){
     //geolocation is available 
       navigator.geolocation.getCurrentPosition(position =>{
-        this.setState({
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude
-        });
     //Call getAirport endpoint on server
-        axios.get(`/api/getAirport?lat=${this.state.latitude}&long=${this.state.longitude}`)
-            .then(response =>this.setState({airport: response.data}));
+        axios
+          .get( `/api/getAirport?lat=${position.coords.latitude}&long=${position.coords.longitude}`)
+          .then(response =>
+            this.setState({
+              latitude: position.coords.latitude,
+              longitude: position.coords.longitude,
+              airport: response.data
+            })
+          );
       });
     }
   }
