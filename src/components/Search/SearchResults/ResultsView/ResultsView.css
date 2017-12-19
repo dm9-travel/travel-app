@@ -4,6 +4,7 @@
     align-items: stretch;
     justify-content: center;
     height: 90vh;
+    width: 100vw;
 }
 .resultsList {
 
@@ -12,7 +13,7 @@
     justify-content: flex-start;
     align-content: center;
     align-items: stretch;
-    width: 50%;
+    width: 50vw;
     height: 90vh;
 }
 

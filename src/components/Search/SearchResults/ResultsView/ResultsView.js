@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
+import './ResultsView.css';
+import logo from './../../../Nav/NavBar/logo.svg';
 const google = window.google;
+
 
 class ResultsView extends Component {
     constructor(props) {
@@ -7,8 +10,8 @@ class ResultsView extends Component {
 
     }
     componentDidMount() {
-        const mapDiv = document.getElementById("gmap");
-        // const mapDiv = this.gmap;
+        // const mapDiv = document.getElementById("gmap");
+        const mapDiv = this.gmap;
         (function initMap() {
           var uluru = { lat: -25.363, lng: 131.044 };
           var map = new google.maps.Map(mapDiv, {
@@ -18,19 +21,15 @@ class ResultsView extends Component {
           var marker = new google.maps.Marker({
             position: uluru,
             map: map,
+            animation: google.maps.Animation.DROP,
+            icon: logo,
             id: 1
           });
           mapDiv.style.height = "90vh";
           mapDiv.style.width = "50vw";
-<<<<<<< HEAD
           
           mapDiv.style.right = "0vw";
           mapDiv.style.top = "0vh";
-=======
-
-          mapDiv.style.right = "0px";
-          mapDiv.style.top = "0px";
->>>>>>> master
 
         //   mapDiv.style.resetBoundsOnResize = "magic";
           console.log(marker)
