@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import {Link} from 'react-router-dom';
 import './Search.css';
 
 class Search extends Component {
@@ -22,7 +22,7 @@ class Search extends Component {
         <div className="col-lg-4">
 
           <p className="lead">
-            <a className="btn btn-primary btn-lg btn-block" href="#" role="button">Find your flight</a>
+            <Link className="btn btn-primary btn-lg" to="/searchResults" role="button">Find your flight</Link>
           </p>
           
         </div>
