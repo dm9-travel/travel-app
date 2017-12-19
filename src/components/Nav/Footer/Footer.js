@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import './Footer.css'
 
  class Footer extends Component {
 render(){
@@ -43,7 +44,7 @@ render(){
           </div>
 
 
-    
+
 
 
           <div className="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
