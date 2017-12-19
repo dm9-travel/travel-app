@@ -23,8 +23,8 @@ class ResultsView extends Component {
           mapDiv.style.height = "90vh";
           mapDiv.style.width = "50vw";
           
-          mapDiv.style.right = "0px";
-          mapDiv.style.top = "0px";
+          mapDiv.style.right = "0vw";
+          mapDiv.style.top = "0vh";
 
         //   mapDiv.style.resetBoundsOnResize = "magic";
           console.log(marker)
