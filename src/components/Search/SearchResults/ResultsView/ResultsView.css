@@ -1,3 +1,7 @@
+.results {
+    display: flex;
+    flex-direction: column;
+}
 .resultsContainer{
     display: flex;
     flex-direction: row;

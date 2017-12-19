@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
+import UpdateSearch from './../UpdateSearch/UpdateSearch';
 import './ResultsView.css';
+
 import logo from './../../../Nav/NavBar/logo.svg';
+
 const google = window.google;
 
 
@@ -38,11 +41,14 @@ class ResultsView extends Component {
 
     render() {
         return (
-            <div className="resultsContainer">
-                <div className="resultsList" >
-                    List here
+            <div className="results">
+            <UpdateSearch/>
+                <div className="resultsContainer" >
+                    <div className="resultsList" >
+                        List here
+                    </div>
+                    <div id='gmap' ref={ref => this.gmap =ref} />
                 </div>
-                <div id='gmap' ref={ref => this.gmap =ref} />
             </div>
         )
     }
