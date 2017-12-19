@@ -37,9 +37,9 @@ const userCtrl = require('./controllers/user_controller');
   passport.use(
     new Auth0Strategy(
       {
-        domain,
-        clientID,
-        clientSecret,
+        domain: process.env.DOMAIN,
+        clientID: process.env.CLIENTID,
+        clientSecret: process.env.CLIENTSECRET,
         callbackURL: "/api/login"
       },
       function(accessToken, refreshToken, extraParams, profile, done) {
@@ -72,34 +72,7 @@ const userCtrl = require('./controllers/user_controller');
     done(null, obj);
   });
 
-app.use(json());
-app.use(cors());
 
-app.use(passport.initialize());
-app.use(passport.session());
-
-passport.use(
-  new Auth0Strategy(
-    {
-      domain: process.env.DOMAIN,
-      clientID: process.env.CLIENTID,
-      clientSecret: process.env.CLIENTSECRET,
-      callbackURL: "/api/login"
-    },
-    passport.authenticate("auth0", { successRedirect: "/dashboard" })
-  );
-  app.get('/logout', function(req, res) {
-    req.logout();
-    res.redirect('/');
-  })
-
-passport.serializeUser(function(user, done) {
-  done(null, user);
-});
-
-passport.deserializeUser(function(obj, done) {
-  done(null, obj);
-});
 
 app.get(
   "/api/login",
