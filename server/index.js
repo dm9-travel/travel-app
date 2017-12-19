@@ -1,27 +1,29 @@
-const express = require('express');
+const express = require("express");
 const { json } = require("body-parser");
 const cors = require("cors");
 const session = require("express-session");
 const massive = require("massive");
 const passport = require("passport");
 const Auth0Strategy = require("passport-auth0");
-require('dotenv').config();
+const user_controller = require("./controllers/user_controller.js");
+const app = express();
 
-const {secret} = require('../config.js').passportAuth0;
+require("dotenv").config();
 
 const port = 3001;
 const app = express();
-app.use(
-    session({
-      secret,
-      resave: false,
-      saveUninitialized: false
-    })
-  );
 
- massive(process.env.CONNECTION_STRING)
+app.use(
+  session({
+    secret: process.env.SECRET,
+    resave: false,
+    saveUninitialized: false
+  })
+);
+
+massive(process.env.CONNECTIONSTRING)
   .then(dbInstance => {
-      app.set('db', dbInstance)
+    app.set("db", dbInstance);
   })
   .catch(console.log);
 
@@ -72,10 +74,19 @@ const userCtrl = require('./controllers/user_controller');
     done(null, obj);
   });
 
-  app.get(
-    "/api/login", function(req, res, next) {
-      console.log("redirected")
-      next()
+app.use(json());
+app.use(cors());
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.use(
+  new Auth0Strategy(
+    {
+      domain: process.env.DOMAIN,
+      clientID: process.env.CLIENTID,
+      clientSecret: process.env.CLIENTSECRET,
+      callbackURL: "/api/login"
     },
     passport.authenticate("auth0", { successRedirect: "/dashboard" })
   );
