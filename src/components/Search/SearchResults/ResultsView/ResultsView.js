@@ -22,7 +22,7 @@ class ResultsView extends Component {
           });
           mapDiv.style.height = "90vh";
           mapDiv.style.width = "50vw";
-          
+
           mapDiv.style.right = "0px";
           mapDiv.style.top = "0px";
 
@@ -37,7 +37,7 @@ class ResultsView extends Component {
                 <div className="resultsList" >
                     List here
                 </div>
-                <div id='gmap' ref={ref => this.gmap =ref} />   
+                <div id='gmap' ref={ref => this.gmap =ref} />
             </div>
         )
     }
