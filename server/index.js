@@ -102,9 +102,9 @@ app.get("/api/me", function(req, res) {
     .catch(() => res.status(500).send());
 });
 //`````````````````````````````````Endpoints`````````````````````````````````````
-
-app.post("/api/getFlights", userCtrl.Get_Flights);
-app.get("/api/watchlist/:id", userCtrl.Get_Watchlist);
+const flightCtrl = require("./controllers/flights_controller");
+app.post("/api/getFlights", flightCtrl.Get_Flights);
+app.get("/api/getWatchlist/:id", userCtrl.Get_Watchlist);
 
 app.get("/api/getAirport",airportCtrl.Get_Airport);
 

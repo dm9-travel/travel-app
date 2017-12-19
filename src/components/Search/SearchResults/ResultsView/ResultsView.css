@@ -1,8 +1,14 @@
+.results {
+    display: flex;
+    flex-direction: column;
+}
 .resultsContainer{
     display: flex;
     flex-direction: row;
     align-items: stretch;
     justify-content: center;
+    height: 90vh;
+    width: 100vw;
 }
 .resultsList {
 
@@ -11,8 +17,8 @@
     justify-content: flex-start;
     align-content: center;
     align-items: stretch;
-    width: 50%;
-    height: 100%;
+    width: 50vw;
+    height: 90vh;
 }
 
 @media screen and (max-width: 785px) {
