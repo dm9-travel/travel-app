@@ -27,51 +27,11 @@ massive(process.env.CONNECTIONSTRING)
 
 // require controllers
 const userCtrl = require('./controllers/user_controller');
+const airportCtrl = require('./controllers/airport_controller');
   
 // middleware
   app.use(json());
   app.use(cors());
-  
-  app.use(passport.initialize());
-  app.use(passport.session());
-  
-  passport.use(
-    new Auth0Strategy(
-      {
-        domain,
-        clientID,
-        clientSecret,
-        callbackURL: "/api/login"
-      },
-      function(accessToken, refreshToken, extraParams, profile, done) {
-        app
-          .get("db")
-          .get_user_by_auth_id(profile.id)
-          .then(response => {
-            if (!response[0]) {
-              app
-                .get("db")
-                .create_user_by_auth_id([profile.id, profile.displayName])
-                .then(created => {
-                  console.log(created);
-                  return done(null, created[0]);
-                });
-            } else {
-              console.log(response)
-              return done(null, response[0]);
-            }
-          });
-      }
-    )
-  );
-  
-  passport.serializeUser(function(user, done) {
-    done(null, user);
-  });
-  
-  passport.deserializeUser(function(obj, done) {
-    done(null, obj);
-  });
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -143,6 +103,8 @@ app.get("/api/me", function(req, res) {
 
 app.post("/api/getFlights", userCtrl.Get_Flights);
 app.get("/api/watchlist/:id", userCtrl.Get_Watchlist);
+
+app.get("/api/getAirport",airportCtrl.Get_Airport);
 
 app.get("/api/test", (req, res, next) => {
   req.app

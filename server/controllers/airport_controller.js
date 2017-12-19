@@ -2,16 +2,16 @@ const axios = require("axios");
 require("dotenv").config();
 
 //Google Places Key
-const PlacesKey = process.env.GOOGLEPLACESKEY;
+const skyScannerKey = process.env.KEY;
 
 module.exports = {
-  getAirports: (req, res, next)=>{
-
+  Get_Airport: (req, res, next)=>{
+    let latitude = req.query.lat; 
+    let longitude = req.query.long;
+    console.log(`latitude:${latitude} longitude:${longitude}`);
     axios
-      .get(
-        // `https://maps.googleapis.com/maps/api/place/textsearch/json?query=123+main+street&location=${latitude},${longitude}&radius=10000&key=${PlacesKey}`
-        `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&rankby=distance&types=airport&key=${PlacesKey}`
-      )
-      .then();
+      .get(`http://partners.api.skyscanner.net/apiservices/autosuggest/v1.0/US/USD/en-US/?id=${latitude},${longitude}-latlong&apiKey=${skyScannerKey}`)
+      .then(airport => {res.status(200).send(airport.data.Places[0])})
+      .catch(()=> (console.log));
   }
 };
