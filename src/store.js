@@ -4,8 +4,4 @@ import { devToolsEnhancer } from "redux-devtools-extension";
 
 import reducer from "./ducks/reducer";
 
-export default createStore(
-  reducer,
-  devToolsEnhancer(),
-  applyMiddleware(promiseMiddleware())
-);
+export default createStore(reducer,devToolsEnhancer(),applyMiddleware(promiseMiddleware()));
