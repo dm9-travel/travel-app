@@ -8,13 +8,15 @@ import NavBar from './components/Nav/NavBar/NavBar';
 import Header from './components/Nav/Header/Header';
 
 class App extends Component {
+
+ 
   render() {
     return (
       <div className="App">
 
         <NavBar />
         {router}
-
+      
       </div>
 
     );
