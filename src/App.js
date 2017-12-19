@@ -6,7 +6,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-
+        
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
           <div className="container">
             <a className="navbar-brand" href="#">Travel App</a>
