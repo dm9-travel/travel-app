@@ -5,13 +5,11 @@ const session = require("express-session");
 const massive = require("massive");
 const passport = require("passport");
 const Auth0Strategy = require("passport-auth0");
-const user_controller = require("./controllers/user_controller.js");
 const app = express();
 
 require("dotenv").config();
 
 const port = 3001;
-const app = express();
 
 app.use(
   session({
@@ -143,8 +141,8 @@ app.get("/api/me", function(req, res) {
 });
 //`````````````````````````````````Endpoints`````````````````````````````````````
 
-app.post("/api/getFlights", user_controller.Get_Flights);
-app.get("/api/watchlist/:id", user_controller.Get_Watchlist);
+app.post("/api/getFlights", userCtrl.Get_Flights);
+app.get("/api/watchlist/:id", userCtrl.Get_Watchlist);
 
 app.get("/api/test", (req, res, next) => {
   req.app
