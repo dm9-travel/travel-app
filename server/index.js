@@ -30,8 +30,8 @@ const userCtrl = require('./controllers/user_controller');
 const airportCtrl = require('./controllers/airport_controller');
   
 // middleware
-  app.use(json());
-  app.use(cors());
+app.use(json());
+app.use(cors());
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -77,6 +77,8 @@ passport.serializeUser(function(user, done) {
 passport.deserializeUser(function(obj, done) {
   done(null, obj);
 });
+
+
 
 app.get(
   "/api/login",
