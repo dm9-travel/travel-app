@@ -11,6 +11,7 @@ const app = express();
 require("dotenv").config();
 
 const port = 3001;
+const app = express();
 
 app.use(
   session({
