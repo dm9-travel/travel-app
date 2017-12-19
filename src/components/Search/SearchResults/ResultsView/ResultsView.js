@@ -7,7 +7,8 @@ class ResultsView extends Component {
 
     }
     componentDidMount() {
-        const mapDiv = document.getElementById("gmap");
+        // const mapDiv = document.getElementById("gmap");
+        const mapDiv = this.gmap;
         (function initMap() {
           var uluru = { lat: -25.363, lng: 131.044 };
           var map = new google.maps.Map(mapDiv, {
@@ -19,16 +20,25 @@ class ResultsView extends Component {
             map: map,
             id: 1
           });
-          mapDiv.style.height = "100%";
+          mapDiv.style.height = "90vh";
           mapDiv.style.width = "50vw";
-          mapDiv.style.hidden = false;
+          
+          mapDiv.style.right = "0px";
+          mapDiv.style.top = "0px";
+
+        //   mapDiv.style.resetBoundsOnResize = "magic";
           console.log(marker)
         })();
       }
 
     render() {
         return (
-            <div id='gmap' />   
+            <div className="resultsContainer">
+                <div className="resultsList" >
+                    List here
+                </div>
+                <div id='gmap' ref={ref => this.gmap =ref} />   
+            </div>
         )
     }
 }

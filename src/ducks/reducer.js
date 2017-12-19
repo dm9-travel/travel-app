@@ -1,11 +1,15 @@
 import axios from "axios";
 // Action Constants
 const REQ_USER = "REQ_USER";
-
+const GET_LOCATIONS = "GET_LOCATIONS";
 // Action Creators
 
 // Initial State
-const initialState = {};
+const initialState = {
+  locationResults: [
+
+  ],
+};
 
 // Reducer
 export function requestUser() {
@@ -14,6 +18,13 @@ export function requestUser() {
     payload: axios.get("/api/me").then(response => response.data)
   };
 }
+// axios call to get locations/destinations/longitude and lattitude of search results
+// export function getLocations() {
+//   return {
+//     type: GET_LOCATIONS,
+//     payload: 
+//   }
+// }
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
@@ -24,6 +35,9 @@ export default function reducer(state = initialState, action) {
         isLoading: false,
         user: action.payload
       });
+    case GET_LOCATIONS:
+      // this will need to be asynchronous once api responses are up and running
+      return Object.assign({}, state, {locationResults: action.payload})
     default:
       return state;
   }

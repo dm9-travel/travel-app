@@ -1,0 +1,22 @@
+.resultsContainer{
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: center;
+}
+.resultsList {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-content: center;
+    align-items: stretch;
+    width: 50%;
+    height: 100%;
+}
+
+@media screen and (max-width: 785px) {
+    #gmap {
+        display: none!important;
+    }
+}
