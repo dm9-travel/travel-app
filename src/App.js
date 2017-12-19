@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-// import router from "./router";
 import './App.css';
+import router from './router';
+
 
 // Import components
 import NavBar from './components/Nav/NavBar/NavBar';
@@ -32,8 +33,8 @@ class App extends Component {
       <div className="App">
 
         <NavBar />
-        <Header />
-        <p>latitude {this.state.latitude} and longitude {this.state.longitude}</p>
+        {router}
+
       </div>
 
     );
