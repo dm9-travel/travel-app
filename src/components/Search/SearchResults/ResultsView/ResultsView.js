@@ -21,6 +21,7 @@ class ResultsView extends Component {
           });
           mapDiv.style.height = "100%";
           mapDiv.style.width = "50vw";
+          mapDiv.style.hidden = false;
           console.log(marker)
         })();
       }
