@@ -6,9 +6,10 @@ class Search extends Component {
   render() {
 
     return (
-      <div className="row">
+      <div className="row search-inputs">
         <div className="col-lg-4">
           <div className="input-group input-group-lg">
+            <span class="input-group-addon">$</span>
             <input type="number" className="form-control" placeholder="Budget" aria-label="Number input"></input>
           </div>
         </div>
