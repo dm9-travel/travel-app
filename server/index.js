@@ -5,13 +5,11 @@ const session = require("express-session");
 const massive = require("massive");
 const passport = require("passport");
 const Auth0Strategy = require("passport-auth0");
-const user_controller = require("./controllers/user_controller.js");
 const app = express();
 
 require("dotenv").config();
 
 const port = 3001;
-const app = express();
 
 app.use(
   session({
@@ -95,25 +93,50 @@ passport.use(
     res.redirect('/');
   })
 
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
 
+passport.deserializeUser(function(obj, done) {
+  done(null, obj);
+});
 
-  app.get("/api/me", function(req, res) {
-    if (!req.user) return res.status(404);
-      req.app.get('db').get_user_by_auth_id([req.user.authid])
-      .then((user) => res.status(200).send(user[0] ))
-      .catch(() => res.status(500).send());
+app.get(
+  "/api/login",
+  function(req, res, next) {
+    console.log("redirected");
+    next();
+  },
+  passport.authenticate("auth0", { successRedirect: "/dashboard" })
+);
+app.get("/logout", function(req, res) {
+  req.logout();
+  res.redirect("/");
+});
 
+app.get("/api/me", function(req, res) {
+  if (!req.user) return res.status(404);
+  req.app
+    .get("db")
+    .get_user_by_auth_id([req.user.authid])
+    .then(user => res.status(200).send(user[0]))
+    .catch(() => res.status(500).send());
+});
+//`````````````````````````````````Endpoints`````````````````````````````````````
 
-  });
+app.post("/api/getFlights", userCtrl.Get_Flights);
+app.get("/api/watchlist/:id", userCtrl.Get_Watchlist);
 
-  app.get("/api/test", (req, res, next) => {
-    req.app
-      .get("db")
-      .get_users()
-      .then(response => {
-        res.json(response);
-      })
-      .catch(console.log);
-  });
+app.get("/api/test", (req, res, next) => {
+  req.app
+    .get("db")
+    .get_users()
+    .then(response => {
+      res.json(response);
+    })
+    .catch(console.log);
+});
 
-// user controller
+app.listen(port, () => {
+  console.log(`Listening at port: ${port}`);
+});
