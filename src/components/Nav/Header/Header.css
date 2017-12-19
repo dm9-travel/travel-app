@@ -5,3 +5,8 @@
   background-repeat: no-repeat;
   height: 70vh;
 }
+
+.w-80 {
+  width: 80%;
+  margin: 0 auto;
+}

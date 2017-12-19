@@ -12,11 +12,11 @@ class Header extends Component {
     return (
       <div className="jumbotron jumbotron-fluid bg-info">
         <div className="container">
-          <h1 className="display-3">Hello, world!</h1>
-          <p className="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-          
-          <Search />
-
+          <div className="w-80">
+            <h1 className="display-3">Hello, world!</h1>
+            <p className="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+            <Search />
+          </div>
         </div>
       </div>
     )
