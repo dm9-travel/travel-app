@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-
 import './App.css';
+import router from './router';
+
 
 // Import components
 import NavBar from './components/Nav/NavBar/NavBar';
@@ -12,7 +13,7 @@ class App extends Component {
       <div className="App">
 
         <NavBar />
-        <Header />
+        {router}
 
       </div>
 
