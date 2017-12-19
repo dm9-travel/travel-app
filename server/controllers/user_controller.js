@@ -1,4 +1,7 @@
 const axios = require("axios");
+require("dotenv").config();
+
+const key = process.env.KEY;
 
 module.exports = {
   Get_Flights: (req, res, next) => {
@@ -9,11 +12,10 @@ module.exports = {
       originPlace,
       destinationPlace,
       outboundPartialDate,
-      inboundPartialDate,
-      key
+      inboundPartialDate
     } = req.body;
-    //http://partners.api.skyscanner.net/apiservices/autosuggest/v1.0/UK/GBP/en-GB/?query=dallas&apiKey=so915963205287245322146323136295
-    //http://partners.api.skyscanner.net/apiservices/browsequotes/v1.0/US/USD/en-US/DFW/Anywhere/2018-03-03/?apiKey=so915963205287245322146323136295
+
+    //http://partners.api.skyscanner.net/apiservices/browsequotes/v1.0/US/USD/en-US/DFW/Anywhere/2018-03-03/?apiKey={key}
     axios
       .get(
         `http://partners.api.skyscanner.net/apiservices/browsequotes/v1.0/${country}/${currency}/${locale}
