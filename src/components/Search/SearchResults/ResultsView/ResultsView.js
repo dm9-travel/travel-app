@@ -7,8 +7,8 @@ class ResultsView extends Component {
 
     }
     componentDidMount() {
-        // const mapDiv = document.getElementById("gmap");
-        const mapDiv = this.gmap;
+        const mapDiv = document.getElementById("gmap");
+        // const mapDiv = this.gmap;
         (function initMap() {
           var uluru = { lat: -25.363, lng: 131.044 };
           var map = new google.maps.Map(mapDiv, {

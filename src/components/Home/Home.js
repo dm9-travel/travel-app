@@ -14,7 +14,6 @@ class Home extends Component {
             <div className="homePage" >
 
                <Header />
-                <ResultsView />
                 <div>
                     <Link to="/searchResults" ><button>Search results</button></Link>
                 </div>
