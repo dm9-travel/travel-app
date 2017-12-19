@@ -31,6 +31,7 @@ app.use(
 // require controllers
 const userCtrl = require('./controllers/user_controller');
   
+// middleware
   app.use(json());
   app.use(cors());
   
