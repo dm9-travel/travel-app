@@ -3,6 +3,17 @@ import {Link} from 'react-router-dom';
 import './Search.css';
 
 class Search extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            country: 'US',
+            locale: 'en-US',
+            originPlace: 'DFW',
+            destinationPlace: 'Anywhere',
+            outboundPartialDate: '',
+            inboundPartialDate: '',
+        }
+    }
   render() {
 
     return (
