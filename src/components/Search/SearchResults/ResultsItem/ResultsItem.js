@@ -3,6 +3,7 @@ import moment from "moment";
 
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import { selectFlight } from "../../../../ducks/flights_reducer";
 import("./ResultsItem.css");
 
 class Quote extends Component {
@@ -11,21 +12,23 @@ class Quote extends Component {
 
     this.state = {
       key: this.props.key,
-      country: this.props.friend_id,
-      originPlace: this.props.image,
+      originPlace: this.props.originPlace,
       destinationPlace: this.props.destination,
       destinationCountry: this.props.destinationCountry,
       outboundDate: this.props.outboundDate,
-      inboundDate: this.props.inboundDate,
       price: this.props.price,
       direct: this.props.direct
     };
+    this.handleClick = this.handleClick.bind(this);
+  }
+  handleClick() {
+    this.props.selectFlight(this.state);
   }
 
   render() {
     return (
       <li>
-        <Link to="/quoteDetails">
+        <Link to="/quoteDetails" onClick={this.handleClick}>
           <p>
             {this.props.destinationPlace}, {this.props.destinationCountry}
           </p>
@@ -37,4 +40,4 @@ class Quote extends Component {
   }
 }
 const mapStateToProps = state => state;
-export default connect(mapStateToProps)(Quote);
+export default connect(mapStateToProps, { selectFlight })(Quote);

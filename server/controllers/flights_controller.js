@@ -17,7 +17,6 @@ module.exports = {
     } = req.body;
 
     //http://partners.api.skyscanner.net/apiservices/browsequotes/v1.0/US/USD/en-US/DFW/Anywhere/2018-03-03/?apiKey={key}
-    console.log("hello");
 
     axios
       .get(
@@ -40,11 +39,12 @@ module.exports = {
           })[0];
           quote.carrierObj = carrier;
         }
+
         for (var i = 0; i < responseData.Quotes.length; i++) {
           matchDestination(responseData.Quotes[i]);
           matchCarrier(responseData.Quotes[i]);
         }
-        console.log(responseData);
+
         res.send(
           responseData.Quotes.filter(quote => {
             return quote.MinPrice <= budget;
