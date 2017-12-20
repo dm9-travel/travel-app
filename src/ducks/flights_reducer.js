@@ -10,8 +10,10 @@ const initialState = {
 export default function flights(state = initialState, action) {
   switch (action.type) {
     case GET_FLIGHTS + "_PENDING":
+      console.log(action.payload);
       return Object.assign({}, state, { isLoading: true });
     case GET_FLIGHTS + "_FULFILLED":
+      console.log(action.payload);
       return Object.assign({}, state, {
         isLoading: false,
         flights: action.payload.data
@@ -22,6 +24,7 @@ export default function flights(state = initialState, action) {
 }
 
 export function getFlights(searchInfo) {
+  console.log("hit flight reducer", searchInfo);
   return {
     type: GET_FLIGHTS,
     payload: axios

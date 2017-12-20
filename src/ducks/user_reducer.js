@@ -10,7 +10,11 @@ const GET_LOCATION = "GET_LOCATION";
 const initialState = {
   user: {},
   watchlist: [],
-  user_location: {}
+  userLocation: {
+    airport: {
+      PlaceName: "DFW"
+    }
+  }
 };
 
 export default function users(state = initialState, action) {
@@ -23,10 +27,9 @@ export default function users(state = initialState, action) {
         user: action.payload
       });
     case GET_LOCATION:
-      console.log(action.payload);
       return Object.assign({}, state, {
         isLoading: false,
-        user_location: action.payload
+        userLocation: action.payload
       });
 
     case GET_WATCHLIST:
@@ -56,7 +59,6 @@ export function getWatchlist(user_id) {
   };
 }
 export function getLocation(location) {
-  console.log("receiving state", location);
   return {
     type: GET_LOCATION,
     payload: location
