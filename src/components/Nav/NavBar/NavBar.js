@@ -4,6 +4,17 @@ import logo from './logo.svg';
 import './NavBar.css';
 
 class NavBar extends Component {
+  constructor(props){
+    super(props);
+
+    this.state = {}
+
+    this.handleLogin = this.handleLogin.bind(this);
+  }
+
+  handleLogin() {
+    window.location.href = 'http://localhost:3001/api/login';
+  }
 
   render() {
 
@@ -22,7 +33,7 @@ class NavBar extends Component {
               <Link className="nav-link" to="/">Home <span className="sr-only">(current)</span></Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#">Link</a>
+              <Link className="nav-link" to="/watchlist">Watchlist</Link>
             </li>
             <li className="nav-item dropdown">
               <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -36,7 +47,7 @@ class NavBar extends Component {
               </div>
             </li>
             <li className="nav-item">
-              <a className="nav-link disabled" href="#">Disabled</a>
+              <button type="button" onClick={this.handleLogin} className="btn btn-outline-primary">Login</button>
             </li>
           </ul>
         </div>
