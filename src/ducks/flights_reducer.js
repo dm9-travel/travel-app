@@ -3,7 +3,7 @@ import axios from "axios";
 //Action Constants
 
 const GET_FLIGHTS = "GET_FLIGHTS";
-const FILTER_BUDGET = "FILTER_BUDGET";
+
 
 const initialState = {
   flights: []
@@ -35,9 +35,4 @@ export function getFlights(searchInfo) {
   };
 }
 
-export function filterBudget(budget) {
-  return {
-    type: FILTER_BUDGET,
-    payload: 
-  }
-}
+

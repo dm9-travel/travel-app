@@ -12,6 +12,7 @@ class Search extends Component {
             destinationPlace: 'Anywhere',
             outboundPartialDate: '',
             inboundPartialDate: '',
+            budget: null
         }
     }
   render() {
