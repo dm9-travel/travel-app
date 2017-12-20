@@ -40,6 +40,7 @@ class Search extends Component {
     //   event.preventDefault();
     alert("Values entered: " + JSON.stringify(this.state));
     this.props.getFlights(this.state);
+    this.props.history.push('/searchResults');
   }
 
   render() {
@@ -74,7 +75,7 @@ class Search extends Component {
         </div>
 
         <div className="col-lg-4 mb-2">
-          <Link to="/searchResults">
+          
             <button
               type="submit"
               className="btn btn-primary btn-lg btn-block"
@@ -82,7 +83,7 @@ class Search extends Component {
             >
               Find your flight
             </button>
-          </Link>
+          
         </div>
 
         <div className="col-lg-4 mb-2">

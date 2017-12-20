@@ -23,6 +23,12 @@ class ResultsView extends Component {
         zoom: 4,
         center: uluru
       });
+    // google.maps.Geocoder.geocode({"placeId": '1463'}, function (results, status) {
+    //     if (status === 'OK') {
+    //         map.setZoom(11);
+    //         map.setCenter(results[0].geometry.location);
+    //     }
+    // })
       var marker = new google.maps.Marker({
         position: uluru,
         map: map,
