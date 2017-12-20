@@ -1,13 +1,15 @@
-import React, { Component } from 'react';
-import './App.css';
-import router from './router';
-import axios from 'axios';
+import React, { Component } from "react";
+import { connect } from "react-redux";
 
+import "./App.css";
+import router from "./router";
+import axios from "axios";
 
 // Import components
-import NavBar from './components/Nav/NavBar/NavBar';
-import Header from './components/Nav/Header/Header';
-import Footer from './components/Nav/Footer/Footer'
+import { getLocation } from "./ducks/user_reducer.js";
+import NavBar from "./components/Nav/NavBar/NavBar";
+import Header from "./components/Nav/Header/Header";
+import Footer from "./components/Nav/Footer/Footer";
 
 class App extends Component {
   constructor(props) {
@@ -19,31 +21,32 @@ class App extends Component {
     };
   }
 
-
-
   componentDidMount() {
-    // //find user position
-    // if ("geolocation" in navigator){
-    // //geolocation is available 
-    //   navigator.geolocation.getCurrentPosition(position =>{
-    // //Call getAirport endpoint on server
-    //     axios
-    //       .get( `/api/getAirport?lat=${position.coords.latitude}&long=${position.coords.longitude}`)
-    //       .then(response =>
-    //         this.setState({
-    //           latitude: position.coords.latitude,
-    //           longitude: position.coords.longitude,
-    //           airport: response.data
-    //         })
-    //       );
-    //   });
-    // }
+    //find user position
+    if ("geolocation" in navigator) {
+      //geolocation is available
+      navigator.geolocation.getCurrentPosition(position => {
+        //Call getAirport endpoint on server
 
-          
+        axios
+          .get(
+            `/api/getAirport?lat=${position.coords.latitude}&long=${
+              position.coords.longitude
+            }`
+          )
+          .then(response => {
+            this.setState({
+              latitude: position.coords.latitude,
+              longitude: position.coords.longitude,
+              airport: response.data
+            });
+          })
+          .then(() => {
+            this.props.getLocation(this.state);
+          });
+      });
+    }
   }
-  
-
-
 
   render() {
     return (
@@ -56,4 +59,5 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => state;
+export default connect(mapStateToProps, { getLocation })(App);

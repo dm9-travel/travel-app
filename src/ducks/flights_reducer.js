@@ -4,17 +4,20 @@ import axios from "axios";
 
 const GET_FLIGHTS = "GET_FLIGHTS";
 
+
 const initialState = {
   flights: []
 };
 export default function flights(state = initialState, action) {
   switch (action.type) {
     case GET_FLIGHTS + "_PENDING":
+      console.log(action.payload);
       return Object.assign({}, state, { isLoading: true });
     case GET_FLIGHTS + "_FULFILLED":
+      console.log(action.payload);
       return Object.assign({}, state, {
         isLoading: false,
-        flights: action.payload.data
+        flights: action.payload
       });
     default:
       return state;
@@ -22,6 +25,7 @@ export default function flights(state = initialState, action) {
 }
 
 export function getFlights(searchInfo) {
+  console.log("hit flight reducer", searchInfo);
   return {
     type: GET_FLIGHTS,
     payload: axios
@@ -33,3 +37,5 @@ export function getFlights(searchInfo) {
       .catch(err => err)
   };
 }
+
+
