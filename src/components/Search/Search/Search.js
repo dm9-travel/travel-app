@@ -37,8 +37,6 @@ class Search extends Component {
   }
 
   async handleSubmit(event) {
-    console.log("submit fired", this.state);
-    event.preventDefault();
     alert("Values entered: " + JSON.stringify(this.state));
     this.props.getFlights(this.state);
   }
