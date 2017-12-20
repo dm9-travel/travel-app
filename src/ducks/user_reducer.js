@@ -2,22 +2,16 @@ import axios from "axios";
 // Action Constants
 const REQ_USER = "REQ_USER";
 const GET_WATCHLIST = "GET_WATCHLIST";
+const GET_LOCATION = "GET_LOCATION";
 
 // Action Creators
 
 // Initial State
 const initialState = {
   user: {},
-  watchlist: []
+  watchlist: [],
+  user_location: {}
 };
-
-// axios call to get locations/destinations/longitude and lattitude of search results
-// export function getLocations() {
-//   return {
-//     type: GET_LOCATIONS,
-//     payload:
-//   }
-// }
 
 export default function users(state = initialState, action) {
   switch (action.type) {
@@ -27,6 +21,12 @@ export default function users(state = initialState, action) {
       return Object.assign({}, state, {
         isLoading: false,
         user: action.payload
+      });
+    case GET_LOCATION:
+      console.log(action.payload);
+      return Object.assign({}, state, {
+        isLoading: false,
+        user_location: action.payload
       });
 
     case GET_WATCHLIST:
@@ -53,5 +53,12 @@ export function getWatchlist(user_id) {
         return response.data;
       })
       .catch(err => err)
+  };
+}
+export function getLocation(location) {
+  console.log("receiving state", location);
+  return {
+    type: GET_LOCATION,
+    payload: location
   };
 }
