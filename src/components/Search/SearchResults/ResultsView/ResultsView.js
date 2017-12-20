@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {getFlights} from './../../../../ducks/flights_reducer';
 import UpdateSearch from './../UpdateSearch/UpdateSearch';
 import './ResultsView.css';
 
@@ -40,12 +42,19 @@ class ResultsView extends Component {
       }
 
     render() {
+        const flightsList = this.props.flights.flights.map((flight) => {
+            return (
+                <div>
+                    {flight.MinPrice}, {flight.QuoteId}
+                </div>
+            )
+        })
         return (
             <div className="results">
             <UpdateSearch/>
                 <div className="resultsContainer" >
                     <div className="resultsList" >
-                        List here
+                        {flightsList}
                     </div>
                     <div id='gmap' ref={ref => this.gmap =ref} />
                 </div>
@@ -53,4 +62,7 @@ class ResultsView extends Component {
         )
     }
 }
-export default ResultsView;
+
+const mapStateToProps = state => state;
+
+export default connect(mapStateToProps, {getFlights})(ResultsView);

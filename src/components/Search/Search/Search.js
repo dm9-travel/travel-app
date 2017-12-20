@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import axios from "axios";
-import { getFlights } from "./../../../ducks/flights_reducer.js";
-
+import { Link } from "react-router-dom";
+import { getFlights } from "./../../../ducks/flights_reducer";
 import "./Search.css";
 
 class Search extends Component {
@@ -23,7 +22,11 @@ class Search extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-
+  componentDidMount() {
+    //   this.setState({
+    //       originPlace: this.props.user_location
+    //   })
+  }
   handleChange(event) {
     const value = event.target.value;
     const name = event.target.name;
@@ -36,9 +39,8 @@ class Search extends Component {
   async handleSubmit(event) {
     console.log("submit fired", this.state);
     event.preventDefault();
-    // alert("Values entered: " + JSON.stringify(this.state));
-    await this.props.getFlights(this.state);
-    window.location.href = "http://localhost:3000/searchResults";
+    alert("Values entered: " + JSON.stringify(this.state));
+    this.props.getFlights(this.state);
   }
 
   render() {
@@ -70,20 +72,29 @@ class Search extends Component {
               />
             </div>
           </div>
+        </div>
 
-          <div className="col-lg-4 mb-2">
-            <button type="submit" className="btn btn-primary btn-lg btn-block">
+        <div className="col-lg-4 mb-2">
+          <Link to="/searchResults">
+            <button
+              type="submit"
+              className="btn btn-primary btn-lg btn-block"
+              onClick={this.handleSubmit}
+            >
               Find your flight
             </button>
-          </div>
+          </Link>
+        </div>
+
+        <div className="col-lg-4 mb-2">
+          <button type="submit" className="btn btn-primary btn-lg btn-block">
+            Find your flight
+          </button>
         </div>
       </form>
     );
   }
 }
-
-const mapStateToProps = state => {
-  return state;
-};
+const mapStateToProps = state => state;
 
 export default connect(mapStateToProps, { getFlights })(Search);
