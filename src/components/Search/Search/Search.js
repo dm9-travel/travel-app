@@ -1,17 +1,31 @@
 import React, { Component } from 'react';
-
+import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
+import {getFlights} from './../../../ducks/flights_reducer';
 import './Search.css';
 
 class Search extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+        country: 'US',
+        currency: 'USD',
+        locale: 'en-US',
+        destinationPlace: 'Anywhere',
+        originPlace: 'DFW',
+        inboundPartialDate: '',
+
+    };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-
+  componentDidMount() {
+    //   this.setState({
+    //       originPlace: this.props.user_location
+    //   })
+  }
   handleChange(event) {
     const value = event.target.value;
     const name = event.target.name;
@@ -24,6 +38,7 @@ class Search extends Component {
   handleSubmit(event) {
     event.preventDefault();
     alert('Values entered: ' + JSON.stringify(this.state));
+    this.props.getFlights(this.state);
   }
 
 
@@ -42,12 +57,12 @@ class Search extends Component {
 
             <div className="col-lg-4 mb-2">
               <div className="input-group input-group-lg">
-                <input type="date" name="departureDate" className="form-control" placeholder="Date" onChange={this.handleChange} required></input>
+                <input type="date" name="outboundPartialDate" className="form-control" placeholder="Date" onChange={this.handleChange} required></input>
               </div>
             </div>
 
             <div className="col-lg-4 mb-2">
-              <button type="submit" className="btn btn-primary btn-lg btn-block">Find your flight</button>
+              <Link to="/searchResults"><button type="submit" className="btn btn-primary btn-lg btn-block" onClick={this.handleSubmit} >Find your flight</button></Link>
             </div>
 
           </div>
@@ -57,5 +72,6 @@ class Search extends Component {
   }
 
 }
+const mapStateToProps = state => state
 
-export default Search;
+export default connect(mapStateToProps, {getFlights})(Search);
