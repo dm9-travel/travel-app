@@ -53,14 +53,18 @@ module.exports = {
   },
   Get_Images: (req, res, next) => {
     console.log("hitter");
-    const { params } = req.params;
+    const { params } = req;
+    console.log("params", params);
 
     function getImage(quote) {
       axios
         .get(
-          `https://pixabay.com/api/?key=${pixKey}&q=${params}&image_type=photo&pretty=true`
+          `https://pixabay.com/api/?key=${pixKey}&q=${
+            params.id
+          }&image_type=photo&pretty=true`
         )
         .then(response => {
+          console.log(response);
           res.status(200).send(response.data.hits[0].webformatURL);
         })
         .catch(err => console.log(err));
