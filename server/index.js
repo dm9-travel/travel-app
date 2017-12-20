@@ -11,6 +11,18 @@ require("dotenv").config();
 
 const port = 3001;
 
+
+
+
+
+// require controllers
+const userCtrl = require('./controllers/user_controller');
+const airportCtrl = require('./controllers/airport_controller');
+
+// middleware
+app.use(json());
+app.use(cors());
+
 app.use(
   session({
     secret: process.env.SECRET,
@@ -25,14 +37,6 @@ massive(process.env.CONNECTIONSTRING)
   })
   .catch(console.log);
 
-// require controllers
-const userCtrl = require('./controllers/user_controller');
-const airportCtrl = require('./controllers/airport_controller');
-
-// middleware
-app.use(json());
-app.use(cors());
-
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -45,7 +49,8 @@ passport.use(
       callbackURL: "/api/login"
     },
     function(accessToken, refreshToken, extraParams, profile, done) {
-      console.log("asdff");
+      console.log("this is working");
+      return done(null, profile)
       app
         .get("db")
         .get_user_by_auth_id(profile.id)
