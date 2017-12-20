@@ -44,6 +44,7 @@ module.exports = {
           matchDestination(responseData.Quotes[i]);
           matchCarrier(responseData.Quotes[i]);
         }
+        console.log(responseData);
         res.send(
           responseData.Quotes.filter(quote => {
             return quote.MinPrice <= budget;
