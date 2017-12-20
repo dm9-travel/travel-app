@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import {withRouter} from 'react-router-dom';
 import { getFlights } from "./../../../../ducks/flights_reducer";
 import UpdateSearch from "./../UpdateSearch/UpdateSearch";
 import ResultsItem from "../ResultsItem/ResultsItem.js";
@@ -70,4 +71,4 @@ class ResultsView extends Component {
 
 const mapStateToProps = state => state;
 
-export default connect(mapStateToProps, { getFlights })(ResultsView);
+export default withRouter(connect(mapStateToProps, { getFlights })(ResultsView));

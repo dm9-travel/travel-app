@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link,withRouter } from "react-router-dom";
 import { getFlights } from "./../../../ducks/flights_reducer";
 import "./Search.css";
 
@@ -37,6 +37,7 @@ class Search extends Component {
   }
 
   async handleSubmit(event) {
+    //   event.preventDefault();
     alert("Values entered: " + JSON.stringify(this.state));
     this.props.getFlights(this.state);
   }
@@ -77,7 +78,7 @@ class Search extends Component {
             <button
               type="submit"
               className="btn btn-primary btn-lg btn-block"
-              onClick={this.handleSubmit}
+              onSubmit={this.handleSubmit}
             >
               Find your flight
             </button>
@@ -95,4 +96,4 @@ class Search extends Component {
 }
 const mapStateToProps = state => state;
 
-export default connect(mapStateToProps, { getFlights })(Search);
+export default withRouter(connect(mapStateToProps, { getFlights })(Search));
