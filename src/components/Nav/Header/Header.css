@@ -3,5 +3,10 @@
   background-color: #fff;
   background-size: cover;
   background-repeat: no-repeat;
-  height: 70vh;
+  height: 75vh;
+}
+
+.w-80 {
+  width: 80%;
+  margin: 0 auto;
 }
