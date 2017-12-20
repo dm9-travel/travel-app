@@ -27,7 +27,7 @@ class App extends Component {
       //geolocation is available
       navigator.geolocation.getCurrentPosition(position => {
         //Call getAirport endpoint on server
-        console.log("hey");
+
         axios
           .get(
             `/api/getAirport?lat=${position.coords.latitude}&long=${
@@ -42,7 +42,6 @@ class App extends Component {
             });
           })
           .then(() => {
-            console.log("sending state", this.state);
             this.props.getLocation(this.state);
           });
       });
