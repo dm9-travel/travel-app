@@ -22,22 +22,24 @@ class App extends Component {
 
 
   componentDidMount() {
-    //find user position
-    if ("geolocation" in navigator){
-    //geolocation is available 
-      navigator.geolocation.getCurrentPosition(position =>{
-    //Call getAirport endpoint on server
-        axios
-          .get( `/api/getAirport?lat=${position.coords.latitude}&long=${position.coords.longitude}`)
-          .then(response =>
-            this.setState({
-              latitude: position.coords.latitude,
-              longitude: position.coords.longitude,
-              airport: response.data
-            })
-          );
-      });
-    }
+    // //find user position
+    // if ("geolocation" in navigator){
+    // //geolocation is available 
+    //   navigator.geolocation.getCurrentPosition(position =>{
+    // //Call getAirport endpoint on server
+    //     axios
+    //       .get( `/api/getAirport?lat=${position.coords.latitude}&long=${position.coords.longitude}`)
+    //       .then(response =>
+    //         this.setState({
+    //           latitude: position.coords.latitude,
+    //           longitude: position.coords.longitude,
+    //           airport: response.data
+    //         })
+    //       );
+    //   });
+    // }
+
+          
   }
   
 
