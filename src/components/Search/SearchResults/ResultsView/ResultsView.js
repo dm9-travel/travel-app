@@ -42,19 +42,19 @@ class ResultsView extends Component {
       }
 
     render() {
-        // const flightsList = this.props.flights.map((cur, ind) => {
-        //     return (
-        //         <div>
-        //             {cur.MinPrice}, {cur.QuoteId}
-        //         </div>
-        //     )
-        // })
+        const flightsList = this.props.flights.flights.map((flight) => {
+            return (
+                <div>
+                    {flight.MinPrice}, {flight.QuoteId}
+                </div>
+            )
+        })
         return (
             <div className="results">
             <UpdateSearch/>
                 <div className="resultsContainer" >
                     <div className="resultsList" >
-                        List here
+                        {flightsList}
                     </div>
                     <div id='gmap' ref={ref => this.gmap =ref} />
                 </div>

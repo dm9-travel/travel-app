@@ -9,6 +9,7 @@ class Search extends Component {
     super(props);
 
     this.state = {
+        country: 'US',
         currency: 'USD',
         locale: 'en-US',
         destinationPlace: 'Anywhere',
@@ -20,7 +21,11 @@ class Search extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-
+  componentDidMount() {
+    //   this.setState({
+    //       originPlace: this.props.user_location
+    //   })
+  }
   handleChange(event) {
     const value = event.target.value;
     const name = event.target.name;
@@ -31,7 +36,7 @@ class Search extends Component {
   }
 
   handleSubmit(event) {
-    // event.preventDefault();
+    event.preventDefault();
     alert('Values entered: ' + JSON.stringify(this.state));
     this.props.getFlights(this.state);
   }
