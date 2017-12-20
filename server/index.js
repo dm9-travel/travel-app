@@ -11,6 +11,18 @@ require("dotenv").config();
 
 const port = 3001;
 
+
+
+
+
+// require controllers
+const userCtrl = require('./controllers/user_controller');
+const airportCtrl = require('./controllers/airport_controller');
+
+// middleware
+app.use(json());
+app.use(cors());
+
 app.use(
   session({
     secret: process.env.SECRET,
@@ -25,14 +37,6 @@ massive(process.env.CONNECTIONSTRING)
   })
   .catch(console.log);
 
-// require controllers
-const userCtrl = require('./controllers/user_controller');
-const airportCtrl = require('./controllers/airport_controller');
-  
-// middleware
-app.use(json());
-app.use(cors());
-
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -45,30 +49,19 @@ passport.use(
       callbackURL: "/api/login"
     },
     function(accessToken, refreshToken, extraParams, profile, done) {
-      app
-        .get("db")
-        .get_user_by_auth_id(profile.id)
-        .then(response => {
-          if (!response[0]) {
-            app
-              .get("db")
-              .create_user_by_auth_id([
-                profile.id,
-                profile.displayName,
-                profile.email
-              ])
-              .then(created => {
-                console.log(created);
-                return done(null, created[0]);
-              });
-          } else {
-            console.log(response);
-            return done(null, response[0]);
-          }
-        });
+      //console.log("gets here");
+      app.get("db").get_user_by_auth_id(profile.id).then(response =>{
+        if(!response[0]){
+          app.get("db").create_user_by_auth_id([profile.id, profile.displayName, profile.email]).then(created => {
+             return done(null, created[0])
+          });
+          //console.log("working ");
+        } else {
+           return done(null, response[0]);
+        }
+      })
     }
-  )
-);
+));
 
 passport.serializeUser(function(user, done) {
   done(null, user);
@@ -82,11 +75,7 @@ passport.deserializeUser(function(obj, done) {
 
 app.get(
   "/api/login",
-  function(req, res, next) {
-    console.log("redirected");
-    next();
-  },
-  passport.authenticate("auth0", { successRedirect: "/dashboard" })
+  passport.authenticate("auth0", { successRedirect: "http://localhost:3000/" })
 );
 app.get("/logout", function(req, res) {
   req.logout();

@@ -37,8 +37,12 @@ class Search extends Component {
   }
 
   async handleSubmit(event) {
+<<<<<<< HEAD
     //   event.preventDefault();
     alert("Values entered: " + JSON.stringify(this.state));
+=======
+    // alert("Values entered: " + JSON.stringify(this.state));
+>>>>>>> master
     this.props.getFlights(this.state);
     this.props.history.push('/searchResults');
   }
@@ -46,6 +50,7 @@ class Search extends Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
+      
         <div className="row search-inputs">
           <div className="col-lg-4 mb-2">
             <div className="input-group input-group-lg">
@@ -72,8 +77,8 @@ class Search extends Component {
               />
             </div>
           </div>
-        </div>
 
+<<<<<<< HEAD
         <div className="col-lg-4 mb-2">
           
             <button
@@ -85,12 +90,22 @@ class Search extends Component {
             </button>
           
         </div>
+=======
+          <div className="col-lg-4 mb-2">
+            <Link to="/searchResults">
+              <button
+                type="submit"
+                className="btn btn-primary btn-lg btn-block"
+                onClick={this.handleSubmit}
+              >
+                Find your flight
+              </button>
+            </Link>
+          </div>
+>>>>>>> master
 
-        <div className="col-lg-4 mb-2">
-          <button type="submit" className="btn btn-primary btn-lg btn-block">
-            Find your flight
-          </button>
         </div>
+
       </form>
     );
   }
