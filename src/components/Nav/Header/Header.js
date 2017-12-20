@@ -13,8 +13,8 @@ class Header extends Component {
       <div className="jumbotron jumbotron-fluid bg-info">
         <div className="container">
           <div className="w-80">
-            <h1 className="display-3">Hello, world!</h1>
-            <p className="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+            <h1 className="display-3">Explore the World</h1>
+            <p className="lead">This is a simple hero unit, a jumbotron component for calling extra attention to featured content.</p>
             <Search />
           </div>
         </div>
