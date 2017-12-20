@@ -28,7 +28,7 @@ massive(process.env.CONNECTIONSTRING)
 // require controllers
 const userCtrl = require('./controllers/user_controller');
 const airportCtrl = require('./controllers/airport_controller');
-  
+
 // middleware
 app.use(json());
 app.use(cors());
@@ -45,6 +45,7 @@ passport.use(
       callbackURL: "/api/login"
     },
     function(accessToken, refreshToken, extraParams, profile, done) {
+      console.log("asdff");
       app
         .get("db")
         .get_user_by_auth_id(profile.id)
@@ -82,11 +83,7 @@ passport.deserializeUser(function(obj, done) {
 
 app.get(
   "/api/login",
-  function(req, res, next) {
-    console.log("redirected");
-    next();
-  },
-  passport.authenticate("auth0", { successRedirect: "/dashboard" })
+  passport.authenticate("auth0", { successRedirect: "http://localhost:3000/" })
 );
 app.get("/logout", function(req, res) {
   req.logout();
