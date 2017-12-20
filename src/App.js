@@ -22,24 +22,29 @@ class App extends Component {
   }
 
   componentDidMount() {
+    //find user position
     if ("geolocation" in navigator) {
       //geolocation is available
       navigator.geolocation.getCurrentPosition(position => {
         //Call getAirport endpoint on server
+        console.log("hey");
         axios
           .get(
             `/api/getAirport?lat=${position.coords.latitude}&long=${
               position.coords.longitude
             }`
           )
-          .then(response =>
+          .then(response => {
             this.setState({
               latitude: position.coords.latitude,
               longitude: position.coords.longitude,
               airport: response.data
-            })
-          );
-        console.log(this.state);
+            });
+          })
+          .then(() => {
+            console.log("sending state", this.state);
+            this.props.getLocation(this.state);
+          });
       });
     }
   }

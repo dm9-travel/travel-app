@@ -5555,6 +5555,10 @@ redux-devtools-extension@^2.13.2:
   version "2.13.2"
   resolved "https://registry.yarnpkg.com/redux-devtools-extension/-/redux-devtools-extension-2.13.2.tgz#e0f9a8e8dfca7c17be92c7124958a3b94eb2911d"
 
+redux-effects-geolocation@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/redux-effects-geolocation/-/redux-effects-geolocation-1.0.2.tgz#0c56bfdf78e89ae621a3844307fd0f222a539ba3"
+
 redux-promise-middleware@^5.0.0:
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/redux-promise-middleware/-/redux-promise-middleware-5.0.0.tgz#1656b24f9ac962bf11fbe55ea8360810e18d47a7"

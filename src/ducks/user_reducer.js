@@ -13,14 +13,6 @@ const initialState = {
   user_location: {}
 };
 
-// axios call to get locations/destinations/longitude and lattitude of search results
-// export function getLocations() {
-//   return {
-//     type: GET_LOCATIONS,
-//     payload:
-//   }
-// }
-
 export default function users(state = initialState, action) {
   switch (action.type) {
     case REQ_USER + "_PENDING":
@@ -30,9 +22,8 @@ export default function users(state = initialState, action) {
         isLoading: false,
         user: action.payload
       });
-    case GET_LOCATION + "_PENDING":
-      return Object.assign({}, state, { isLoading: true });
-    case GET_LOCATION + "_FULFILLED":
+    case GET_LOCATION:
+      console.log(action.payload);
       return Object.assign({}, state, {
         isLoading: false,
         user_location: action.payload
@@ -65,27 +56,9 @@ export function getWatchlist(user_id) {
   };
 }
 export function getLocation(location) {
+  console.log("receiving state", location);
   return {
     type: GET_LOCATION,
-    payload: function() {
-      if ("geolocation" in navigator) {
-        //geolocation is available
-        navigator.geolocation.getCurrentPosition(position => {
-          //Call getAirport endpoint on server
-          axios
-            .get(
-              `/api/getAirport?lat=${position.coords.latitude}&long=${
-                position.coords.longitude
-              }`
-            )
-            .then(response => ({
-              latitude: position.coords.latitude,
-              longitude: position.coords.longitude,
-              airport: response.data
-            }));
-          console.log(this.props.user_location);
-        });
-      }
-    }
+    payload: location
   };
 }
