@@ -24,6 +24,11 @@ class Quote extends Component {
   handleClick() {
     this.props.selectFlight(this.state);
   }
+  componentDidMount() {
+    axios.get(`/api/getImages/${this.state.destinationPlace}`).then(() => {
+      this.setState({ imageUrl: response });
+    });
+  }
 
   render() {
     return (
