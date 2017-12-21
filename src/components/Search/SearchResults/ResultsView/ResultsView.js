@@ -7,6 +7,8 @@ import ResultsItem from "../ResultsItem/ResultsItem.js";
 import "./ResultsView.css";
 
 import logo from "./../../../Nav/NavBar/logo.svg";
+import * as Scroll from 'react-scroll';
+import {Link, DirectLink, Element, Events, animateScroll as scroll, scrollSpy, scroller} from 'react-scroll';
 
 const google = window.google;
 
@@ -155,23 +157,25 @@ class ResultsView extends Component {
         var carrier = flight.carrierObj.Name;
       }
       return (
-        <ResultsItem
-          key={flights.QuoteId}
-          destinationPlace={flight.destinationObj.Name}
-          countryName={flight.destinationObj.CountryName}
-          originPlace={this.props.users.userLocation.airport.PlaceName}
-          outboundDate={flight.OutboundLeg.DepartureDate}
-          price={flight.MinPrice}
-          direct={flight.Direct}
-          iataCode={flight.destinationObj.IataCode}
-          cityName={flight.destinationObj.CityName}
-          airline={carrier}
-          name={flight.destinationObj.Name}
-          skyCode={flight.destinationObj.SkyscannerCode}
-          placeId={flight.destinationObj.placeId}
-          originId={flight.OutboundLeg.OriginId}
-          carrierId={flight.OutboundLeg.CarrierIds[0]}
-        />
+        <Element name={flight.QuoteId} key={flight.QuoteId} >
+            <ResultsItem
+            key={flight.QuoteId}
+            destinationPlace={flight.destinationObj.Name}
+            countryName={flight.destinationObj.CountryName}
+            originPlace={this.props.users.userLocation.airport.PlaceName}
+            outboundDate={flight.OutboundLeg.DepartureDate}
+            price={flight.MinPrice}
+            direct={flight.Direct}
+            iataCode={flight.destinationObj.IataCode}
+            cityName={flight.destinationObj.CityName}
+            airline={carrier}
+            name={flight.destinationObj.Name}
+            skyCode={flight.destinationObj.SkyscannerCode}
+            placeId={flight.destinationObj.placeId}
+            originId={flight.OutboundLeg.OriginId}
+            carrierId={flight.OutboundLeg.CarrierIds[0]}
+            />
+        </Element>
       );
     });
     return (
