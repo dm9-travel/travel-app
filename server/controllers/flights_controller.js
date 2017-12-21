@@ -116,7 +116,7 @@ module.exports = {
           console.log(quotes);
           res.status(200).send(quotes);
         })
-        .catch(err => res.status(500).send(err.response.data));
+        .catch(err => res.status(500).send(err.response.data));},
   Get_Images: (req, res, next) => {
     console.log("hitter");
     const { params } = req;
