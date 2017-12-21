@@ -27,6 +27,7 @@ ul {
   list-style: none;
 }
 
+
 @media screen and (max-width: 785px) {
   #gmap {
     display: none !important;
@@ -72,7 +73,12 @@ ul {
   /* border: 5px solid black; */
 
 }
-
+.infowindow {
+    background: navajowhite;
+}
+.text-bold {
+    font-weight: bold;
+}
 
 @media (min-width: 576px) {
   .card-columns {
