@@ -26,12 +26,7 @@
 ul {
   list-style: none;
 }
-.infowindow {
-    background: navajowhite;
-}
-.text-bold {
-    font-weight: bold;
-}
+
 
 @media screen and (max-width: 785px) {
   #gmap {
@@ -78,7 +73,12 @@ ul {
   /* border: 5px solid black; */
 
 }
-
+.infowindow {
+    background: navajowhite;
+}
+.text-bold {
+    font-weight: bold;
+}
 
 @media (min-width: 576px) {
   .card-columns {
