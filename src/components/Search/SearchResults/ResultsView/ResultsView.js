@@ -110,22 +110,10 @@ class ResultsView extends Component {
       ]
       
       });
-<<<<<<< HEAD
-      var marker = new google.maps.Marker({
-        position: uluru,
-        map: map,
-        animation: google.maps.Animation.DROP,
-        icon: logo,
-        id: 1
-      });
-      // mapDiv.style.height = "90vh";
-      // mapDiv.style.width = "50vw";
-=======
       var geocoder = new google.maps.Geocoder;
    
-      mapDiv.style.height = "90vh";
-      mapDiv.style.width = "50vw";
->>>>>>> master
+    //   mapDiv.style.height = "90vh";
+    //   mapDiv.style.width = "50vw";
 
       mapDiv.style.right = "0vw";
       mapDiv.style.top = "0vh";
