@@ -17,7 +17,7 @@ class NavBar extends Component {
   }
 
   render() {
-    let navBarStyle = 'navbar sticky-top navbar-expand-lg navbar-light bg-light';
+    let navBarStyle = 'navbar sticky-top navbar-expand-lg navbar-light';
     let containerType = 'container';
 
     if (this.props.location.pathname !== '/') {
@@ -38,7 +38,7 @@ class NavBar extends Component {
         </button>
 
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav ml-auto">
+          <ul className="navbar-nav ml-auto text-uppercase">
             <li className="nav-item active">
               <Link className="nav-link" to="/">Home <span className="sr-only">(current)</span></Link>
             </li>
@@ -46,7 +46,7 @@ class NavBar extends Component {
               <Link className="nav-link" to="/watchlist">Watchlist</Link>
             </li>
             <li className="nav-item">
-              <button type="button" onClick={this.handleLogin} className="btn btn-outline-primary">Login</button>
+              <button type="button" onClick={this.handleLogin} className="btn btn-outline-primary text-uppercase ml-5">Login</button>
             </li>
           </ul>
         </div>
