@@ -94,20 +94,15 @@ class ResultsView extends Component {
   }
 
   render() {
-<<<<<<< HEAD
-      console.log(this.map)
     const flightsList = this.props.flights.flights.map((flight, ind) => {
-=======
-    const flightsList = this.props.flights.flights.map(flight => {
       if (!flight.carrierObj) {
         var carrier = "Malaysian Airlines";
       } else {
         var carrier = flight.carrierObj.Name;
       }
->>>>>>> master
       return (
         <ResultsItem
-          key={ind}
+          key={flights.QuoteId}
           destinationPlace={flight.destinationObj.Name}
           countryName={flight.destinationObj.CountryName}
           originPlace={this.props.users.userLocation.airport.PlaceName}
