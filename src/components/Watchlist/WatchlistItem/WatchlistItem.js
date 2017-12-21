@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import moment from 'moment';
 
 class WatchlistItem extends Component {
     constructor(props){
@@ -26,7 +27,7 @@ class WatchlistItem extends Component {
             destinationCity = this.props.inboundLeg.DestinationName;
         }
 
-// DestinationCode OriginCode Carrier[0]
+// DestinationCode OriginCode Carrier[0] DepartureDate
 
         return <div className="card" style={cardStyle}>
             <div className="card-body">
@@ -36,17 +37,18 @@ class WatchlistItem extends Component {
               </div>
               <div className="d-flex flex-row justify-content-start align-items-center flex-wrap">
                 {this.props.outboundLeg && <div className="d-flex flex-row justify-content-between" style={rowStyle}>
-                  <span className="card-text">Sat, Feb 23</span>
+                  <span className="card-text">{moment(this.props.outboundLeg.DepartureDate).format("dddd, MMMM Do YYYY, h:mm:ss a")}</span>
                   <span className="card-text">{this.props.outboundLeg.OriginCode}-{this.props.outboundLeg.DestinationCode}</span>
                 </div>}
                 {this.props.inboundLeg && <div className="d-flex flex-row justify-content-between" style={rowStyle}>
-                  <span className="card-text">Tues, Feb 25</span>
+                  <span className="card-text">{moment(this.props.inboundLeg.DepartureDate ).format("dddd, MMMM Do YYYY, h:mm:ss a") }</span>
                   <span className="card-text">{this.props.inboundLeg.OriginCode}-{this.props.inboundLeg.DestinationCode}</span>
                 </div>}
               </div>
               <div className="d-flex flex-row justify-content-start">
-                <a href="#" className="card-link">Details</a>
-                <a href="#" className="card-link">Delete</a>
+                <a href="#" className="card-link">
+                  Details <i className="fa fa-external-link-square" aria-hidden="true"></i>
+                </a>
               </div>
             </div>
           </div>;

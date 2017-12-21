@@ -1,4 +1,5 @@
 const axios = require("axios");
+const moment = require("moment");
 require("dotenv").config();
 
 const key = process.env.KEY;
@@ -61,7 +62,8 @@ module.exports = {
         originPlace,
         destinationPlace,
         outboundPartialDate,
-        inboundPartialDate
+        inboundPartialDate,
+        budget
       } = req.body;
       axios
         .get(
@@ -110,8 +112,10 @@ module.exports = {
               quote.InboundLeg.DestinationCode = DestinationPlace.IataCode;
             }
           });
-          
 
+          /*filter quotes for budget*/
+          quotes = quotes.filter(quote=>quote.MinPrice <= budget)
+          console.log(quotes);
           res.status(200).send(quotes);
         })
         .catch(err => res.status(500).send(err.response.data));
