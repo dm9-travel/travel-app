@@ -11,13 +11,9 @@ require("dotenv").config();
 
 const port = 3001;
 
-
-
-
-
 // require controllers
-const userCtrl = require('./controllers/user_controller');
-const airportCtrl = require('./controllers/airport_controller');
+const userCtrl = require("./controllers/user_controller");
+const airportCtrl = require("./controllers/airport_controller");
 
 // middleware
 app.use(json());
@@ -50,18 +46,29 @@ passport.use(
     },
     function(accessToken, refreshToken, extraParams, profile, done) {
       //console.log("gets here");
-      app.get("db").get_user_by_auth_id(profile.id).then(response =>{
-        if(!response[0]){
-          app.get("db").create_user_by_auth_id([profile.id, profile.displayName, profile.email]).then(created => {
-             return done(null, created[0])
-          });
-          //console.log("working ");
-        } else {
-           return done(null, response[0]);
-        }
-      })
+      app
+        .get("db")
+        .get_user_by_auth_id(profile.id)
+        .then(response => {
+          if (!response[0]) {
+            app
+              .get("db")
+              .create_user_by_auth_id([
+                profile.id,
+                profile.displayName,
+                profile.email
+              ])
+              .then(created => {
+                return done(null, created[0]);
+              });
+            //console.log("working ");
+          } else {
+            return done(null, response[0]);
+          }
+        });
     }
-));
+  )
+);
 
 passport.serializeUser(function(user, done) {
   done(null, user);
@@ -70,8 +77,6 @@ passport.serializeUser(function(user, done) {
 passport.deserializeUser(function(obj, done) {
   done(null, obj);
 });
-
-
 
 app.get(
   "/api/login",
@@ -94,8 +99,9 @@ app.get("/api/me", function(req, res) {
 const flightCtrl = require("./controllers/flights_controller");
 app.post("/api/getFlights", flightCtrl.Get_Flights);
 app.get("/api/getWatchlist/:id", userCtrl.Get_Watchlist);
+app.get("/api/getImages/:id", flightCtrl.Get_Images);
 
-app.get("/api/getAirport",airportCtrl.Get_Airport);
+app.get("/api/getAirport", airportCtrl.Get_Airport);
 
 app.get("/api/test", (req, res, next) => {
   req.app
