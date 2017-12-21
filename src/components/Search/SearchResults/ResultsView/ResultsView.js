@@ -196,8 +196,6 @@ class ResultsView extends Component {
         <NavBar />
         <div className="row">
 
-            
-
           <div id="results-view" className="col-lg-6">
         
             <div className="card-columns">
