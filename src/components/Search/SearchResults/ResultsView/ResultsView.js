@@ -5,6 +5,9 @@ import flights, { getFlights } from "./../../../../ducks/flights_reducer";
 import UpdateSearch from "./../UpdateSearch/UpdateSearch";
 import ResultsItem from "../ResultsItem/ResultsItem.js";
 import "./ResultsView.css";
+import NavBar from './../../../Nav/NavBar/NavBar';
+
+
 
 import logo from "./../../../Nav/NavBar/logo.svg";
 import * as Scroll from 'react-scroll';
@@ -212,8 +215,10 @@ class ResultsView extends Component {
       );
     });
     return (
-      
+      <div>
+          <NavBar/>
         <div className="row">
+            
 
           <div id="results-view" className="col-lg-6">
         
@@ -236,7 +241,7 @@ class ResultsView extends Component {
         //   </div>
          
         // </div> 
-      
+      </div>
     );
   }
 }
