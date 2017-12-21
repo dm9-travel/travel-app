@@ -24,11 +24,10 @@ class Watchlist extends Component {
                                     budget={trip.budget}/>
                       );
 
-    return (
-    <div className="d.flex flex-row justify-content-center">
-        <h3>My Trips</h3>
+    return <div className="d.flex flex-row justify-content-center bg-light">
+        <h3 className="display-3">My Trips</h3>
         {userTrips}
-    </div>);
+      </div>;
   }
 }
 

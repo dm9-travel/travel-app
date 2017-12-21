@@ -36,12 +36,20 @@ class Trip extends Component {
           return <WatchlistItem price={quote.MinPrice} key={quote.QuoteId} outboundLeg={quote.OutboundLeg} inboundLeg={quote.InboundLeg} />;
         });
 
-        return <div>
-            <h4>
-              {this.props.originPlace} To {this.props.destinationPlace}
-            </h4>
+        const tripStyle = { width: "90%",padding:"1rem", margin:"1rem" };
+
+        return (
+        <div className="bg-dark rounded" style={tripStyle}>
+              <h4 className="text-light d-flex justify-content-between">
+                {this.props.originPlace} To {this.props.destinationPlace}
+                <span class="badge badge-light">
+                  ${this.props.budget}
+                </span>
+              </h4>
+              <button type="button" class="btn btn-danger d-flex justify-content-start">Delete</button>
             {watchArray}
-          </div>;
+        </div>
+        );
     }
 }
 
