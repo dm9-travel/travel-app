@@ -168,7 +168,7 @@ class ResultsView extends Component {
       }
       return (
         <ResultsItem
-          key={flights.QuoteId}
+          key={flight.QuoteId}
           destinationPlace={flight.destinationObj.Name}
           countryName={flight.destinationObj.CountryName}
           originPlace={this.props.users.userLocation.airport.PlaceName}
