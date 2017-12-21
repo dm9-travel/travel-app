@@ -49,7 +49,6 @@ passport.use(
         .get("db")
         .get_user_by_auth_id(profile.id)
         .then(response => {
-
           if (!response[0]) {
             app
               .get("db")
