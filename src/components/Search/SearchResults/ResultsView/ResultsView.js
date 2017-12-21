@@ -15,9 +15,18 @@ const google = window.google;
 class ResultsView extends Component {
   constructor(props) {
     super(props);
+
   }
+
   componentDidMount() {
-    
+      Events.scrollEvent.register('begin', function() {
+          console.log('begin', arguments)
+      })
+      Events.scrollEvent.register('end', function() {
+          console.log('end', arguments)
+      })
+      scrollSpy.update();
+    var userLoc = this.props.users.userLocation;
     let flightsData = this.props.flights.flights;
     console.log(flightsData)
     const mapDiv = this.gmap;
@@ -29,7 +38,7 @@ class ResultsView extends Component {
       
       self.map = new google.maps.Map(mapDiv, {
         zoom: 4,
-        center: uluru,
+        center: {lat: userLoc.latitude, lng: userLoc.longitude},
         styles: [
           {
               "featureType": "administrative",
@@ -126,9 +135,10 @@ class ResultsView extends Component {
     var flightsData = this.props.flights.flights;
     var self = this;
     var geocoder = new google.maps.Geocoder;
-    var infowindow = new google.maps.InfoWindow;
+    var scrollevents = scroller;
+    
     flightsData.forEach((cur, ind) => {
-        return geocoder.geocode({'address': `${cur.destinationObj.CityName}`}, function(results, status) {
+        return geocoder.geocode({'address': `${cur.destinationObj.CityName}, ${cur.destinationObj.CountryName} `}, function(results, status) {
             if(status === 'OK') {
                 var marker = new google.maps.Marker({
                     map: self.map,
@@ -136,19 +146,42 @@ class ResultsView extends Component {
                     animation: google.maps.Animation.DROP,
                     id: cur.QuoteId
                 });
+                var infowindow = new google.maps.InfoWindow;
+                var infowindowContent = (
+                    `<div class="infowindow">
+                        Fly to <span class="text-bold" >${cur.destinationObj.Name}</span> for just <span class="text-bold" >$</span><span class="text-bold" >${cur.MinPrice}</span>
+                    </div>`
+                )
+                console.log(marker)
                 self.map.center = results[0].geometry.location
-                infowindow.setContent(results[0].formatted_address);
-                infowindow.open(self.map,marker)
-                console.log('geocode')
+                infowindow.setContent(infowindowContent);
+                marker.addListener( 'mouseover', function(){
+                    infowindow.open(self.map, marker)
+                })
+                marker.addListener('mouseout', function() {
+                    infowindow.close(self.map, marker)
+                })
+                marker.addListener('click', function() {
+                    console.log(`flight:${marker.id}`)
+                    scrollevents.scrollTo(`flight:${marker.id}`, {
+                        duration:800,
+                        delay: 0,
+                        smooth: true,
+                        containerId: 'results-view',
+                        offset: -100
+                    })
+                })
+                // infowindow.open(self.map,marker)
             } else {
                 console.log(status)
             }
-        })
-      
-       
+        }) 
     }) 
   }
-
+  componentWillUnmount() {
+      Events.scrollEvent.remove('begin');
+      Events.scrollEvent.remove('end');
+  }
   render() {
     const flightsList = this.props.flights.flights.map((flight, ind) => {
       if (!flight.carrierObj) {
@@ -157,7 +190,7 @@ class ResultsView extends Component {
         var carrier = flight.carrierObj.Name;
       }
       return (
-        <Element name={flight.QuoteId} key={flight.QuoteId} >
+        <Element name={`flight:${flight.QuoteId}`} key={flight.QuoteId} >
             <ResultsItem
             key={flight.QuoteId}
             destinationPlace={flight.destinationObj.Name}
