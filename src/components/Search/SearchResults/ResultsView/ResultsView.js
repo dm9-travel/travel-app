@@ -155,7 +155,6 @@ class ResultsView extends Component {
                         Fly to <span class="text-bold" >${cur.destinationObj.Name}</span> for just <span class="text-bold" >$</span><span class="text-bold" >${cur.MinPrice}</span>
                     </div>`
                 )
-                console.log(marker)
                 self.map.center = results[0].geometry.location
                 infowindow.setContent(infowindowContent);
                 marker.addListener( 'mouseover', function(){
@@ -217,13 +216,14 @@ class ResultsView extends Component {
     return (
       <div>
           <NavBar/>
+          
         <div className="row">
-            
-
+          
+        {/* <UpdateSearch /> */}
           <div id="results-view" className="col-lg-6">
-        
+          
             <div className="card-columns">
-              {/* <UpdateSearch /> */}
+              
               {flightsList}
             </div>
           </div>
