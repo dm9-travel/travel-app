@@ -14,22 +14,35 @@ class WatchlistItem extends Component {
 
     render() {
         let cardStyle={width:"90%",margin:"1rem"};
-        let rowStyle={width:"100%"}
+        let rowStyle={width:"100%"};
+        let price = this.props.price;
+        let originCity;
+        let destinationCity;
+        if(this.props.outboundLeg){
+            originCity = this.props.outboundLeg.OriginName;
+            destinationCity = this.props.outboundLeg.DestinationName;
+        }else if(this.props.inboundLeg){
+            originCity = this.props.inboundLeg.OriginName;
+            destinationCity = this.props.inboundLeg.DestinationName;
+        }
+
+// DestinationCode OriginCode Carrier[0]
+
         return <div className="card" style={cardStyle}>
             <div className="card-body">
               <div className="d-flex flex-row justify-content-between align-items-center">
-                <h4 className="card-title">Dallas To Los Angeles</h4>
-                <h6 className="card-subtitle text-muted">$150.00</h6>
+                <h4 className="card-title">{originCity} To {destinationCity}</h4>
+                <h6 className="card-subtitle text-muted">${price}</h6>
               </div>
               <div className="d-flex flex-row justify-content-start align-items-center flex-wrap">
-                <div className="d-flex flex-row justify-content-between" style={rowStyle}>
+                {this.props.outboundLeg && <div className="d-flex flex-row justify-content-between" style={rowStyle}>
                   <span className="card-text">Sat, Feb 23</span>
-                  <span className="card-text">DFW-LAX</span>
-                </div>
-                <div className="d-flex flex-row justify-content-between" style={rowStyle}>
+                  <span className="card-text">{this.props.outboundLeg.OriginCode}-{this.props.outboundLeg.DestinationCode}</span>
+                </div>}
+                {this.props.inboundLeg && <div className="d-flex flex-row justify-content-between" style={rowStyle}>
                   <span className="card-text">Tues, Feb 25</span>
-                  <span className="card-text">LAX-DFW</span>
-                </div>
+                  <span className="card-text">{this.props.inboundLeg.OriginCode}-{this.props.inboundLeg.DestinationCode}</span>
+                </div>}
               </div>
               <div className="d-flex flex-row justify-content-start">
                 <a href="#" className="card-link">Details</a>
