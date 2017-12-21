@@ -4,6 +4,7 @@ import './Header.css';
 
 // Import components
 import Search from './../../Search/Search/Search';
+import NavBar from './../NavBar/NavBar';
 
 
 class Header extends Component {
@@ -11,6 +12,7 @@ class Header extends Component {
 
     return (
       <div className="jumbotron jumbotron-fluid bg-info">
+        <NavBar />
         <div className="container">
           <div className="w-80">
             <h1 className="display-3">Explore the World</h1>

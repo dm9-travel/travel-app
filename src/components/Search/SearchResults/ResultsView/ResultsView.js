@@ -2,11 +2,15 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import {withRouter} from 'react-router-dom';
 import flights, { getFlights } from "./../../../../ducks/flights_reducer";
+
+import "./ResultsView.css";
+import logo from "./../../../Nav/NavBar/logo.svg";
+
+// Import components 
 import UpdateSearch from "./../UpdateSearch/UpdateSearch";
 import ResultsItem from "../ResultsItem/ResultsItem.js";
-import "./ResultsView.css";
+import NavBar from '../../../Nav/NavBar/NavBar';
 
-import logo from "./../../../Nav/NavBar/logo.svg";
 
 const google = window.google;
 
@@ -175,8 +179,12 @@ class ResultsView extends Component {
       );
     });
     return (
-      
+        
+        <div>
+        <NavBar />
         <div className="row">
+
+            
 
           <div id="results-view" className="col-lg-6">
         
@@ -190,6 +198,7 @@ class ResultsView extends Component {
             <div id="gmap" ref={ref => (this.gmap = ref)} />
           </div>
 
+        </div>
         </div>
 
         // <UpdateSearch />

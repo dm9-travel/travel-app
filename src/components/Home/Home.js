@@ -1,7 +1,10 @@
 import React, {Component} from 'react';
-import ResultsView from './../Search/SearchResults/ResultsView/ResultsView';
-import Header from './../Nav/Header/Header';
 import {Link, withRouter} from 'react-router-dom';
+
+// Import components
+import Header from './../Nav/Header/Header';
+import ResultsView from './../Search/SearchResults/ResultsView/ResultsView';
+
 
 class Home extends Component {
     constructor(props) {
@@ -12,8 +15,8 @@ class Home extends Component {
     render() {
         return(
             <div className="homePage" >
-
-               <Header />
+                
+                <Header />
                 <div>
                     <Link to="/searchResults" ><button>Search results</button></Link>
                 </div>
