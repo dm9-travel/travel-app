@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import {withRouter} from 'react-router-dom';
-import { getFlights } from "./../../../../ducks/flights_reducer";
+import flights, { getFlights } from "./../../../../ducks/flights_reducer";
 import UpdateSearch from "./../UpdateSearch/UpdateSearch";
 import ResultsItem from "../ResultsItem/ResultsItem.js";
 import "./ResultsView.css";
@@ -16,29 +16,38 @@ class ResultsView extends Component {
   }
   componentDidMount() {
     // const mapDiv = document.getElementById("gmap");
+    let flightsData = this.props.flights.flights;
+    console.log(flightsData)
     const mapDiv = this.gmap;
-    (function initMap() {
+    const self = this;
+   (function initMap() {
       var uluru = { lat: -25.363, lng: 131.044 };
-      ;
+      var coords = [];
       var infowindow = new google.maps.InfoWindow;
       
-      var map = new google.maps.Map(mapDiv, {
+      self.map = new google.maps.Map(mapDiv, {
         zoom: 4,
         center: uluru
       });
       var geocoder = new google.maps.Geocoder;
-        var geocoded = geocoder.geocode({'address': 'Dallas'}, function(results, status) {
-            if(status === 'OK') {
-                var marker = new google.maps.Marker({
-                    map: map,
-                    position: results[0].geometry.location
-                });
-                infowindow.setContent(results[0].formatted_address);
-                infowindow.open(map,marker)
-            } else {
-                console.log(status)
-            }
-        })
+    //   flightsData.forEach((cur, ind) => {
+    //     if (geocoder) {
+    //         geocoder.geocode({'address': cur.destinationObj.CityName}, function (results, status) {
+    //             if (status == google.maps.GeocoderStatus.OK) {
+    //                 coords.push(results[0].geometry.location)
+    //             }
+    //         })
+    //     }
+    //   })
+    //   coords.forEach((cur, ind) => {
+    //       return new google.maps.Marker({
+    //           position: cur,
+    //           map: map,
+    //           animation: google.maps.Animation.DROP,
+    //           id: ind
+    //       }) && console.log(cur)
+    //   })
+        
     
     //   var marker = new google.maps.Marker({
     //     position: uluru,
@@ -57,12 +66,39 @@ class ResultsView extends Component {
       console.log(google.maps);
     })();
   }
+  componentDidUpdate() {
+    var flightsData = this.props.flights.flights;
+    var self = this;
+    var geocoder = new google.maps.Geocoder;
+    var infowindow = new google.maps.InfoWindow;
+    flightsData.forEach((cur, ind) => {
+        return geocoder.geocode({'address': `${cur.destinationObj.CityName}`}, function(results, status) {
+            if(status === 'OK') {
+                var marker = new google.maps.Marker({
+                    map: self.map,
+                    position: results[0].geometry.location,
+                    animation: google.maps.Animation.DROP,
+                    id: cur.QuoteId
+                });
+                self.map.center = results[0].geometry.location
+                infowindow.setContent(results[0].formatted_address);
+                infowindow.open(self.map,marker)
+                console.log('geocode')
+            } else {
+                console.log(status)
+            }
+        })
+      
+       
+    }) 
+  }
 
   render() {
-    const flightsList = this.props.flights.flights.map(flight => {
+      console.log(this.map)
+    const flightsList = this.props.flights.flights.map((flight, ind) => {
       return (
         <ResultsItem
-          key={flight.QuoteId}
+          key={ind}
           destinationPlace={flight.destinationObj.Name}
           destinationCountry={flight.destinationObj.CountryName}
           originPlace={this.props.users.userLocation.airport.PlaceName}
