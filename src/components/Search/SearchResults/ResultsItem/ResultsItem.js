@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import getTime from "./timeGenerator";
 import moment from "moment";
 import axios from "axios";
 
@@ -19,18 +20,22 @@ class Quote extends Component {
       destinationCountry: this.props.destinationCountry,
       outboundDate: this.props.outboundDate,
       price: this.props.price,
-      direct: this.props.direct
+      direct: this.props.direct,
+      time: ""
     };
     this.handleClick = this.handleClick.bind(this);
+  }
+  componentDidMount() {
+    this.setState({ time: getTime() });
   }
   handleClick() {
     this.props.selectFlight(this.state);
   }
-  componentDidMount() {
-    axios.get(`/api/getImages/${this.state.destinationPlace}`).then(() => {
-      this.setState({ imageUrl: response });
-    });
-  }
+  //   componentDidMount() {
+  //     axios.get(`/api/getImages/${this.state.destinationPlace}`).then(() => {
+  //       this.setState({ imageUrl: response });
+  //     });
+  //   }
 
   render() {
     return (
