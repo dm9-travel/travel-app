@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import {Link, withRouter} from 'react-router-dom';
+import {connect} from 'react-redux'
+import { requestUser } from '../../../ducks/user_reducer';
 import logo from './logo.svg';
 import './NavBar.css';
 
@@ -14,6 +16,11 @@ class NavBar extends Component {
 
   handleLogin() {
     window.location.href = 'http://localhost:3001/api/login';
+  }
+
+  componentDidMount(){
+    console.log(requestUser());
+    this.props.requestUser()
   }
 
 
@@ -37,7 +44,7 @@ class NavBar extends Component {
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
-
+          <h1>{this.props.displayName}</h1>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav ml-auto">
             <li className="nav-item active">
@@ -57,5 +64,12 @@ class NavBar extends Component {
   }
 
 }
+function mapStateToProps(state){
+  const { user }= state;
+  return{
+    user
 
-export default withRouter(NavBar);
+  };
+}
+
+export default withRouter(connect(mapStateToProps, { requestUser })(NavBar));

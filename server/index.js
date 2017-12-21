@@ -45,11 +45,11 @@ passport.use(
       callbackURL: "/api/login"
     },
     function(accessToken, refreshToken, extraParams, profile, done) {
-      //console.log("gets here");
       app
         .get("db")
         .get_user_by_auth_id(profile.id)
         .then(response => {
+
           if (!response[0]) {
             app
               .get("db")
