@@ -19,23 +19,34 @@ class ResultsView extends Component {
     const mapDiv = this.gmap;
     (function initMap() {
       var uluru = { lat: -25.363, lng: 131.044 };
+      ;
+      var infowindow = new google.maps.InfoWindow;
+      
       var map = new google.maps.Map(mapDiv, {
         zoom: 4,
         center: uluru
       });
-    // google.maps.Geocoder.geocode({"placeId": '1463'}, function (results, status) {
-    //     if (status === 'OK') {
-    //         map.setZoom(11);
-    //         map.setCenter(results[0].geometry.location);
-    //     }
-    // })
-      var marker = new google.maps.Marker({
-        position: uluru,
-        map: map,
-        animation: google.maps.Animation.DROP,
-        icon: logo,
-        id: 1
-      });
+      var geocoder = new google.maps.Geocoder;
+        var geocoded = geocoder.geocode({'address': 'Dallas'}, function(results, status) {
+            if(status === 'OK') {
+                var marker = new google.maps.Marker({
+                    map: map,
+                    position: results[0].geometry.location
+                });
+                infowindow.setContent(results[0].formatted_address);
+                infowindow.open(map,marker)
+            } else {
+                console.log(status)
+            }
+        })
+    
+    //   var marker = new google.maps.Marker({
+    //     position: uluru,
+    //     map: map,
+    //     animation: google.maps.Animation.DROP,
+    //     icon: logo,
+    //     id: 1
+    //   });
       mapDiv.style.height = "90vh";
       mapDiv.style.width = "50vw";
 
@@ -43,7 +54,7 @@ class ResultsView extends Component {
       mapDiv.style.top = "0vh";
 
       //   mapDiv.style.resetBoundsOnResize = "magic";
-      console.log(marker);
+      console.log(google.maps);
     })();
   }
 
