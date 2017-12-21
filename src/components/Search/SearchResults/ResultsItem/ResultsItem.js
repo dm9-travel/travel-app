@@ -28,21 +28,22 @@ class Quote extends Component {
       placeId: this.props.placeId,
       originId: this.props.originId,
       carrierId: this.props.carrierId,
-      time: ""
+      time: "",
+      imageUrl: ""
     };
     this.handleClick = this.handleClick.bind(this);
   }
-  componentDidMount() {
+  async componentDidMount() {
     this.setState({ time: getTime() });
+    // await axios.get(`/api/getImages/${this.state.cityName}`).then(response => {
+    //   console.log(response);
+    //   this.setState({ imageUrl: response.data });
+    // });
+    // console.log(this.state.imageUrl);
   }
   handleClick() {
     this.props.selectFlight(this.state);
   }
-  //   componentDidMount() {
-  //     axios.get(`/api/getImages/${this.state.destinationPlace}`).then(() => {
-  //       this.setState({ imageUrl: response });
-  //     });
-  //   }
 
   render() {
     return (
