@@ -47,24 +47,25 @@ class Quote extends Component {
 
   render() {
     return (
-      <div className="card">
+      <div className="card text-left rounded-0">
         <div className="card-body">
-          <h3 className="card-title">{this.props.destinationPlace}</h3>
+          <h3 className="card-title">{this.props.cityName}</h3>
           <h4 className="card-subtitle mb-2 text-muted">
-            {this.props.destinationCountry}
+            {this.props.countryName}
           </h4>
           <p>
-            From {this.props.originPlace} on{" "}
-            {moment(this.props.outboundDate).format("dddd, MMMM Do YYYY")}
+            <i className="fa fa-plane mr-2" aria-hidden="true"></i>
+            From <strong>{this.props.originPlace}</strong> on{" "}
+            {moment(this.props.outboundDate).format("ddd, MMMM DD")}
           </p>
-          <p className="text-uppercase">
+          {/* <p className="text-uppercase">
             {moment(this.props.outboundDate).format("dddd, MMMM Do YYYY")}
-          </p>
+          </p> */}
           <h2>from ${this.props.price}</h2>
           {this.props.direct ? (
-            <h6 className="text-uppercase">Non stop</h6>
+            <h6 className="text-uppercase">Non stop flight</h6>
           ) : (
-            <p className="text-uppercase">Connecting flight</p>
+            <h6 className="text-uppercase">Connecting flight</h6>
           )}
           <Link to="/details/">
             <button type="button" className="btn btn-primary">

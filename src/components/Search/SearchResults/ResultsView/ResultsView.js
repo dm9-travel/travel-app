@@ -27,12 +27,93 @@ class ResultsView extends Component {
       
       self.map = new google.maps.Map(mapDiv, {
         zoom: 4,
-        center: uluru
+        center: uluru,
+        styles: [
+          {
+              "featureType": "administrative",
+              "elementType": "labels.text.fill",
+              "stylers": [
+                  {
+                      "color": "#444444"
+                  }
+              ]
+          },
+          {
+              "featureType": "landscape",
+              "elementType": "all",
+              "stylers": [
+                  {
+                      "color": "#f2f2f2"
+                  }
+              ]
+          },
+          {
+              "featureType": "poi",
+              "elementType": "all",
+              "stylers": [
+                  {
+                      "visibility": "off"
+                  }
+              ]
+          },
+          {
+              "featureType": "road",
+              "elementType": "all",
+              "stylers": [
+                  {
+                      "saturation": -100
+                  },
+                  {
+                      "lightness": 45
+                  }
+              ]
+          },
+          {
+              "featureType": "road.highway",
+              "elementType": "all",
+              "stylers": [
+                  {
+                      "visibility": "simplified"
+                  }
+              ]
+          },
+          {
+              "featureType": "road.arterial",
+              "elementType": "labels.icon",
+              "stylers": [
+                  {
+                      "visibility": "off"
+                  }
+              ]
+          },
+          {
+              "featureType": "transit",
+              "elementType": "all",
+              "stylers": [
+                  {
+                      "visibility": "off"
+                  }
+              ]
+          },
+          {
+              "featureType": "water",
+              "elementType": "all",
+              "stylers": [
+                  {
+                      "color": "#46bcec"
+                  },
+                  {
+                      "visibility": "on"
+                  }
+              ]
+          }
+      ]
+      
       });
       var geocoder = new google.maps.Geocoder;
    
-      mapDiv.style.height = "90vh";
-      mapDiv.style.width = "50vw";
+    //   mapDiv.style.height = "90vh";
+    //   mapDiv.style.width = "50vw";
 
       mapDiv.style.right = "0vw";
       mapDiv.style.top = "0vh";
@@ -94,15 +175,31 @@ class ResultsView extends Component {
       );
     });
     return (
-      <div className="results">
-        <UpdateSearch />
-        <div className="resultsContainer">
-          <div className="resultsList">
-            <ul>{flightsList}</ul>
+      
+        <div className="row">
+
+          <div id="results-view" className="col-lg-6">
+        
+            <div className="card-columns">
+              {/* <UpdateSearch /> */}
+              {flightsList}
+            </div>
           </div>
-          <div id="gmap" ref={ref => (this.gmap = ref)} />
+
+          <div id="map-view" className="col-lg-6">
+            <div id="gmap" ref={ref => (this.gmap = ref)} />
+          </div>
+
         </div>
-      </div>
+
+        // <UpdateSearch />
+        // <div className="resultsContainer">
+        //   <div className="resultsList">
+        //     <ul>{flightsList}</ul>
+        //   </div>
+         
+        // </div> 
+      
     );
   }
 }
