@@ -4,6 +4,11 @@
   background-size: cover;
   background-repeat: no-repeat;
   height: 75vh;
+  padding-top: 1rem;
+}
+
+.header-title {
+  padding-top: 4rem;
 }
 
 .w-80 {
