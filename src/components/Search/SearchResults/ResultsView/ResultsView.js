@@ -136,9 +136,9 @@ class ResultsView extends Component {
                 });
                 var infowindow = new google.maps.InfoWindow;
                 var infowindowContent = (
-                   ` <div class="infowindow">
+                    `<div class="infowindow">
                         Fly to <span class="text-bold" >${cur.destinationObj.Name}</span> for just <span class="text-bold" >$</span><span class="text-bold" >${cur.MinPrice}</span>
-                        </div>`
+                    </div>`
                 )
                 self.map.center = results[0].geometry.location
                 infowindow.setContent(infowindowContent);
@@ -146,15 +146,16 @@ class ResultsView extends Component {
                     infowindow.open(self.map, marker)
                 })
                 marker.addListener('mouseout', function() {
-                    // infowindow.close(self.map, marker)
+                    infowindow.close(self.map, marker)
+                })
+                marker.addListener('click', function() {
+                    infowindow.open(self.map, marker)
                 })
                 // infowindow.open(self.map,marker)
             } else {
                 console.log(status)
             }
-        })
-      
-       
+        }) 
     }) 
   }
 
