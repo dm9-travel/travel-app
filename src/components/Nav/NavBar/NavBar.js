@@ -17,10 +17,20 @@ class NavBar extends Component {
   }
 
   render() {
+    let navBarStyle = 'navbar sticky-top navbar-expand-lg navbar-light bg-light';
+    let containerType = 'container';
+
+    if (this.props.location.pathname !== '/') {
+      console.log('Not home page');
+      containerType = 'container-fluid';
+      navBarStyle = 'navbar sticky-top navbar-expand-lg navbar-dark bg-dark';
+    }
+
+    console.log('I am NavBar at pathname: ', this.props.location.pathname);
 
     return (
-      <nav className="navbar sticky-top navbar-expand-lg navbar-light bg-light">
-      <div className="container">
+      <nav className={ navBarStyle }>
+      <div className={ containerType }>
         <img src={logo} className="logo" alt="logo"/>
         <Link to="/" className="navbar-brand">Wayz</Link>
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
