@@ -14,13 +14,20 @@ class Quote extends Component {
 
     this.state = {
       key: this.props.key,
-      country: this.props.friend_id,
       originPlace: this.props.originPlace,
       destinationPlace: this.props.destination,
-      destinationCountry: this.props.destinationCountry,
+      countryName: this.props.countryName,
       outboundDate: this.props.outboundDate,
       price: this.props.price,
       direct: this.props.direct,
+      IATAcode: this.props.iataCode,
+      cityName: this.props.cityName,
+      airline: this.props.airline,
+      name: this.props.name,
+      skyCode: this.props.skyCode,
+      placeId: this.props.placeId,
+      originId: this.props.originId,
+      carrierId: this.props.carrierId,
       time: ""
     };
     this.handleClick = this.handleClick.bind(this);
