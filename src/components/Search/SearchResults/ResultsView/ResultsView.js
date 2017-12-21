@@ -234,13 +234,13 @@ class ResultsView extends Component {
 
         </div>
 
-        // <UpdateSearch />
+        {/* // <UpdateSearch />
         // <div className="resultsContainer">
         //   <div className="resultsList">
         //     <ul>{flightsList}</ul>
         //   </div>
          
-        // </div> 
+        // </div>  */}
       </div>
     );
   }
