@@ -3,12 +3,13 @@ import axios from "axios";
 const REQ_USER = "REQ_USER";
 const GET_WATCHLIST = "GET_WATCHLIST";
 const GET_LOCATION = "GET_LOCATION";
+const LOCK_USER = "LOCK_USER";
 
 // Action Creators
 
 // Initial State
 const initialState = {
-  user: {},
+  currentUser: {},
   watchlist: [],
   userLocation: {
     airport: {
@@ -24,7 +25,7 @@ export default function users(state = initialState, action) {
     case REQ_USER + "_FULFILLED":
       return Object.assign({}, state, {
         isLoading: false,
-        user: action.payload
+        currentUser: action.payload
       });
     case GET_LOCATION:
       return Object.assign({}, state, {
@@ -34,7 +35,8 @@ export default function users(state = initialState, action) {
 
     case GET_WATCHLIST:
       return Object.assign({}, state, { watchlist: action.payload });
-
+    case LOCK_USER:
+      return Object.assign({}, state, { currentUser: action.payload });
     default:
       return state;
   }
@@ -62,5 +64,11 @@ export function getLocation(location) {
   return {
     type: GET_LOCATION,
     payload: location
+  };
+}
+export function lockUser(user) {
+  return {
+    type: LOCK_USER,
+    payload: user
   };
 }
