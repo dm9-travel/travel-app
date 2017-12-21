@@ -27,9 +27,8 @@ class WatchlistItem extends Component {
             destinationCity = this.props.inboundLeg.DestinationName;
         }
 
-// DestinationCode OriginCode Carrier[0] DepartureDate
 
-        return <div className="card" style={cardStyle}>
+        return (<div className="card" style={cardStyle}>
             <div className="card-body">
               <div className="d-flex flex-row justify-content-between align-items-center">
                 <h4 className="card-title">{originCity} To {destinationCity}</h4>
@@ -51,7 +50,7 @@ class WatchlistItem extends Component {
                 </a>
               </div>
             </div>
-          </div>;
+      </div>);
     }
 }
 
