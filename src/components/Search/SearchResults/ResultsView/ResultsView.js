@@ -15,7 +15,7 @@ class ResultsView extends Component {
     super(props);
   }
   componentDidMount() {
-    // const mapDiv = document.getElementById("gmap");
+    
     let flightsData = this.props.flights.flights;
     console.log(flightsData)
     const mapDiv = this.gmap;
@@ -30,39 +30,12 @@ class ResultsView extends Component {
         center: uluru
       });
       var geocoder = new google.maps.Geocoder;
-    //   flightsData.forEach((cur, ind) => {
-    //     if (geocoder) {
-    //         geocoder.geocode({'address': cur.destinationObj.CityName}, function (results, status) {
-    //             if (status == google.maps.GeocoderStatus.OK) {
-    //                 coords.push(results[0].geometry.location)
-    //             }
-    //         })
-    //     }
-    //   })
-    //   coords.forEach((cur, ind) => {
-    //       return new google.maps.Marker({
-    //           position: cur,
-    //           map: map,
-    //           animation: google.maps.Animation.DROP,
-    //           id: ind
-    //       }) && console.log(cur)
-    //   })
-        
-    
-    //   var marker = new google.maps.Marker({
-    //     position: uluru,
-    //     map: map,
-    //     animation: google.maps.Animation.DROP,
-    //     icon: logo,
-    //     id: 1
-    //   });
+   
       mapDiv.style.height = "90vh";
       mapDiv.style.width = "50vw";
 
       mapDiv.style.right = "0vw";
       mapDiv.style.top = "0vh";
-
-      //   mapDiv.style.resetBoundsOnResize = "magic";
       console.log(google.maps);
     })();
   }
