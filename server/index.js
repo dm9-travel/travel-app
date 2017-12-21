@@ -95,6 +95,8 @@ const flightCtrl = require("./controllers/flights_controller");
 app.post("/api/getFlights", flightCtrl.Get_Flights);
 app.get("/api/getWatchlist/:id", userCtrl.Get_Watchlist);
 
+app.post("/api/getQuote",flightCtrl.Get_Quote);
+
 app.get("/api/getAirport",airportCtrl.Get_Airport);
 
 app.get("/api/test", (req, res, next) => {
