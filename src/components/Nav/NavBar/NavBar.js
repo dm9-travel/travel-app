@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 import logo from './logo.svg';
 import './NavBar.css';
 
@@ -22,7 +22,7 @@ class NavBar extends Component {
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container">
         <img src={logo} className="logo" alt="logo"/>
-        <Link className="navbar-brand" to="/">Wayz</Link>
+        <Link to="/" className="navbar-brand">Wayz</Link>
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
@@ -58,4 +58,4 @@ class NavBar extends Component {
 
 }
 
-export default NavBar;
+export default withRouter(NavBar);

@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-
+import {withRouter} from 'react-router-dom';
 import "./App.css";
-import router from "./router";
+
 import axios from "axios";
 
 // Import components
@@ -10,6 +10,7 @@ import { getLocation } from "./ducks/user_reducer.js";
 import NavBar from "./components/Nav/NavBar/NavBar";
 import Header from "./components/Nav/Header/Header";
 import Footer from "./components/Nav/Footer/Footer";
+import router from "./router";
 
 class App extends Component {
   constructor(props) {
@@ -60,4 +61,4 @@ class App extends Component {
 }
 
 const mapStateToProps = state => state;
-export default connect(mapStateToProps, { getLocation })(App);
+export default withRouter(connect(mapStateToProps, { getLocation })(App));

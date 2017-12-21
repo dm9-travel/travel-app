@@ -1,5 +1,5 @@
 import React from 'react';
-import {Switch, BrowserRouter, Route} from 'react-router-dom';
+import {Switch, Route} from 'react-router-dom';
 
 //components to be rendered
 import ResultsView from './components/Search/SearchResults/ResultsView/ResultsView.js';
@@ -11,7 +11,7 @@ export default (
   
     <Switch>
       <Route exact path = '/' component={Home} />
-      <Route path = '/searchresults' component={ResultsView} />
+      <Route path = '/searchResults' component={ResultsView} />
       <Route path = '/details' component={Details} />
       <Route path = '/watchlist' component={Watchlist} />
     </Switch>
