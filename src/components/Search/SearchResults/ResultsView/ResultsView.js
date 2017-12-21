@@ -15,7 +15,7 @@ class ResultsView extends Component {
     super(props);
   }
   componentDidMount() {
-    
+    var userLoc = this.props.users.userLocation;
     let flightsData = this.props.flights.flights;
     console.log(flightsData)
     const mapDiv = this.gmap;
@@ -27,7 +27,7 @@ class ResultsView extends Component {
       
       self.map = new google.maps.Map(mapDiv, {
         zoom: 4,
-        center: uluru,
+        center: {lat: userLoc.latitude, lng: userLoc.longitude},
         styles: [
           {
               "featureType": "administrative",
@@ -124,9 +124,9 @@ class ResultsView extends Component {
     var flightsData = this.props.flights.flights;
     var self = this;
     var geocoder = new google.maps.Geocoder;
-    var infowindow = new google.maps.InfoWindow;
+    
     flightsData.forEach((cur, ind) => {
-        return geocoder.geocode({'address': `${cur.destinationObj.CityName}`}, function(results, status) {
+        return geocoder.geocode({'address': `${cur.destinationObj.CityName}, ${cur.destinationObj.CountryName} `}, function(results, status) {
             if(status === 'OK') {
                 var marker = new google.maps.Marker({
                     map: self.map,
@@ -134,16 +134,28 @@ class ResultsView extends Component {
                     animation: google.maps.Animation.DROP,
                     id: cur.QuoteId
                 });
+                var infowindow = new google.maps.InfoWindow;
+                var infowindowContent = (
+                    `<div class="infowindow">
+                        Fly to <span class="text-bold" >${cur.destinationObj.Name}</span> for just <span class="text-bold" >$</span><span class="text-bold" >${cur.MinPrice}</span>
+                    </div>`
+                )
                 self.map.center = results[0].geometry.location
-                infowindow.setContent(results[0].formatted_address);
-                infowindow.open(self.map,marker)
-                console.log('geocode')
+                infowindow.setContent(infowindowContent);
+                marker.addListener( 'mouseover', function(){
+                    infowindow.open(self.map, marker)
+                })
+                marker.addListener('mouseout', function() {
+                    infowindow.close(self.map, marker)
+                })
+                marker.addListener('click', function() {
+                    infowindow.open(self.map, marker)
+                })
+                // infowindow.open(self.map,marker)
             } else {
                 console.log(status)
             }
-        })
-      
-       
+        }) 
     }) 
   }
 
@@ -156,7 +168,7 @@ class ResultsView extends Component {
       }
       return (
         <ResultsItem
-          key={flights.QuoteId}
+          key={flight.QuoteId}
           destinationPlace={flight.destinationObj.Name}
           countryName={flight.destinationObj.CountryName}
           originPlace={this.props.users.userLocation.airport.PlaceName}

@@ -101,7 +101,9 @@ app.post("/api/getFlights", flightCtrl.Get_Flights);
 app.get("/api/getWatchlist/:id", userCtrl.Get_Watchlist);
 app.get("/api/getImages/:id", flightCtrl.Get_Images);
 
-app.get("/api/getAirport", airportCtrl.Get_Airport);
+app.post("/api/getQuote",flightCtrl.Get_Quote);
+
+app.get("/api/getAirport",airportCtrl.Get_Airport);
 
 app.get("/api/test", (req, res, next) => {
   req.app
