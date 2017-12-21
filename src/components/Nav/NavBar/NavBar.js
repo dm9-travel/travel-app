@@ -58,12 +58,5 @@ class NavBar extends Component {
   }
 
 }
-function mapStateToProps(state){
-  const {user, logged} = state
-  return {
-    user,
-    logged
-  }
-}
 
 export default withRouter(NavBar);
