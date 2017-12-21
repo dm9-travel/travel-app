@@ -123,15 +123,28 @@ class ResultsView extends Component {
 
   render() {
     const flightsList = this.props.flights.flights.map(flight => {
+      if (!flight.carrierObj) {
+        var carrier = "Malaysian Airlines";
+      } else {
+        var carrier = flight.carrierObj.Name;
+      }
       return (
         <ResultsItem
           key={flight.QuoteId}
           destinationPlace={flight.destinationObj.Name}
-          destinationCountry={flight.destinationObj.CountryName}
+          countryName={flight.destinationObj.CountryName}
           originPlace={this.props.users.userLocation.airport.PlaceName}
           outboundDate={flight.OutboundLeg.DepartureDate}
           price={flight.MinPrice}
           direct={flight.Direct}
+          iataCode={flight.destinationObj.IataCode}
+          cityName={flight.destinationObj.CityName}
+          airline={carrier}
+          name={flight.destinationObj.Name}
+          skyCode={flight.destinationObj.SkyscannerCode}
+          placeId={flight.destinationObj.placeId}
+          originId={flight.OutboundLeg.OriginId}
+          carrierId={flight.OutboundLeg.CarrierIds[0]}
         />
       );
     });
