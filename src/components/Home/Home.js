@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import ResultsView from './../Search/SearchResults/ResultsView/ResultsView';
 import Header from './../Nav/Header/Header';
-import {Link} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 
 class Home extends Component {
     constructor(props) {
@@ -21,4 +21,4 @@ class Home extends Component {
         )
     }
 }
-export default Home;
+export default withRouter(Home);

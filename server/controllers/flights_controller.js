@@ -2,6 +2,7 @@ const axios = require("axios");
 require("dotenv").config();
 
 const key = process.env.KEY;
+const pixKey = process.env.PIXABAYKEY;
 
 module.exports = {
   Get_Flights: (req, res, next) => {
@@ -16,9 +17,6 @@ module.exports = {
       budget
     } = req.body;
 
-    //http://partners.api.skyscanner.net/apiservices/browsequotes/v1.0/US/USD/en-US/DFW/Anywhere/2018-03-03/?apiKey={key}
-    console.log("hello");
-
     axios
       .get(
         `http://partners.api.skyscanner.net/apiservices/browsequotes/v1.0/${country}/${currency}/${locale}/${originPlace}/${destinationPlace}/${outboundPartialDate}/${inboundPartialDate ||
@@ -26,7 +24,6 @@ module.exports = {
         { headers: { Accept: "application/json" } }
       )
       .then(response => {
-        console.log(response.data);
         let responseData = response.data;
         function matchDestination(quote) {
           let destination = responseData.Places.filter(place => {
@@ -40,11 +37,12 @@ module.exports = {
           })[0];
           quote.carrierObj = carrier;
         }
+
         for (var i = 0; i < responseData.Quotes.length; i++) {
           matchDestination(responseData.Quotes[i]);
           matchCarrier(responseData.Quotes[i]);
         }
-        console.log(responseData);
+
         res.send(
           responseData.Quotes.filter(quote => {
             return quote.MinPrice <= budget;
@@ -52,5 +50,22 @@ module.exports = {
         );
       })
       .catch(err => res.send(err.response.data));
+  },
+  Get_Images: (req, res, next) => {
+    console.log("hitter");
+    const { params } = req;
+    console.log("params", params.id);
+
+    axios
+      .get(
+        `https://pixabay.com/api/?key=${pixKey}&q=${
+          params.id
+        }&image_type=photo&pretty=true`
+      )
+      .then(response => {
+        console.log(response);
+        res.status(200).send(response.data.hits[0].webformatURL);
+      })
+      .catch(err => console.log(err));
   }
 };
