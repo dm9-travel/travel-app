@@ -41,7 +41,7 @@ class Details extends Component {
                   <h4>{cityName}</h4>
                 </div>
               </div>
-              <div className="d-flex flex-row w-100 justify-content-start">
+              <div className="d-flex flex-row w-100 justify-content-start flex-wrap">
                 <i className="fa fa-calendar fa-3x" aria-hidden="true" />
                 <div className="some-margin  d-flex flex-column align-items-start">
                   <h6>Departing</h6>
