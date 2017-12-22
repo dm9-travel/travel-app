@@ -241,6 +241,11 @@ class ResultsView extends Component {
         //   </div>
          
         // </div>  */}
+        <div>
+            <UpdateSearch
+                flightsArray={this.props.flights.flights}
+            />
+            </div>
       </div>
     );
   }

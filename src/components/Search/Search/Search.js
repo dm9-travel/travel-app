@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link,withRouter } from "react-router-dom";
-import { getFlights } from "./../../../ducks/flights_reducer";
+import { getFlights, setSearch } from "./../../../ducks/flights_reducer";
 import "./Search.css";
 
 class Search extends Component {
@@ -39,6 +39,7 @@ class Search extends Component {
   async handleSubmit(event) {
     // alert("Values entered: " + JSON.stringify(this.state));
     this.props.getFlights(this.state);
+    this.props.setSearch(this.state);
     this.props.history.push('/searchResults');
   }
 
@@ -93,4 +94,4 @@ class Search extends Component {
 }
 const mapStateToProps = state => state;
 
-export default withRouter(connect(mapStateToProps, { getFlights })(Search));
+export default withRouter(connect(mapStateToProps, { getFlights, setSearch })(Search));
