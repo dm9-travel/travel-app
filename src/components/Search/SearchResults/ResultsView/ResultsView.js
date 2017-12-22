@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import {withRouter} from 'react-router-dom';
+import { withRouter } from "react-router-dom";
 import flights, { getFlights } from "./../../../../ducks/flights_reducer";
 import UpdateSearch from "./../UpdateSearch/UpdateSearch";
 import ResultsItem from "../ResultsItem/ResultsItem.js";
@@ -11,8 +11,16 @@ import MapResults from './MapResults/MapResults';
 
 
 import logo from "./../../../Nav/NavBar/logo.svg";
-import * as Scroll from 'react-scroll';
-import {Link, DirectLink, Element, Events, animateScroll as scroll, scrollSpy, scroller} from 'react-scroll';
+import * as Scroll from "react-scroll";
+import {
+  Link,
+  DirectLink,
+  Element,
+  Events,
+  animateScroll as scroll,
+  scrollSpy,
+  scroller
+} from "react-scroll";
 
 const google = window.google;
 
@@ -37,8 +45,8 @@ class ResultsView extends Component {
   
     
   componentWillUnmount() {
-      Events.scrollEvent.remove('begin');
-      Events.scrollEvent.remove('end');
+    Events.scrollEvent.remove("begin");
+    Events.scrollEvent.remove("end");
   }
   render() {
     const flightsList = this.props.flights.flights.map((flight, ind) => {
@@ -48,8 +56,8 @@ class ResultsView extends Component {
         var carrier = flight.carrierObj.Name;
       }
       return (
-        <Element name={`flight:${flight.QuoteId}`} key={flight.QuoteId} >
-            <ResultsItem
+        <Element name={`flight:${flight.QuoteId}`} key={flight.QuoteId}>
+          <ResultsItem
             key={flight.QuoteId}
             destinationPlace={flight.destinationObj.Name}
             countryName={flight.destinationObj.CountryName}
@@ -65,29 +73,27 @@ class ResultsView extends Component {
             placeId={flight.destinationObj.placeId}
             originId={flight.OutboundLeg.OriginId}
             carrierId={flight.OutboundLeg.CarrierIds[0]}
-            />
+          />
         </Element>
       );
     });
     return (
       <div>
-          <NavBar/>
-          
+        <NavBar />
+
         <div className="row">
-          
-        {/* <UpdateSearch /> */}
+          {/* <UpdateSearch /> */}
           <div id="results-view" className="col-lg-6">
+
+            <div className="container filters"> FILTER CONTAINER </div>
           
-            <div className="card-columns">
-              
-              {flightsList}
-            </div>
+            <h6 className="text-left">{ this.props.users.userLocation.airport.PlaceName } - { this.props.users.userLocation.airport.CountryName } - Number of flights available: { this.props.flights.flights.length } - Budget:  JACK, MAKE ME BUDGET VALUE AVAILABLE HERE  </h6>
+            <div className="card-columns">{flightsList}</div>
           </div>
 
           <div id="map-view" className="col-lg-6">
             <MapResults/>
           </div>
-
         </div>
 
         {/* // <UpdateSearch />
@@ -109,4 +115,6 @@ class ResultsView extends Component {
 
 const mapStateToProps = state => state;
 
-export default withRouter(connect(mapStateToProps, { getFlights })(ResultsView));
+export default withRouter(
+  connect(mapStateToProps, { getFlights })(ResultsView)
+);

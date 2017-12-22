@@ -1,4 +1,3 @@
-
 import React, { Component } from "react";
 import ResultsView from "./../Search/SearchResults/ResultsView/ResultsView";
 import Header from "./../Nav/Header/Header";
@@ -25,25 +24,21 @@ class Home extends Component {
       })
       .catch(err => err);
 
-
     this.props.lockUser(this.state.user);
   }
-    render() {
-      return(
-          <div className="homePage" >
-              
-              <Header />
-              <div>
-                  <Link to="/searchResults" ><button>Search results</button></Link>
-              </div>
-          </div>
-      )
+  render() {
+    return (
+      <div className="homePage">
+        <Header />
+        <div>
+          <Link to="/searchResults">
+            <button>Search results</button>
+          </Link>
+        </div>
+      </div>
+    );
   }
-
-    }
-
-    
-
+}
 
 const mapStateToProps = state => state;
 const connected = connect(mapStateToProps, { lockUser })(Home);
