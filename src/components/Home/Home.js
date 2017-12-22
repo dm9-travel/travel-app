@@ -1,3 +1,4 @@
+
 import React, { Component } from "react";
 import ResultsView from "./../Search/SearchResults/ResultsView/ResultsView";
 import Header from "./../Nav/Header/Header";
@@ -6,6 +7,7 @@ import { lockUser } from "../../ducks/user_reducer.js";
 import { Link, withRouter } from "react-router-dom";
 
 import { connect } from "react-redux";
+
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -23,24 +25,27 @@ class Home extends Component {
       })
       .catch(err => err);
 
+
     this.props.lockUser(this.state.user);
   }
-  render() {
-    return (
-      <div className="homePage">
-        <Header />
-        <div>
-          <Link to="/searchResults">
-            <button>Search results</button>
-          </Link>
-        </div>
-      </div>
-    );
-  }
+  
+
+    }
+
+    render() {
+        return(
+            <div className="homePage" >
+                
+                <Header />
+                <div>
+                    <Link to="/searchResults" ><button>Search results</button></Link>
+                </div>
+            </div>
+        )
+    }
+
 }
 const mapStateToProps = state => state;
 const connected = connect(mapStateToProps, { lockUser })(Home);
 const RoutedContainer = withRouter(connected);
 export default RoutedContainer;
-/////////////////////////////////////////////////////HELP ME ERIC//////////////////////////////////////////////WHYWHYWHYWHYWHYWHYWHY/////////////////////////////
-////////////////////////////NEVERMIND//////////////////////////////////////////////////////////////////////////////////////////////////`````````````````````````````````
