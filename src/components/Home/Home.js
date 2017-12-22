@@ -6,6 +6,7 @@ import { lockUser } from "../../ducks/user_reducer.js";
 import { Link, withRouter } from "react-router-dom";
 
 import { connect } from "react-redux";
+
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -25,6 +26,7 @@ class Home extends Component {
 
     this.props.lockUser(this.state.user);
   }
+
   render() {
     return (
       <div className="homePage">
