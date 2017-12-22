@@ -50,7 +50,7 @@ export default function users(state = initialState, action) {
 export function requestUser() {
   return {
     type: REQ_USER,
-    payload: axios.get("/api/me").then(response => response.data)
+    payload: axios.get("/api/me").then(response => {console.log(response.data); return response.data})
   };
 }
 export function getWatchlist(user_id) {

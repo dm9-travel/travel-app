@@ -45,7 +45,6 @@ passport.use(
       callbackURL: "/api/login"
     },
     function(accessToken, refreshToken, extraParams, profile, done) {
-      //console.log("gets here");
       app
         .get("db")
         .get_user_by_auth_id(profile.id)
@@ -82,9 +81,9 @@ app.get(
   "/api/login",
   passport.authenticate("auth0", { successRedirect: "http://localhost:3000/" })
 );
-app.get("/logout", function(req, res) {
+app.get("/api/logout", function(req, res) {
   req.logout();
-  res.redirect("/");
+  res.redirect("http://localhost:3000/");
 });
 
 app.get("/api/me", function(req, res) {
