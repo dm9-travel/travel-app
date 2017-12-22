@@ -233,6 +233,10 @@ class ResultsView extends Component {
         <div className="row">
           {/* <UpdateSearch /> */}
           <div id="results-view" className="col-lg-6">
+
+            <div className="container filters"> FILTER CONTAINER </div>
+          
+            <h6 className="text-left">{ this.props.users.userLocation.airport.PlaceName } - { this.props.users.userLocation.airport.CountryName } - Number of flights available: { this.props.flights.flights.length } - Budget:  JACK, MAKE ME BUDGET VALUE AVAILABLE HERE  </h6>
             <div className="card-columns">{flightsList}</div>
           </div>
 
