@@ -28,7 +28,6 @@ class App extends Component {
       //geolocation is available
       navigator.geolocation.getCurrentPosition(position => {
         //Call getAirport endpoint on server
-
         axios
           .get(
             `/api/getAirport?lat=${position.coords.latitude}&long=${
@@ -52,9 +51,8 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        
         {router}
-        {/* <Footer /> */}
+        {/*<Footer />*/}
       </div>
     );
   }
