@@ -88,11 +88,12 @@ app.get("/logout", function(req, res) {
 
 app.get("/api/me", function(req, res) {
   if (!req.user) return res.status(404);
+
   req.app
     .get("db")
-    .get_user_by_auth_id([req.user.authid])
-    .then(user => res.status(200).send(user[0]))
-    .catch(() => res.status(500).send());
+    .get_user_by_auth_id(req.user.auth_id)
+    .then(user => res.status(200).send(user))
+    .catch(err => res.status(500).send(err));
 });
 //`````````````````````````````````Endpoints`````````````````````````````````````
 const flightCtrl = require("./controllers/flights_controller");
