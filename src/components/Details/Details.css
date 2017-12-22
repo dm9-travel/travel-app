@@ -1,0 +1,17 @@
+.some-margin{
+  margin:0 1.25rem;
+}
+main{
+  padding:0 1rem;
+}
+.details-jumbotron{
+  background-image: url('http://cdn.wonderfulengineering.com/wp-content/uploads/2015/05/Dallas-Wallpaper-10.jpg');
+  background-color: #fff;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 50vh;
+  padding-top: 1rem;
+}
+.card{
+    margin:1rem;
+}
