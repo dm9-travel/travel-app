@@ -26,7 +26,6 @@ class Home extends Component {
 
     this.props.lockUser(this.state.user);
   }
-
   render() {
     return (
       <div className="homePage">
@@ -40,6 +39,7 @@ class Home extends Component {
     );
   }
 }
+
 const mapStateToProps = state => state;
 const connected = connect(mapStateToProps, { lockUser })(Home);
 const RoutedContainer = withRouter(connected);
