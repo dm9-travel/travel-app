@@ -68,7 +68,7 @@ class Quote extends Component {
             <h6 className="text-uppercase">Connecting flight</h6>
           )}
           <Link to="/details/">
-            <button type="button" className="btn btn-primary">
+            <button type="button" className="btn btn-primary" onClick={this.handleClick}>
               View Details
             </button>
           </Link>
