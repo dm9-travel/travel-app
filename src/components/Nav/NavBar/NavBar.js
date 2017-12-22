@@ -6,14 +6,16 @@ import logo from './logo.svg';
 import './NavBar.css';
 
 class NavBar extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
+
+    this.state = {};
 
     this.handleLogin = this.handleLogin.bind(this);
   }
 
   handleLogin() {
-    window.location.href = 'http://localhost:3001/api/login';
+    window.location.href = "http://localhost:3001/api/login";
   }
 
   handleLogout() {
@@ -75,11 +77,9 @@ class NavBar extends Component {
             }
           </ul>
         </div>
-      </div>
       </nav>
-    )
+    );
   }
-
 }
 function mapStateToProps(state){
   const { users }= state;

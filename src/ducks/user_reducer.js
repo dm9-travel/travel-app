@@ -4,6 +4,7 @@ const REQ_USER = "REQ_USER";
 const GET_WATCHLIST = "GET_WATCHLIST";
 const GET_LOCATION = "GET_LOCATION";
 const LOCK_USER = "LOCK_USER";
+const LOGOUT = "LOGOUT";
 
 // Action Creators
 
@@ -37,6 +38,10 @@ export default function users(state = initialState, action) {
       return Object.assign({}, state, { watchlist: action.payload });
     case LOCK_USER:
       return Object.assign({}, state, { currentUser: action.payload });
+    case LOGOUT:
+      return Object.assign({}, state, {
+        currentUser: action.payload
+      });
     default:
       return state;
   }
@@ -70,5 +75,11 @@ export function lockUser(user) {
   return {
     type: LOCK_USER,
     payload: user
+  };
+}
+export function logout() {
+  return {
+    type: LOGOUT,
+    payload: {}
   };
 }

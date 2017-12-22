@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import getTime from "./timeGenerator";
+import getDuration from "./durationGenerator";
 import moment from "moment";
 import axios from "axios";
 
@@ -29,17 +30,19 @@ class Quote extends Component {
       originId: this.props.originId,
       carrierId: this.props.carrierId,
       time: "",
-      imageUrl: ""
+      imageUrl: "",
+      duration: ""
     };
     this.handleClick = this.handleClick.bind(this);
   }
   async componentDidMount() {
-    this.setState({ time: getTime() });
+    await this.setState({ time: getTime(), duration: getDuration() });
     // await axios.get(`/api/getImages/${this.state.cityName}`).then(response => {
     //   console.log(response);
     //   this.setState({ imageUrl: response.data });
     // });
     // console.log(this.state.imageUrl);
+    console.log(this.state);
   }
   handleClick() {
     this.props.selectFlight(this.state);
@@ -54,7 +57,7 @@ class Quote extends Component {
             {this.props.countryName}
           </h4>
           <p>
-            <i className="fa fa-plane mr-2" aria-hidden="true"></i>
+            <i className="fa fa-plane mr-2" aria-hidden="true" />
             From <strong>{this.props.originPlace}</strong> on{" "}
             {moment(this.props.outboundDate).format("ddd, MMMM DD")}
           </p>
