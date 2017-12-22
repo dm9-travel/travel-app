@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import './UpdateSearch.css';
 
 class UpdateSearch extends Component {
@@ -6,11 +7,17 @@ class UpdateSearch extends Component {
         super(props);
     }
     render() {
+        var countriesOptions = this.props.flights.flights.map((cur, ind) => {
+            <option value={cur.destinationObj.CountryName} >{cur.destinationObj.CountryName}</option>
+        })
         return(
             <div className="updateSearchContainer" >
-                Update search filters and stuff go here
+                <select>
+                    {countriesOptions}
+                </select>
             </div>
         )
     }
 }
-export default UpdateSearch;
+const mapStateToProps = state => state;
+export default connect(mapStateToProps)(UpdateSearch);
