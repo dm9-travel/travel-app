@@ -2,8 +2,9 @@ import React, {Component} from 'react';
 import Collapsible from 'react-collapsible';
 import {connect} from 'react-redux';
 import flights, {getFlights, filterFlights} from './../../../../ducks/flights_reducer';
-import './UpdateSearch.css';
 
+import './UpdateSearch.css';
+const countries = require('./Countries.json');
 class UpdateSearch extends Component {
     constructor(props) {
         super(props);
@@ -30,9 +31,14 @@ class UpdateSearch extends Component {
         })
     }
     handleCountrySelect(val) {
-        this.setState({
-            destinationPlace: val
-        })
+        if(this.props.flights.searchTerms.budget !== this.state.budget){
+            var selectedCountry = countries.find(x => x.name = val)
+                this.setState({
+                    destinationPlace: selectedCountry.code
+            })
+        } else {
+            this.setState({destinationPlace: val})
+        }
     }
 
     handleSubmit() {
@@ -46,9 +52,13 @@ class UpdateSearch extends Component {
         else if (flightProps.destinationPlace !== this.state.destinationPlace && flightProps.budget !== this.state.budget) {
             this.props.getFlights(this.state);
             // this.props.history.push('/searchResults');
-        }
-
+        }   
     }
+    // handleUpdateSearch() {
+    //     this.setState({
+    //         destinationPlace: "Anywhere"
+    //     }, this.props.getFlights(this.state))
+    // }
 
     render() {
         var countriesOptions = this.props.flights.flights.map((cur, ind) => {
@@ -69,6 +79,7 @@ class UpdateSearch extends Component {
                 </Collapsible>
                 <button onClick={this.handleSubmit} >Apply Filters</button>
                 <button onClick={() => this.props.getFlights(this.props.flights.searchTerms)} >Clear Filters</button>
+               
             </div>
         )
     }
