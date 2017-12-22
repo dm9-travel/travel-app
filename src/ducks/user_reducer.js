@@ -5,6 +5,7 @@ const GET_WATCHLIST = "GET_WATCHLIST";
 const GET_LOCATION = "GET_LOCATION";
 const LOCK_USER = "LOCK_USER";
 const LOGOUT = "LOGOUT";
+const SEND_BUDGET = "SEND_BUDGET";
 
 // Action Creators
 
@@ -16,7 +17,8 @@ const initialState = {
     airport: {
       PlaceName: "DFW"
     }
-  }
+  },
+  budget: null
 };
 
 export default function users(state = initialState, action) {
@@ -42,6 +44,8 @@ export default function users(state = initialState, action) {
       return Object.assign({}, state, {
         currentUser: action.payload
       });
+    case SEND_BUDGET:
+      return Object.assign({}, state, {budget: action.payload});
     default:
       return state;
   }
@@ -50,7 +54,7 @@ export default function users(state = initialState, action) {
 export function requestUser() {
   return {
     type: REQ_USER,
-    payload: axios.get("/api/me").then(response => response.data)
+    payload: axios.get("/api/me").then(response => {console.log(response.data); return response.data})
   };
 }
 export function getWatchlist(user_id) {
@@ -82,4 +86,10 @@ export function logout() {
     type: LOGOUT,
     payload: {}
   };
+}
+export function sendBudget(budget){
+  return {
+    type: SEND_BUDGET,
+    payload: budget
+  }
 }
