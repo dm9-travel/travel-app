@@ -28,23 +28,23 @@ class Home extends Component {
 
     this.props.lockUser(this.state.user);
   }
-  
-
-    }
-
     render() {
-        return(
-            <div className="homePage" >
-                
-                <Header />
-                <div>
-                    <Link to="/searchResults" ><button>Search results</button></Link>
-                </div>
-            </div>
-        )
+      return(
+          <div className="homePage" >
+              
+              <Header />
+              <div>
+                  <Link to="/searchResults" ><button>Search results</button></Link>
+              </div>
+          </div>
+      )
+  }
+
     }
 
-}
+    
+
+
 const mapStateToProps = state => state;
 const connected = connect(mapStateToProps, { lockUser })(Home);
 const RoutedContainer = withRouter(connected);

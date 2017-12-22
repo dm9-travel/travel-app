@@ -1,4 +1,9 @@
 .updateSearchContainer{
     width: 100vw;
     background: navajowhite;
+    position: fixed;
+    height: 60px;
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
 }
