@@ -12,6 +12,7 @@ class NavBar extends Component {
     this.state = {};
 
     this.handleLogin = this.handleLogin.bind(this);
+    this.handleLogout = this.handleLogout.bind(this);
   }
 
   handleLogin() {
@@ -28,20 +29,31 @@ class NavBar extends Component {
 
 
   render() {
+    let username = this.props.users.currentUser.user_name
     let navBarStyle = 'navbar sticky-top navbar-expand-lg navbar-light';
     let containerType = 'container';
-    let greeting = <h1>Welcome {this.props.users.currentUser.user_name}!</h1>
+    let greeting = username ? <h1>Welcome {this.props.users.currentUser.user_name}!</h1> : null
+    let renderAuth = !username
+
+                  ?
+                  <li className="nav-item">
+                    <button className="btn btn-outline-primary log btn-lg" onClick={this.handleLogin}>LOG IN</button>
+                  </li>
+                  :
+                  <li className="nav-item">
+                    <img src={this.props.picture} className="rounded-circle mr-4" height="40"></img>
+                    <button className="btn btn-outline-danger log" onClick={this.handleLogout}>LOG OUT</button>
+                  </li>
+
 
     if (this.props.location.pathname !== '/') {
       console.log('Not home page');
       containerType = 'container-fluid';
       navBarStyle = 'navbar sticky-top navbar-expand-lg navbar-dark bg-dark';
-      if (this.props.users.currentUser.user_name){
-         greeting
-         console.log(greeting);
 
-      }
     }
+    console.log(this.props.users.currentUser.user_name)
+
     console.log('I am NavBar at pathname: ', this.props.location.pathname);
 
     return (
@@ -61,23 +73,11 @@ class NavBar extends Component {
             <li className="nav-item">
               <Link className="nav-link" to="/watchlist">Watchlist</Link>
             </li>
-
-
-            {
-              this.props.users.currentUser.user_name === null
-              ?
-              <li className="nav-item">
-                <button className="btn btn-outline-primary log btn-lg" onClick={this.handleLogin}>LOG IN</button>
-              </li>
-              :
-              <li className="nav-item">
-                <img src={this.props.picture} className="rounded-circle mr-4" height="40"></img>
-                <button className="btn btn-outline-danger log" onClick={this.handleLogout}>LOG OUT</button>
-              </li>
-            }
+            {renderAuth}
           </ul>
         </div>
-      </nav>
+      </div>
+    </nav>
     );
   }
 }
