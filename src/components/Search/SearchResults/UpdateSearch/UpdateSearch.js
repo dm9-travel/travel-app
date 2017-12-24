@@ -31,28 +31,45 @@ class UpdateSearch extends Component {
         })
     }
     handleCountrySelect(val) {
-        if(this.props.flights.searchTerms.budget !== this.state.budget){
-            var selectedCountry = countries.find(x => x.name = val)
-                this.setState({
-                    destinationPlace: selectedCountry.code
-            })
-        } else {
+           
             this.setState({destinationPlace: val})
-        }
+        
     }
 
     handleSubmit() {
         var flightProps = this.props.flights.searchTerms;
-    
-        if(flightProps.destinationPlace == this.state.destinationPlace && flightProps.budget !== this.state.budget) {
-            this.props.getFlights(this.state)
-        } else if (flightProps.destinationPlace !== this.state.destinationPlace && flightProps.budget == this.state.budget) {
-            this.props.filterFlights(this.state.destinationPlace)
+        var selectedCountry = countries.find(x => x.name == this.state.destinationPlace)
+        var countriesList = countries;
+        // if(flightProps.destinationPlace == this.state.destinationPlace && flightProps.budget !== this.state.budget) {
+        //     this.props.getFlights(this.state)
+        // } else if (flightProps.destinationPlace !== this.state.destinationPlace && flightProps.budget == this.state.budget) {
+        //     this.props.filterFlights(this.state.destinationPlace)
+        // }
+        // else if (flightProps.destinationPlace !== this.state.destinationPlace && flightProps.budget !== this.state.budget) {
+            
+        //     this.setState({
+        //         destinationPlace: selectedCountry.code
+        //     }, this.props.getFlights(this.state))
+            
+        //     // this.props.history.push('/searchResults');
+        // }  
+        if (flightProps.budget != this.state.budget) {
+            if (this.state.destinationPlace == "Anywhere") {
+                this.props.getFlights(this.state)
+            } else {
+                var selectedCountry = countriesList.find(x => x.name = this.state.destinationPlace)
+                var searchObj = this.state;
+                searchObj.destinationPlace = selectedCountry.code;
+                this.props.getFlights(searchObj);
+            }
+        } else {
+            if (this.state.destinationPlace == "Anywhere") {
+                alert('no changes to search or results')
+            } else {
+                this.props.filterFlights(this.state.destinationPlace)
+            }
         }
-        else if (flightProps.destinationPlace !== this.state.destinationPlace && flightProps.budget !== this.state.budget) {
-            this.props.getFlights(this.state);
-            // this.props.history.push('/searchResults');
-        }   
+
     }
     // handleUpdateSearch() {
     //     this.setState({
@@ -74,7 +91,7 @@ class UpdateSearch extends Component {
                 </select>
                 <Collapsible trigger="Select a new budget" >
                     <div className="priceSelector" >
-                        <input type="range" min="1" max="10000" className="slider" id="myRange" onChange={(e) => this.handleBudgetUpdate(e.target.value)} />
+                        <input type="range" min="1" max="1000" className="slider" id="myRange" onChange={(e) => this.handleBudgetUpdate(e.target.value)} />
                     </div>
                 </Collapsible>
                 <button onClick={this.handleSubmit} >Apply Filters</button>
