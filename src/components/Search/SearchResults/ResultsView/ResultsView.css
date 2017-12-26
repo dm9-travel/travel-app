@@ -76,8 +76,16 @@ ul {
 
 .filters {
   border: 5px solid #000;
-  padding: 1em 0;
+  height: auto;
   margin: 0 0 1em 0;
+  overflow-x: scroll;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  align-content: center;
+  width: 100%;
 }
 
 .infowindow {

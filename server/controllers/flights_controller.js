@@ -133,5 +133,8 @@ module.exports = {
         res.status(200).send(response.data.hits[0].webformatURL);
       })
       .catch(err => console.log(err));
-  }
+  },
+   getLocations(req, res, next) {
+     
+   }
 };
