@@ -38,8 +38,8 @@ class UpdateSearch extends Component {
 
     handleSubmit() {
         var flightProps = this.props.flights.searchTerms;
-        var selectedCountry = countries.find(x => x.name == this.state.destinationPlace)
         var countriesList = countries;
+        var selectedCountry = countriesList.find(x => x.name == this.state.destinationPlace)
         // if(flightProps.destinationPlace == this.state.destinationPlace && flightProps.budget !== this.state.budget) {
         //     this.props.getFlights(this.state)
         // } else if (flightProps.destinationPlace !== this.state.destinationPlace && flightProps.budget == this.state.budget) {
@@ -57,7 +57,7 @@ class UpdateSearch extends Component {
             if (this.state.destinationPlace == "Anywhere") {
                 this.props.getFlights(this.state)
             } else {
-                var selectedCountry = countriesList.find(x => x.name = this.state.destinationPlace)
+                
                 var searchObj = this.state;
                 searchObj.destinationPlace = selectedCountry.code;
                 this.props.getFlights(searchObj);
