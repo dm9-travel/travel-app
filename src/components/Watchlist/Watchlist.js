@@ -1,4 +1,8 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {withRouter} from 'react-router-dom';
+import axios from 'axios';
+import getWatchlist from '../../ducks/user_reducer.js';
 
 import Trip from './Trip/Trip';
 
@@ -9,10 +13,9 @@ class Watchlist extends Component {
   }
 
   render() {
-    /** Test Array For Trips needs to be replaced with a call **/
-    let testTrips = [{ trip_id: 1, country: "US", currency: "USD", locale: "en-US", originPlace: "DEN", destinationPlace: "ABQ", outboundPartialDate: "2018-01-10", inboundPartialDate: "2018-01-17", budget: 200 }, { trip_id: 2, country: "US", currency: "USD", locale: "en-US", originPlace: "BFI", destinationPlace: "ESD", outboundPartialDate: "2018-01-18", inboundPartialDate: "2018-01-22", budget: 800 }, { trip_id: 3, country: "US", currency: "USD", locale: "en-US", originPlace: "ESD", destinationPlace: "FRD", outboundPartialDate: "2018-01-18", inboundPartialDate: "2018-01-22", budget: 800 }];
-
-    const userTrips = testTrips
+   
+   if (this.props.watchlist){
+    const userTrips = this.props.watchlist
                       .map(trip => <Trip 
                                     country={trip.country} 
                                     currency={trip.currency} 
@@ -23,12 +26,18 @@ class Watchlist extends Component {
                                     inboundDate={trip.inboundPartialDate} 
                                     budget={trip.budget}/>
                       );
+                    }
+    
 
     return <div className="d.flex flex-row justify-content-center bg-white">
         <h3 className="display-3">My Trips</h3>
-        {userTrips}
+        
       </div>;
   }
 }
 
-export default Watchlist;
+const mapStateToProps = state => state;
+
+export default withRouter(
+  connect(mapStateToProps, { getWatchlist })(Watchlist)
+);
