@@ -1,5 +1,6 @@
 const axios = require("axios");
 const moment = require("moment");
+// const massive = require("massive");
 require("dotenv").config();
 
 const key = process.env.KEY;
@@ -133,5 +134,29 @@ module.exports = {
         res.status(200).send(response.data.hits[0].webformatURL);
       })
       .catch(err => console.log(err));
+  },
+  Add_Trip:(req,res,next)=>{
+    const { 
+      user_id,
+      country, 
+      currency, 
+      locale, 
+      origin, 
+      destination, 
+      outbound_date, 
+      inbound_date, 
+      budget 
+    } = req.body;
+    
+    const dbInstance = req.app.get("db");
+    dbInstance
+      .add_trip([country,currency,locale,origin,destination,outbound_date,inbound_date,budget])
+      .then(
+        trip=>{
+          dbInstance
+            .add_watchlist([user_id, trip[0].trip_id])
+            .then(item=>{res.status(201).send(item)})
+        }
+      );
   }
 };

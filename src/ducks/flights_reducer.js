@@ -4,10 +4,12 @@ import axios from "axios";
 
 const GET_FLIGHTS = "GET_FLIGHTS";
 const SELECTED_FLIGHT = "SELECTED_FLIGHT";
+const ADD_TO_WATCHLIST = "ADD_TO_WATCHLIST";
 
 const initialState = {
   flights: [],
-  selectedFlight: {}
+  selectedFlight: {},
+  trips:[]
 };
 export default function flights(state = initialState, action) {
   switch (action.type) {
@@ -21,6 +23,10 @@ export default function flights(state = initialState, action) {
     case SELECTED_FLIGHT:
       return Object.assign({}, state, {
         selectedFlight: action.payload
+      });
+    case ADD_TO_WATCHLIST:
+      return Object.assign({},state,{
+        trips: action.payload
       });
     default:
       return state;
@@ -43,5 +49,11 @@ export function selectFlight(flight) {
   return {
     type: SELECTED_FLIGHT,
     payload: flight
+  };
+}
+export function addToWatchlist(trip) {
+  return {
+    type: ADD_TO_WATCHLIST,
+    payload: axios.post(`/api/addTrip`,trip)
   };
 }
