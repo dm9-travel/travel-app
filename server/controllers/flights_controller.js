@@ -158,7 +158,7 @@ module.exports = {
             .then(item=>{res.status(201).send(item)})
         }
       );
-  }
+  },
    getLocations(req, res, next) {
      
    }

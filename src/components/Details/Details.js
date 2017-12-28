@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import moment from 'moment';
 
+import users, { requestUser } from "../../ducks/user_reducer";
 import flights, { addToWatchlist } from "../../ducks/flights_reducer";
 import "./Details.css";
 
@@ -16,19 +17,20 @@ class Details extends Component {
     this.handleClick=this.handleClick.bind(this);
   }
   handleClick() {
-    this.props.addToWatchlist();
+    this.props.addToWatchlist(this.state);
   }
   componentDidMount(){
+    
     this.setState({
-      user_id
+      user_id:12,/*this.props.users.currentUser.user_id ?? Can't log in so I don't know what it looks like*/
       country:this.props.flights.selectedFlight.countryName,
-      currency:"USD",
-      locale:"",
+      currency:this.props.flights.searchTerms.currency,
+      locale:this.props.flights.searchTerms.locale,
       origin:this.props.flights.selectedFlight.originPlace,
-      destination,
-      outbound_date,
-      inbound_date,
-      budget
+      destination:this.props.flights.selectedFlight.IATAcode,
+      outbound_date:this.props.flights.selectedFlight.outboundDate,
+      inbound_date:this.props.flights.searchTerms.inboundPartialDate,
+      budget:this.props.users.budget
     });
     
   }
@@ -109,4 +111,4 @@ class Details extends Component {
 }
 const mapStateToProps = state => state;
 
-export default withRouter(connect(mapStateToProps, { addToWatchlist })(Details));
+export default withRouter(connect(mapStateToProps, { addToWatchlist, requestUser })(Details));

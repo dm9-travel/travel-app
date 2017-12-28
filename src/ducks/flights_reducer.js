@@ -11,7 +11,7 @@ const FILTER_FLIGHTS = "FILTER_FLIGHTS";
 const initialState = {
   flights: [],
   selectedFlight: {},
-  trips:[]
+  trips:[],
   searchTerms: {}
 };
 export default function flights(state = initialState, action) {
