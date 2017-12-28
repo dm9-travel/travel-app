@@ -87,6 +87,7 @@ app.get("/api/logout", function(req, res) {
 });
 
 app.get("/api/me", function(req, res) {
+  
   if (!req.user) return res.status(404);
 
   req.app
@@ -102,6 +103,7 @@ app.get("/api/getWatchlist/:id", userCtrl.Get_Watchlist);
 app.get("/api/getImages/:id", flightCtrl.Get_Images);
 
 app.post("/api/getQuote",flightCtrl.Get_Quote);
+app.post("/api/addTrip",flightCtrl.Add_Trip);
 
 app.get("/api/getAirport",airportCtrl.Get_Airport);
 
