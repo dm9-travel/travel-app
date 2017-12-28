@@ -19,6 +19,17 @@ class Details extends Component {
     this.props.addToWatchlist();
   }
   componentDidMount(){
+    this.setState({
+      user_id
+      country:this.props.flights.selectedFlight.countryName,
+      currency:"USD",
+      locale:"",
+      origin:this.props.flights.selectedFlight.originPlace,
+      destination,
+      outbound_date,
+      inbound_date,
+      budget
+    });
     
   }
 
