@@ -23,6 +23,7 @@ class Trip extends Component {
              inboundPartialDate: this.props.inboundDate, 
              budget:this.props.budget 
             };
+        console.log("tripBody:",tripBody)
         axios
           .post("http://localhost:3001/api/getQuote", tripBody)
           .then(response => {
@@ -42,11 +43,11 @@ class Trip extends Component {
         <div className="bg-dark rounded" style={tripStyle}>
               <h4 className="text-light d-flex justify-content-between">
                 {this.props.originPlace} To {this.props.destinationPlace}
-                <span class="badge badge-light">
-                  ${this.props.budget}
+                <span className="badge badge-light">
+                  Budget ${this.props.budget}
                 </span>
               </h4>
-              <button type="button" class="btn btn-danger d-flex justify-content-start">Delete</button>
+              <button type="button" className="btn btn-danger d-flex justify-content-start">Delete</button>
             {watchArray}
         </div>
         );
