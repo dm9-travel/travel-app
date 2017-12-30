@@ -23,7 +23,7 @@ class Details extends Component {
   componentDidMount(){
     
     this.setState({
-      user_id:12,/*this.props.users.currentUser.user_id ?? Can't log in so I don't know what it looks like*/
+      user_id:this.props.users.currentUser[0].user_id,
       country:this.props.flights.selectedFlight.countryName,
       currency:this.props.flights.searchTerms.currency,
       locale:this.props.flights.searchTerms.locale,

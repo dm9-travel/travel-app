@@ -16,7 +16,10 @@ class Watchlist extends Component {
 
   componentDidMount(){
     /**** Run axios.get on endpoint trips for watchlist ****/
-    this.props.getWatchlist(12).then(trips=>this.setState({trips:trips.value}))
+    console.log("current user id", this.props.users.currentUser.user_id);
+    this.props
+      .getWatchlist(this.props.users.currentUser.user_id)
+      .then(trips => {this.setState({ trips: trips.value })});
   }
 
   render() {
