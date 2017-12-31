@@ -13,13 +13,13 @@ class WatchlistItem extends Component {
           key:1 ,
           originPlace: this.props.outboundLeg.OriginCode,
           destinationPlace: this.props.outboundLeg.DestinationCode,
-          countryName:"United States" ,//needs to be added to props
+          countryName:this.props.country,
           outboundDate: this.props.outboundLeg.DepartureDate,
           price: this.props.price,
-          direct: true,//needs to be added to props
+          direct: this.props.direct,
           IATAcode: this.props.outboundLeg.DestinationCode,
           cityName: this.props.outboundLeg.DestinationName,
-          airline: this.props.outboundLeg.Carrier[0],//needs to be added to props
+          airline: this.props.outboundLeg.Carrier[0],
           name: this.props.outboundLeg.DestinationName,
           skyCode: this.props.outboundLeg.DestinationCode,
           placeId: this.props.outboundLeg.DestinationId,

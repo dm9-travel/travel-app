@@ -34,7 +34,7 @@ class Trip extends Component {
 
     render() {
         const watchArray = this.state.quotes.map(quote => {
-          return <WatchlistItem price={quote.MinPrice} key={quote.QuoteId} outboundLeg={quote.OutboundLeg} inboundLeg={quote.InboundLeg} />;
+          return <WatchlistItem price={quote.MinPrice} key={quote.QuoteId} outboundLeg={quote.OutboundLeg} inboundLeg={quote.InboundLeg} direct={quote.Direct} country={this.props.country}/>;
         });
 
         const tripStyle = { width: "90%",padding:"1rem", margin:"1rem" };
