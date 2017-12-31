@@ -1,16 +1,41 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import moment from 'moment';
+import { connect } from 'react-redux';
+import { Link } from "react-router-dom";
+
+import { selectFlight } from '../../../ducks/flights_reducer';
 
 class WatchlistItem extends Component {
     constructor(props){
         super(props);
-        this.state={
-
-        }
+        this.state = {
+          key:1 ,
+          originPlace: this.props.outboundLeg.OriginCode,
+          destinationPlace: this.props.outboundLeg.DestinationCode,
+          countryName:"United States" ,//needs to be added to props
+          outboundDate: this.props.outboundLeg.DepartureDate,
+          price: this.props.price,
+          direct: true,//needs to be added to props
+          IATAcode: this.props.outboundLeg.DestinationCode,
+          cityName: this.props.outboundLeg.DestinationName,
+          airline: this.props.outboundLeg.Carrier[0],//needs to be added to props
+          name: this.props.outboundLeg.DestinationName,
+          skyCode: this.props.outboundLeg.DestinationCode,
+          placeId: this.props.outboundLeg.DestinationId,
+          originId: this.props.outboundLeg.OriginId,
+          carrierId: this.props.outboundLeg.CarrierIds[0],
+          time: "",
+          imageUrl: "",
+          duration: ""
+        };
+        this.handleClick = this.handleClick.bind(this);
     }
     componentDidMount(){
         
+    }
+    handleClick() {
+    this.props.selectFlight(this.state);
     }
 
     render() {
@@ -45,13 +70,15 @@ class WatchlistItem extends Component {
                 </div>}
               </div>
               <div className="d-flex flex-row justify-content-start">
-                <a href="#" className="card-link">
-                  Details <i className="fa fa-external-link-square" aria-hidden="true"></i>
-                </a>
+                <Link to="/details/">
+                  <button type="button" className="btn btn-primary" onClick={this.handleClick}>
+                    Details
+                  </button>
+                </Link>
               </div>
             </div>
       </div>);
     }
 }
-
-export default WatchlistItem;
+const mapStateToProps = state => state;
+export default connect(mapStateToProps, { selectFlight })(WatchlistItem);
