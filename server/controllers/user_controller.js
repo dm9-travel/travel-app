@@ -14,6 +14,7 @@ module.exports = {
       outboundPartialDate,
       inboundPartialDate
     } = req.body;
+    
 
     //http://partners.api.skyscanner.net/apiservices/browsequotes/v1.0/US/USD/en-US/DFW/Anywhere/2018-03-03/?apiKey={key}
     axios
@@ -33,7 +34,7 @@ module.exports = {
     const { params } = req;
 
     dbInstance
-      .Get_Watchlist(params.id)
+      .get_watchlist(params.id)
       .then(list => {
         res.status(200).send(list);
       })
