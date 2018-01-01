@@ -194,7 +194,14 @@ module.exports = {
     )
 
   },
-   getLocations(req, res, next) {
+   getLocations:(req, res, next)=>{
      
+   },
+   Delete_Trip:(req,res,next)=>{
+     const tripId = req.params.id;
+     const dbInstance = req.app.get("db");
+     dbInstance
+        .delete_trip([tripId])
+        .then(trip => res.status(200).send(trip));
    }
 };

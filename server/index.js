@@ -104,6 +104,7 @@ app.get("/api/getImages/:id", flightCtrl.Get_Images);
 
 app.post("/api/getQuote",flightCtrl.Get_Quote);
 app.post("/api/addTrip",flightCtrl.Add_Trip);
+app.delete("/api/trip/:id",flightCtrl.Delete_Trip);
 
 app.get("/api/getAirport",airportCtrl.Get_Airport);
 

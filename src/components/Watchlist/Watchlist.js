@@ -24,42 +24,28 @@ class Watchlist extends Component {
   }
 
   render() {
-   
-   if (this.state.trips.length > 0){
-    const userTrips = this.state.trips
-                      .map(trip => <Trip 
-                                    country={trip.country} 
-                                    currency={trip.currency} 
-                                    locale={trip.locale} 
-                                    originPlace={trip.originPlace} 
-                                    destinationPlace={trip.destinationPlace} 
-                                    outboundDate={trip.outboundPartialDate} 
-                                    inboundDate={trip.inboundPartialDate} 
-                                    budget={trip.budget}/>
-                      );
-                    }
-    
-
     return (
-      <div>
+    <div>
         <NavBar />
         <div className="d.flex flex-row justify-content-center bg-white">
           <h3 className="display-3">My Trips</h3>
-          {this.state.trips[0] && this.state.trips
-                        .map(trip => <Trip 
-                                      country={trip.country} 
-                                      currency={trip.currency} 
-                                      locale={trip.locale} 
-                                      originPlace={trip.origin} 
-                                      destinationPlace={trip.destination} 
-                                      outboundDate={trip.outbound_date} 
-                                      inboundDate={trip.inbound_date} 
-                                      budget={trip.budget}/>
-                        )}
-          
+          {this.state.trips[0] && this.state.trips.map(trip => (
+              <Trip
+                key={trip.trip_id}
+                tripId={trip.trip_id}
+                country={trip.country}
+                currency={trip.currency}
+                locale={trip.locale}
+                originPlace={trip.origin}
+                destinationPlace={trip.destination}
+                outboundDate={trip.outbound_date}
+                inboundDate={trip.inbound_date}
+                budget={trip.budget}
+              />
+            ))}
         </div>
-      </div>
-);
+    </div>
+          );
   }
 }
 

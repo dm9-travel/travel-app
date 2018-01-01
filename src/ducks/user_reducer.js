@@ -6,8 +6,7 @@ const GET_LOCATION = "GET_LOCATION";
 const LOCK_USER = "LOCK_USER";
 const LOGOUT = "LOGOUT";
 const SEND_BUDGET = "SEND_BUDGET";
-
-// Action Creators
+const DEL_TRIP = "DEL_TRIP";
 
 // Initial State
 const initialState = {
@@ -20,6 +19,7 @@ const initialState = {
   },
   budget: null
 };
+
 
 export default function users(state = initialState, action) {
   switch (action.type) {
@@ -38,6 +38,8 @@ export default function users(state = initialState, action) {
 
     case GET_WATCHLIST:
       return Object.assign({}, state, { watchlist: action.payload });
+    case DEL_TRIP:
+      return Object.assign({},state,{ watchlist:action.payload });
     case LOCK_USER:
       return Object.assign({}, state, { currentUser: action.payload });
     case LOGOUT:
@@ -50,7 +52,7 @@ export default function users(state = initialState, action) {
       return state;
   }
 }
-
+// Action Creators
 export function requestUser() {
   return {
     type: REQ_USER,
@@ -68,6 +70,15 @@ export function getWatchlist(user_id) {
       })
       .catch(err => err)
   };
+}
+export function deleteTrip(trip_id){
+  return{
+    type:DEL_TRIP,
+    payload: axios
+    .delete(`/api/trip/${trip_id}`)
+    .then(response => response.data)
+    .catch(err => err)
+  }
 }
 export function getLocation(location) {
   return {
