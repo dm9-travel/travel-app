@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
-import axios from 'axios';
-import users,{getWatchlist} from '../../ducks/user_reducer.js';
+import {getWatchlist} from '../../ducks/user_reducer.js';
 
 import Trip from './Trip/Trip';
 import NavBar from "../Nav/NavBar/NavBar";
@@ -11,13 +10,12 @@ class Watchlist extends Component {
   constructor(props){
     super(props);
     this.state = {
-      trips:[]
+      trips:[],
+      index:0
     }
   }
 
   componentDidMount(){
-    /**** Run axios.get on endpoint trips for watchlist ****/
-    console.log("current user id", this.props.users.currentUser.user_id);
     this.props
       .getWatchlist(this.props.users.currentUser.user_id)
       .then(trips => {this.setState({ trips: trips.value })});
@@ -41,6 +39,7 @@ class Watchlist extends Component {
                 outboundDate={trip.outbound_date}
                 inboundDate={trip.inbound_date}
                 budget={trip.budget}
+                watchlistUpdate={i=>this.setState({index:this.state.index + i})}
               />
             ))}
         </div>

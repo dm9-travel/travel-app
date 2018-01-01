@@ -35,6 +35,7 @@ class Trip extends Component {
     }
     handleClick() {
     this.props.deleteTrip(this.props.tripId);
+    this.props.watchlistUpdate(7);
     }
     render() {
         const watchArray = this.state.quotes.map(quote => {

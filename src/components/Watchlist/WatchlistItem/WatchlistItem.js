@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import moment from 'moment';
 import { connect } from 'react-redux';
 import { Link } from "react-router-dom";
 
 import { selectFlight } from '../../../ducks/flights_reducer';
+import getTime from "../../Search/SearchResults/ResultsItem/timeGenerator";
+import getDuration from "../../Search/SearchResults/ResultsItem/durationGenerator";
 
 class WatchlistItem extends Component {
     constructor(props){
@@ -32,7 +33,7 @@ class WatchlistItem extends Component {
         this.handleClick = this.handleClick.bind(this);
     }
     componentDidMount(){
-        
+        this.setState({ time: getTime(), duration: getDuration() });
     }
     handleClick() {
     this.props.selectFlight(this.state);
@@ -53,7 +54,8 @@ class WatchlistItem extends Component {
         }
 
 
-        return (<div className="card" style={cardStyle}>
+        return (
+        <div className="card" style={cardStyle}>
             <div className="card-body">
               <div className="d-flex flex-row justify-content-between align-items-center">
                 <h4 className="card-title">{originCity} To {destinationCity}</h4>
@@ -61,11 +63,11 @@ class WatchlistItem extends Component {
               </div>
               <div className="d-flex flex-row justify-content-start align-items-center flex-wrap">
                 {this.props.outboundLeg && <div className="d-flex flex-row justify-content-between" style={rowStyle}>
-                  <span className="card-text">{moment(this.props.outboundLeg.DepartureDate).format("dddd, MMMM Do YYYY, h:mm:ss a")}</span>
+                  <span className="card-text">{moment(this.props.outboundLeg.DepartureDate).format("dddd, MMMM Do YYYY")} at {moment(`2014-09-08T${this.state.time}`).format("H:mm A")}</span>
                   <span className="card-text">{this.props.outboundLeg.OriginCode}-{this.props.outboundLeg.DestinationCode}</span>
                 </div>}
                 {this.props.inboundLeg && <div className="d-flex flex-row justify-content-between" style={rowStyle}>
-                  <span className="card-text">{moment(this.props.inboundLeg.DepartureDate ).format("dddd, MMMM Do YYYY, h:mm:ss a") }</span>
+                  <span className="card-text">{moment(this.props.inboundLeg.DepartureDate ).format("dddd, MMMM Do YYYY") } at {this.state.time}</span>
                   <span className="card-text">{this.props.inboundLeg.OriginCode}-{this.props.inboundLeg.DestinationCode}</span>
                 </div>}
               </div>
@@ -77,7 +79,8 @@ class WatchlistItem extends Component {
                 </Link>
               </div>
             </div>
-      </div>);
+      </div>
+      );
     }
 }
 const mapStateToProps = state => state;
