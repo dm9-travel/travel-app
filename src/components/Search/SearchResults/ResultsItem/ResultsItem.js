@@ -30,7 +30,7 @@ class Quote extends Component {
       originId: this.props.originId,
       carrierId: this.props.carrierId,
       time: "",
-      imageUrl: "",
+      imageUrl: "https://openclipart.org/download/168858/sydney-skyline.svg",
       duration: ""
     };
     this.handleClick = this.handleClick.bind(this);
@@ -38,10 +38,10 @@ class Quote extends Component {
 
   async componentDidMount() {
     await this.setState({ time: getTime(), duration: getDuration() });
-    // await axios.get(`/api/getImages/${this.state.cityName}`).then(response => {
-    //   console.log('CITY IMAGE: ', response);
-    //   this.setState({ imageUrl: response.data });
-    // });
+    await axios.get(`/api/getImages/${this.state.cityName}`).then(response => {
+      console.log('CITY IMAGE: ', response);
+      this.setState({ imageUrl: response.data });
+    });
   }
 
   handleClick() {
@@ -50,12 +50,26 @@ class Quote extends Component {
 
   render() {
     return (
-      <div className="card text-left rounded-0">
-        <div className="card-body">
+      <div className="card cart-title-bg text-left rounded-0">
+        <Link to="/details/">
+        
+        <div className="img-gradient">
+          <img className="card-img-top sized" src={this.state.imageUrl} alt="Card image cap"></img>
+        </div>
+        
+        <div className="card-img-overlay">
           <h3 className="card-title">{this.props.cityName}</h3>
+          <h5 className="card-subtitle">
+            {this.props.countryName}
+          </h5>
+        </div>
+        </Link>
+        
+        <div className="card-body">
+          {/* <h3 className="card-title">{this.props.cityName}</h3>
           <h4 className="card-subtitle mb-2 text-muted">
             {this.props.countryName}
-          </h4>
+          </h4> */}
           <p>
             <i className="fa fa-plane mr-2" aria-hidden="true" />
             From <strong>{this.props.originPlace}</strong> on{" "}
@@ -64,18 +78,19 @@ class Quote extends Component {
           {/* <p className="text-uppercase">
             {moment(this.props.outboundDate).format("dddd, MMMM Do YYYY")}
           </p> */}
-          <h2>from ${this.props.price}</h2>
+          <h3>from ${this.props.price}</h3>
           {this.props.direct ? (
             <h6 className="text-uppercase">Non stop flight</h6>
           ) : (
             <h6 className="text-uppercase">Connecting flight</h6>
           )}
-          <Link to="/details/">
-            <button type="button" className="btn btn-primary" onClick={this.handleClick}>
+          
+            {/* <button type="button" className="btn btn-primary" onClick={this.handleClick}>
               View Details
-            </button>
-          </Link>
+            </button> */}
+          
         </div>
+        
       </div>
     );
   }
