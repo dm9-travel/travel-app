@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import {Link, withRouter} from 'react-router-dom';
-import {connect} from 'react-redux'
+import { Link, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux'
 import { requestUser } from '../../../ducks/user_reducer';
 import logo from './logo.svg';
 import './NavBar.css';
@@ -23,7 +23,7 @@ class NavBar extends Component {
     window.location.href = 'http://localhost:3001/api/logout';
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.props.requestUser()
   }
 
@@ -35,57 +35,55 @@ class NavBar extends Component {
     let greeting = username ? <h1>Welcome {this.props.users.currentUser.user_name}!</h1> : null
     let renderAuth = !username
 
-                  ?
-                  <li className="nav-item">
-                    <button className="btn btn-outline-primary log btn-lg" onClick={this.handleLogin}>LOG IN</button>
-                  </li>
-                  :
-                  <li className="nav-item">
-                    <img src={this.props.picture} className="rounded-circle mr-4" height="40"></img>
-                    <button className="btn btn-outline-danger log" onClick={this.handleLogout}>LOG OUT</button>
-                  </li>
+      ?
+      <li className="nav-item">
+        <button className="btn btn-outline-primary log" onClick={this.handleLogin}>LOG IN</button>
+      </li>
+      :
+      <li className="nav-item">
+        <img src={this.props.picture} className="rounded-circle mr-4" height="40"></img>
+        <button className="btn btn-outline-danger log" onClick={this.handleLogout}>LOG OUT</button>
+      </li>
 
 
     if (this.props.location.pathname !== '/') {
-      console.log('Not home page');
       containerType = 'container-fluid';
       navBarStyle = 'navbar sticky-top navbar-expand-lg navbar-dark bg-dark';
-
     }
-    console.log(this.props.users.currentUser.user_name)
 
-    console.log('I am NavBar at pathname: ', this.props.location.pathname);
+    // console.log(this.props.users.currentUser.user_name);
 
     return (
-      <nav className={ navBarStyle }>
-      <div className={ containerType }>
-        <img src={logo} className="logo" alt="logo"/>
-        <Link to="/" className="navbar-brand">Wayz</Link>
-        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span className="navbar-toggler-icon"></span>
-        </button>
+      <nav className={navBarStyle}>
+        <div className={containerType}>
+          <img src={logo} className="logo" alt="logo" />
+          <Link to="/" className="navbar-brand">Wayz</Link>
+          <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span className="navbar-toggler-icon"></span>
+          </button>
           {greeting}
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav ml-auto text-uppercase">
-            <li className="nav-item active">
-              <Link className="nav-link" to="/">Home <span className="sr-only">(current)</span></Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/watchlist">Watchlist</Link>
-            </li>
-            {renderAuth}
-          </ul>
+          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul className="navbar-nav ml-auto text-uppercase">
+              <li className="nav-item mr-4">
+                <Link className="nav-link" to="/">Home <span className="sr-only">(current)</span></Link>
+              </li>
+              <li className="nav-item mr-4">
+                <Link className="nav-link" to="/watchlist">Watchlist</Link>
+              </li>
+
+                {renderAuth}
+
+            </ul>
+          </div>
         </div>
-      </div>
-    </nav>
+      </nav>
     );
   }
 }
-function mapStateToProps(state){
-  const { users }= state;
-  return{
+function mapStateToProps(state) {
+  const { users } = state;
+  return {
     users
-
   };
 }
 

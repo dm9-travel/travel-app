@@ -4,11 +4,10 @@ import { withRouter } from "react-router-dom";
 import flights, { getFlights } from "./../../../../ducks/flights_reducer";
 import UpdateSearch from "./../UpdateSearch/UpdateSearch";
 import ResultsItem from "../ResultsItem/ResultsItem.js";
-import "./ResultsView.css";
 import NavBar from './../../../Nav/NavBar/NavBar';
 import MapResults from './MapResults/MapResults';
 
-
+import "./ResultsView.css";
 
 import logo from "./../../../Nav/NavBar/logo.svg";
 import * as Scroll from "react-scroll";
@@ -27,23 +26,23 @@ const google = window.google;
 class ResultsView extends Component {
   constructor(props) {
     super(props);
-    this.state ={
-        markers: [],
+    this.state = {
+      markers: [],
     }
   }
 
   componentDidMount() {
-      Events.scrollEvent.register('begin', function() {
-          console.log('begin', arguments)
-      })
-      Events.scrollEvent.register('end', function() {
-          console.log('end', arguments)
-      })
-      scrollSpy.update();
-    
+    Events.scrollEvent.register('begin', function () {
+      console.log('begin', arguments)
+    })
+    Events.scrollEvent.register('end', function () {
+      console.log('end', arguments)
+    })
+    scrollSpy.update();
+
   }
-  
-    
+
+
   componentWillUnmount() {
     Events.scrollEvent.remove("begin");
     Events.scrollEvent.remove("end");
@@ -82,34 +81,23 @@ class ResultsView extends Component {
         <NavBar />
 
         <div className="row">
-          {/* <UpdateSearch /> */}
-          <div id="results-view" className="col-lg-6">
 
+          <div id="results-view" className="col-lg-6">
             <div className="container filters">
-            <UpdateSearch
+              <UpdateSearch
                 flightsArray={this.props.flights.flights}
-            />
+              />
             </div>
-          
-            <h6 className="text-left">{ this.props.users.userLocation.airport.PlaceName } - { this.props.users.userLocation.airport.CountryName } - Number of flights available: { this.props.flights.flights.length } - Budget:  JACK, MAKE ME BUDGET VALUE AVAILABLE HERE  </h6>
+            <h6 className="text-left">Departure location: {this.props.users.userLocation.airport.PlaceName}, {this.props.users.userLocation.airport.CountryName} - Number of flights available: {this.props.flights.flights.length} - Budget:  GET VALUE</h6>
             <div className="card-columns">{flightsList}</div>
           </div>
 
           <div id="map-view" className="col-lg-6">
-            <MapResults/>
+            <MapResults />
           </div>
+
         </div>
 
-        {/* // <UpdateSearch />
-        // <div className="resultsContainer">
-        //   <div className="resultsList">
-        //     <ul>{flightsList}</ul>
-        //   </div>
-         
-        // </div>  */}
-        <div>
-            
-            </div>
       </div>
     );
   }
