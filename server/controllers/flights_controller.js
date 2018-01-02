@@ -145,7 +145,7 @@ module.exports = {
       .get(
         `https://pixabay.com/api/?key=${pixKey}&q=${
           params.id
-        }&image_type=photo&pretty=true`
+        }&image_type=photo&orientation=horizontal&category=places&pretty=true`
       )
       .then(response => {
         console.log(response);

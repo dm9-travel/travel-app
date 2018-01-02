@@ -48,6 +48,8 @@ export default function users(state = initialState, action) {
       });
     case SEND_BUDGET:
       return Object.assign({}, state, {budget: action.payload});
+    case GET_WATCHLIST:
+      return Object.assign({}, state, {watchlist: action.payload});
     default:
       return state;
   }
