@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import { connect } from "react-redux";
+import {Link} from 'react-router-dom';
 import { withRouter } from "react-router-dom";
 import moment from 'moment';
+
 
 import users, { requestUser } from "../../ducks/user_reducer";
 import flights, { addToWatchlist } from "../../ducks/flights_reducer";
@@ -12,10 +14,12 @@ class Details extends Component {
   constructor(props){
     super(props);
     this.state = {
-
+          redirect: ''
     }
 
     this.handleClick=this.handleClick.bind(this);
+    this.bookFlight=this.bookFlight.bind(this);
+
   }
   handleClick() {
 
@@ -34,8 +38,17 @@ class Details extends Component {
         inbound_date: this.props.flights.searchTerms.inboundPartialDate,
         budget: this.props.users.budget
       })
-    };
+    }
     
+    
+    
+  }
+  bookFlight(){
+    var redirector = `http://partners.api.skyscanner.net/apiservices/referral/v1.0/US/USD/en-US/${this.props.users.userLocation.airport.PlaceId}/${this.props.flights.selectedFlight.IATAcode}/${moment(this.props.flights.selectedFlight.outboundDate).format('YYYY-MM-DD')}/${moment(this.props.flights.searchTerms.inboundPartialDate).format('YYYY-MM-DD')}?apiKey=so91596320528724`;
+    console.log(redirector);
+
+    window.location.href= redirector;
+
   }
 
   render() {
@@ -67,9 +80,14 @@ class Details extends Component {
                   <span>{IATAcode}</span>
                 </h1>
                 <h1 className="display-6 text-white">${price}</h1>
-                <button type="button" class="btn btn-success" onClick={this.handleClick}>
+                <button type="button" className="btn btn-success" onClick={this.handleClick}>
                   Add To Watchlist
                 </button>
+                
+                <button type="button" className="btn btn-success" onClick={this.bookFlight}>
+                Book Now!
+                </button>
+               
               </header>
               <main>
                 <section className="card">
