@@ -169,7 +169,6 @@ module.exports = {
     .then(countries =>{
           let countryList = countries.data.Countries;
           let selectedCountry = countryList.filter(countryObject => countryObject.Name == country);
-
           const dbInstance = req.app.get("db");
             dbInstance
               .add_trip([

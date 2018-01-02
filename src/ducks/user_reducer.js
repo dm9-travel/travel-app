@@ -65,7 +65,6 @@ export function getWatchlist(user_id) {
     payload: axios
       .get(`/api/getWatchlist/${user_id}`)
       .then(response => {
-        console.log("reducer response:",response.data);
         return response.data;
       })
       .catch(err => err)
