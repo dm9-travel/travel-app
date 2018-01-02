@@ -10,7 +10,9 @@ const google = window.google;
 class MapResults extends Component {
     constructor(props) {
         super(props);
-        
+        this.state = {
+            markers: []
+        }
     }
     
     componentDidMount() {
@@ -134,50 +136,58 @@ class MapResults extends Component {
       var geocoder = new google.maps.Geocoder;
       var scrollevents = scroller;
       var markers = [];
+      var coords = [];
       
       flightsData.forEach((cur, ind) => {
           return geocoder.geocode({'address': `${cur.destinationObj.CityName}, ${cur.destinationObj.CountryName} `}, function(results, status) {
               if(status === 'OK') {
-                markers.push(marker);
-                  var marker = new google.maps.Marker({
-                      map: self.map,
-                      position: results[0].geometry.location,
-                      animation: google.maps.Animation.DROP,
-                      id: cur.QuoteId
-                  });
-                  var infowindow = new google.maps.InfoWindow;
-                  var infowindowContent = (
-                      `<div class="infowindow">
-                          Fly to <span class="text-bold" >${cur.destinationObj.Name}</span> for just <span class="text-bold" >$</span><span class="text-bold" >${cur.MinPrice}</span>
-                      </div>`
-                  )
-                  self.map.center = results[0].geometry.location
-                  infowindow.setContent(infowindowContent);
-                  marker.addListener( 'mouseover', function(){
-                      infowindow.open(self.map, marker)
-                  })
-                  marker.addListener('mouseout', function() {
-                      infowindow.close(self.map, marker)
-                  })
-                  marker.addListener('click', function() {
-                      console.log(`flight:${marker.id}`)
-                      scrollevents.scrollTo(`flight:${marker.id}`, {
-                          duration:800,
-                          delay: 0,
-                          smooth: true,
-                          containerId: 'results-view',
-                          offset: -100
-                      })
-                  })
-                  // infowindow.open(self.map,marker)
-                  
-  
-              } else {
+                coords.push(results[0].geometry.location)
+                coords[ind].id = cur.QuoteId;
+                coords[ind].destinationObj = cur.destinationObj;
+                coords[ind].MinPrice = cur.MinPrice;
+               } else {
                   console.log(status)
               }
           }) 
       }) 
-    }
+      
+      coords.forEach((cur, ind) => {
+        var marker = new google.maps.Marker({
+            map: self.map,
+            position: {lat: cur.lat, lng: cur.lng},
+            animation: google.maps.Animation.DROP,
+            id: cur.id
+        });
+        markers.push(marker);
+        var infowindow = new google.maps.InfoWindow;
+        var infowindowContent = (
+            `<div class="infowindow">
+                Fly to <span class="text-bold" >${cur.destinationObj.Name}</span> for just <span class="text-bold" >$</span><span class="text-bold" >${cur.MinPrice}</span>
+            </div>`
+        )
+        // self.map.center = results[0].geometry.location
+        infowindow.setContent(infowindowContent);
+        marker.addListener( 'mouseover', function(){
+            infowindow.open(self.map, marker)
+        })
+        marker.addListener('mouseout', function() {
+            infowindow.close(self.map, marker)
+        })
+        marker.addListener('click', function() {
+            console.log(`flight:${marker.id}`)
+            scrollevents.scrollTo(`flight:${marker.id}`, {
+                duration:800,
+                delay: 0,
+                smooth: true,
+                containerId: 'results-view',
+                offset: -100
+            })
+    })
+// infowindow.open(self.map,marker)
+
+    })
+
+}
     componentWillUnmount() {
         Events.scrollEvent.remove('begin');
         Events.scrollEvent.remove('end');
@@ -190,3 +200,4 @@ class MapResults extends Component {
 }
 const mapStateToProps = state => state;
 export default connect(mapStateToProps, {getFlights})(MapResults);
+
