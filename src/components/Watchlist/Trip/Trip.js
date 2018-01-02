@@ -29,9 +29,10 @@ class Trip extends Component {
         axios
           .post("http://localhost:3001/api/getQuote", tripBody)
           .then(response => {
+            if(response){
             console.log("quote:", response.data);
             this.setState({ quotes: response.data });
-          });
+          }});
     }
     handleClick() {
     this.props.deleteTrip(this.props.tripId);
