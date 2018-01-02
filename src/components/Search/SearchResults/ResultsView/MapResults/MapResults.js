@@ -194,9 +194,6 @@ class MapResults extends Component {
       var geocoder = new google.maps.Geocoder;
       var scrollevents = scroller;
       var markers = [];
-    
-     
-      var hasCoordinates = false;
       
           this.state.coords.forEach((cur, ind) => {
             var marker = new google.maps.Marker({
@@ -241,6 +238,7 @@ class MapResults extends Component {
 
 
 }
+
 
 }
     componentWillUnmount() {
