@@ -51,7 +51,7 @@ class NavBar extends Component {
       navBarStyle = 'navbar sticky-top navbar-expand-lg navbar-dark bg-dark';
     }
 
-    console.log(this.props.users.currentUser.user_name)
+    // console.log(this.props.users.currentUser.user_name);
 
     return (
       <nav className={navBarStyle}>
