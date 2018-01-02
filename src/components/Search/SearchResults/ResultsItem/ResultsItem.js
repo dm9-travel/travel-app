@@ -66,10 +66,6 @@ class Quote extends Component {
         </Link>
         
         <div className="card-body">
-          {/* <h3 className="card-title">{this.props.cityName}</h3>
-          <h4 className="card-subtitle mb-2 text-muted">
-            {this.props.countryName}
-          </h4> */}
           <p>
             <i className="fa fa-plane mr-2" aria-hidden="true" />
             From <strong>{this.props.originPlace}</strong> on{" "}
