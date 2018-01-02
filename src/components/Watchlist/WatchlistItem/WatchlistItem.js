@@ -11,7 +11,7 @@ class WatchlistItem extends Component {
     constructor(props){
         super(props);
         this.state = {
-          key:1 ,
+          key:this.props.QuoteId ,
           originPlace: this.props.outboundLeg.OriginCode,
           destinationPlace: this.props.outboundLeg.DestinationCode,
           countryName:this.props.country,

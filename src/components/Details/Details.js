@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import { connect } from "react-redux";
+import {Link} from 'react-router-dom';
 import { withRouter } from "react-router-dom";
 import moment from 'moment';
+
 
 import users, { requestUser } from "../../ducks/user_reducer";
 import flights, { addToWatchlist } from "../../ducks/flights_reducer";
@@ -12,10 +14,12 @@ class Details extends Component {
   constructor(props){
     super(props);
     this.state = {
-
+          redirect: ''
     }
 
     this.handleClick=this.handleClick.bind(this);
+    this.bookFlight=this.bookFlight.bind(this);
+
   }
   handleClick() {
 
@@ -34,8 +38,16 @@ class Details extends Component {
         inbound_date: this.props.flights.searchTerms.inboundPartialDate,
         budget: this.props.users.budget
       })
-    };
+    }
     
+    
+    
+  }
+  bookFlight(){
+    var redirector = `http://partners.api.skyscanner.net/apiservices/referral/v1.0/US/${this.state.currency}/${this.state.locale}/${this.state.origin}/${this.state.destination}/${moment(this.state.outbound_date).format('YYYYMMDD')}/${this.state.inbound_date}?apiKey=so91596320528724`;
+
+    window.location.href= redirector;
+
   }
 
   render() {
@@ -70,6 +82,11 @@ class Details extends Component {
                 <button type="button" class="btn btn-success" onClick={this.handleClick}>
                   Add To Watchlist
                 </button>
+                
+                <button type="button" class="btn btn-success" onClick={this.bookFlight}>
+                Book Now!
+                </button>
+               
               </header>
               <main>
                 <section className="card">
