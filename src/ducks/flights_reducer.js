@@ -12,7 +12,8 @@ const initialState = {
   flights: [],
   selectedFlight: {},
   trips:[],
-  searchTerms: {}
+  searchTerms: {},
+  filteredFlights: []
 };
 export default function flights(state = initialState, action) {
   switch (action.type) {
@@ -21,7 +22,8 @@ export default function flights(state = initialState, action) {
     case GET_FLIGHTS + "_FULFILLED":
       return Object.assign({}, state, {
         isLoading: false,
-        flights: action.payload
+        flights: action.payload,
+        filteredFlights: action.payload
       });
     case SELECTED_FLIGHT:
       return Object.assign({}, state, {
@@ -35,9 +37,9 @@ export default function flights(state = initialState, action) {
       return Object.assign({}, state, {searchTerms: action.payload})
     case FILTER_FLIGHTS:
       {
-        var flightsCopy = [...state.flights];
+        var flightsCopy = [...state.filteredFlights];
         flightsCopy = flightsCopy.filter(flight => flight.destinationObj.CountryName == action.payload)
-        return Object.assign({}, state, {flights: flightsCopy})
+        return Object.assign({}, state, {filteredFlights: flightsCopy})
       }
     default:
       return state;

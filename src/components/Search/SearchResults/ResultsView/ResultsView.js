@@ -33,10 +33,10 @@ class ResultsView extends Component {
 
   componentDidMount() {
     Events.scrollEvent.register('begin', function () {
-      console.log('begin', arguments)
+      // console.log('begin', arguments)
     })
     Events.scrollEvent.register('end', function () {
-      console.log('end', arguments)
+      // console.log('end', arguments)
     })
     scrollSpy.update();
 
@@ -48,7 +48,7 @@ class ResultsView extends Component {
     Events.scrollEvent.remove("end");
   }
   render() {
-    const flightsList = this.props.flights.flights.map((flight, ind) => {
+    const flightsList = this.props.flights.filteredFlights.map((flight, ind) => {
       if (!flight.carrierObj) {
         var carrier = "Malaysian Airlines";
       } else {
