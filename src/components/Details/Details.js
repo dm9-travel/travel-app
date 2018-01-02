@@ -44,7 +44,8 @@ class Details extends Component {
     
   }
   bookFlight(){
-    var redirector = `http://partners.api.skyscanner.net/apiservices/referral/v1.0/US/${this.state.currency}/${this.state.locale}/${this.state.origin}/${this.state.destination}/${moment(this.state.outbound_date).format('YYYYMMDD')}/${this.state.inbound_date}?apiKey=so91596320528724`;
+    var redirector = `http://partners.api.skyscanner.net/apiservices/referral/v1.0/US/USD/en-US/${this.props.users.userLocation.airport.PlaceId}/${this.props.flights.selectedFlight.IATAcode}/${moment(this.props.flights.selectedFlight.outboundDate).format('YYYY-MM-DD')}/${moment(this.props.flights.searchTerms.inboundPartialDate).format('YYYY-MM-DD')}?apiKey=so91596320528724`;
+    console.log(redirector);
 
     window.location.href= redirector;
 
@@ -79,11 +80,11 @@ class Details extends Component {
                   <span>{IATAcode}</span>
                 </h1>
                 <h1 className="display-6 text-white">${price}</h1>
-                <button type="button" class="btn btn-success" onClick={this.handleClick}>
+                <button type="button" className="btn btn-success" onClick={this.handleClick}>
                   Add To Watchlist
                 </button>
                 
-                <button type="button" class="btn btn-success" onClick={this.bookFlight}>
+                <button type="button" className="btn btn-success" onClick={this.bookFlight}>
                 Book Now!
                 </button>
                
