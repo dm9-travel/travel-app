@@ -35,15 +35,15 @@ class Quote extends Component {
     };
     this.handleClick = this.handleClick.bind(this);
   }
+
   async componentDidMount() {
     await this.setState({ time: getTime(), duration: getDuration() });
     // await axios.get(`/api/getImages/${this.state.cityName}`).then(response => {
-    //   console.log(response);
+    //   console.log('CITY IMAGE: ', response);
     //   this.setState({ imageUrl: response.data });
     // });
-    // console.log(this.state.imageUrl);
-    console.log(this.state);
   }
+
   handleClick() {
     this.props.selectFlight(this.state);
   }

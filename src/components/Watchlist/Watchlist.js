@@ -1,38 +1,50 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
-import axios from 'axios';
-import getWatchlist from '../../ducks/user_reducer.js';
+import {getWatchlist} from '../../ducks/user_reducer.js';
 
 import Trip from './Trip/Trip';
+import NavBar from "../Nav/NavBar/NavBar";
 
 class Watchlist extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      trips:[],
+      index:0
+    }
+  }
 
   componentDidMount(){
-    /**** Run axios.get on endpoint trips for watchlist ****/
+    this.props
+      .getWatchlist(this.props.users.currentUser.user_id)
+      .then(trips => {this.setState({ trips: trips.value })});
   }
 
   render() {
-   
-   if (this.props.watchlist){
-    const userTrips = this.props.watchlist
-                      .map(trip => <Trip 
-                                    country={trip.country} 
-                                    currency={trip.currency} 
-                                    locale={trip.locale} 
-                                    originPlace={trip.originPlace} 
-                                    destinationPlace={trip.destinationPlace} 
-                                    outboundDate={trip.outboundPartialDate} 
-                                    inboundDate={trip.inboundPartialDate} 
-                                    budget={trip.budget}/>
-                      );
-                    }
-    
-
-    return <div className="d.flex flex-row justify-content-center bg-white">
-        <h3 className="display-3">My Trips</h3>
-        
-      </div>;
+    return (
+    <div>
+        <NavBar />
+        <div className="d.flex flex-row justify-content-center bg-white">
+          <h3 className="display-3">My Trips</h3>
+          {this.state.trips[0] && this.state.trips.map(trip => (
+              <Trip
+                key={trip.trip_id}
+                tripId={trip.trip_id}
+                country={trip.country}
+                currency={trip.currency}
+                locale={trip.locale}
+                originPlace={trip.origin}
+                destinationPlace={trip.destination}
+                outboundDate={trip.outbound_date}
+                inboundDate={trip.inbound_date}
+                budget={trip.budget}
+                watchlistUpdate={i=>this.setState({index:this.state.index + i})}
+              />
+            ))}
+        </div>
+    </div>
+          );
   }
 }
 
