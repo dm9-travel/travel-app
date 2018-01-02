@@ -51,7 +51,7 @@ class Quote extends Component {
   render() {
     return (
       <div className="card cart-title-bg text-left rounded-0">
-        <Link to="/details/">
+        <Link to="/details/" onClick={this.handleClick}>
         
         <div className="img-gradient">
           <img className="card-img-top sized" src={this.state.imageUrl} alt="Card image cap"></img>
