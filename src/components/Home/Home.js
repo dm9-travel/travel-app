@@ -6,6 +6,7 @@ import { lockUser } from "../../ducks/user_reducer.js";
 import { Link, withRouter } from "react-router-dom";
 
 import { connect } from "react-redux";
+import Popular from "./Popular/Popular";
 
 class Home extends Component {
   constructor(props) {
@@ -31,9 +32,10 @@ class Home extends Component {
       <div className="homePage">
         <Header />
         <div>
-          <Link to="/searchResults">
+          {/* <Link to="/searchResults">
             <button>Search results</button>
-          </Link>
+          </Link> */}
+          <Popular/>
         </div>
       </div>
     );
