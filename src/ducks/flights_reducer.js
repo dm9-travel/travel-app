@@ -78,4 +78,5 @@ export function addToWatchlist(trip) {
     type: ADD_TO_WATCHLIST,
     payload: axios.post(`/api/addTrip`,trip)
   };
+
 }
