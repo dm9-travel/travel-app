@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import flights, {getFlights} from './../../../../../ducks/flights_reducer';
+import flights, {getFlights, setCoords} from './../../../../../ducks/flights_reducer';
 import './MapResults.css';
 import * as Scroll from 'react-scroll';
 import {Link, DirectLink, Element, Events, animateScroll as scroll, scrollSpy, scroller} from 'react-scroll';
 import { setInterval, setTimeout } from 'timers';
 import { log } from 'util';
+import index from 'axios';
 
 const google = window.google;
 
@@ -20,7 +21,8 @@ class MapResults extends Component {
         this.coords = [];
     }
     
-    componentDidMount() {        
+    componentDidMount() {
+    //scrollspy event triggers        
         Events.scrollEvent.register('begin', function() {
             console.log('begin', arguments)
         })
@@ -29,7 +31,7 @@ class MapResults extends Component {
         })
         scrollSpy.update();
 
-
+    //initialize map
       var userLoc = this.props.users.userLocation;
       let flightsData = this.props.flights.filteredFlights;
       
@@ -130,16 +132,13 @@ class MapResults extends Component {
         
         });
         var geocoder = new google.maps.Geocoder;
-     
-      //   mapDiv.style.height = "90vh";
-      //   mapDiv.style.width = "50vw";
   
         mapDiv.style.right = "0vw";
         mapDiv.style.top = "0vh";
         console.log(google.maps);
       })();
-
-      flightsData.forEach((cur, ind) => {
+      //get lat lng for destinations of searchResults
+      this.props.flights.filteredFlights.forEach((cur, ind) => {
         return geocoder.geocode({'address': `${cur.destinationObj.CityName}, ${cur.destinationObj.CountryName} `}, function(results, status) {
             if(status === 'OK') {
             
@@ -153,23 +152,22 @@ class MapResults extends Component {
 
         }) 
     })
-    this.setState({coords: self.coords});
+    //setstate to coordinates array - every update to the flights array should update state here
+    this.props.setCoords(self.coords);
 
     console.log(self.coords)
 }
 
 
-
-
-
-
-
-
-
-
     componentDidUpdate(prevProps, prevState) {
         var geocoder = new google.maps.Geocoder;
+        
+        // self.coords = []
+    
+        var self = this;
+
         // if (this.state != prevState || this.props != prevProps) {
+        //     self.coords = [];
         //     this.props.flights.filteredFlights.forEach((cur, ind) => {
         //         return geocoder.geocode({'address': `${cur.destinationObj.CityName}, ${cur.destinationObj.CountryName} `}, function(results, status) {
         //             if(status === 'OK') {
@@ -184,62 +182,72 @@ class MapResults extends Component {
         
         //         }) 
         //     })
+        //     // this.props.setCoords(self.coords)
         // }
-        if (this.state.coords.length && this.state != prevState) {
+        // var markers = []
+        // markers.forEach((cur, ind) => setMap(null))
+        if (this.props.flights.coords.length ) {
             // console.log('updated',this.state.coords[0].lat())
 
+            var flightsData = this.props.flights.filteredFlights;
+            var self = this;
+            var geocoder = new google.maps.Geocoder;
+            var scrollevents = scroller;
+            for (var i =0; i<this.markers.length; i++) {
+                return this.markers[i].setMap(null)
+            }
+            // this.markers.forEach((cur, ind) => {
+            //     return cur.setMap(null)
 
-      var flightsData = this.props.flights.filteredFlights;
-      var self = this;
-      var geocoder = new google.maps.Geocoder;
-      var scrollevents = scroller;
-      var markers = [];
-      
-          this.state.coords.forEach((cur, ind) => {
-            var marker = new google.maps.Marker({
-            map: self.map,
-            position: {lat: cur.lat(), lng: cur.lng()},
-            animation: google.maps.Animation.DROP,
-            id: cur.id
-        });
-        // console.log(marker)
-        // markers.push(marker);
-        var infowindow = new google.maps.InfoWindow;
-        var infowindowContent = (
-            `<div class="infowindow">
-                Fly to <span class="text-bold" >${cur.destinationObj.Name}</span> for just <span class="text-bold" >$</span><span class="text-bold" >${cur.MinPrice}</span>
-            </div>`
-        )
-        // self.map.center = results[0].geometry.location
-        infowindow.setContent(infowindowContent);
-        marker.addListener( 'mouseover', function(){
-            infowindow.open(self.map, marker)
-        })
-        marker.addListener('mouseout', function() {
-            infowindow.close(self.map, marker)
-        })
-        marker.addListener('click', function() {
-            // console.log(`flight:${marker.id}`)
-            scrollevents.scrollTo(`flight:${marker.id}`, {
-                duration:800,
-                delay: 0,
-                smooth: true,
-                containerId: 'results-view',
-                offset: -100
+            // })
+            var markers = [];
+            // self.markers = []
+            
+            this.props.flights.coords.forEach((cur, ind) => {
+                var marker = new google.maps.Marker({
+                // map: self.map,
+                position: {lat: cur.lat(), lng: cur.lng()},
+                animation: google.maps.Animation.DROP,
+                id: cur.id
+            });
+            // console.log(marker)
+            // markers.push(marker);
+            var infowindow = new google.maps.InfoWindow;
+            var infowindowContent = (
+                `<div class="infowindow">
+                    Fly to <span class="text-bold" >${cur.destinationObj.Name}</span> for just <span class="text-bold" >$</span><span class="text-bold" >${cur.MinPrice}</span>
+                </div>`
+            )
+            // self.map.center = results[0].geometry.location
+            infowindow.setContent(infowindowContent);
+            marker.addListener( 'mouseover', function(){
+                infowindow.open(self.map, marker)
             })
-    })
-// infowindow.open(self.map,marker)
-    markers.push(marker);
-    })   
-    
-    this.markers = markers
+            marker.addListener('mouseout', function() {
+                infowindow.close(self.map, marker)
+            })
+            marker.addListener('click', function() {
+                // console.log(`flight:${marker.id}`)
+                scrollevents.scrollTo(`flight:${marker.id}`, {
+                    duration:800,
+                    delay: 0,
+                    smooth: true,
+                    containerId: 'results-view',
+                    offset: -100
+                })
+        })
+    // infowindow.open(self.map,marker)
+        markers.push(marker);
+        })   
+        
+        this.markers = markers
 
-    // console.log(this.markers.length);
+        // console.log(this.markers.length);
 
 
-}
-
-
+    }
+        this.markers.forEach((cur, ind) => cur.setMap(self.map))
+        console.log(this.markers)
 }
     componentWillUnmount() {
         Events.scrollEvent.remove('begin');
@@ -252,5 +260,5 @@ class MapResults extends Component {
     }
 }
 const mapStateToProps = state => state;
-export default connect(mapStateToProps, {getFlights})(MapResults);
+export default connect(mapStateToProps, {getFlights, setCoords})(MapResults);
 

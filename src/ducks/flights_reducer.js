@@ -7,13 +7,15 @@ const SELECTED_FLIGHT = "SELECTED_FLIGHT";
 const ADD_TO_WATCHLIST = "ADD_TO_WATCHLIST";
 const SET_SEARCH_TERMS = "SET_SEARCH_TERMS";
 const FILTER_FLIGHTS = "FILTER_FLIGHTS";
+const FLIGHT_COORDS = "FLIGHT_COORDS";
 
 const initialState = {
   flights: [],
   selectedFlight: {},
   trips:[],
   searchTerms: {},
-  filteredFlights: []
+  filteredFlights: [],
+  coords: []
 };
 export default function flights(state = initialState, action) {
   switch (action.type) {
@@ -41,8 +43,16 @@ export default function flights(state = initialState, action) {
         flightsCopy = flightsCopy.filter(flight => flight.destinationObj.CountryName == action.payload)
         return Object.assign({}, state, {filteredFlights: flightsCopy})
       }
+    case FLIGHT_COORDS:
+      return Object.assign({}, state, {coords: action.payload})
     default:
       return state;
+  }
+}
+export function setCoords(coords) {
+  return {
+    type: FLIGHT_COORDS,
+    payload: coords
   }
 }
 export function filterFlights(country) {

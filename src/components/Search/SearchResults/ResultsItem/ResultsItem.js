@@ -39,7 +39,7 @@ class Quote extends Component {
   async componentDidMount() {
     await this.setState({ time: getTime(), duration: getDuration() });
     await axios.get(`/api/getImages/${this.state.cityName}`).then(response => {
-      console.log('CITY IMAGE: ', response);
+      // console.log('CITY IMAGE: ', response);
       this.setState({ imageUrl: response.data });
     });
   }
