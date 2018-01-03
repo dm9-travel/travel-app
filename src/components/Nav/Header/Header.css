@@ -3,8 +3,16 @@
   background-color: #fff;
   background-size: cover;
   background-repeat: no-repeat;
-  height: 75vh;
+  background-position: bottom center;
+  height: 80vh;
   padding-top: 1rem;
+  position: relative;
+}
+
+.location {
+  position: absolute;
+  bottom: 1rem;
+  padding-left: 1rem;
 }
 
 .header-title {
