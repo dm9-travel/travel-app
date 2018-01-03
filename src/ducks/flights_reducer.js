@@ -1,4 +1,5 @@
 import axios from "axios";
+import { stat } from "fs";
 
 //Action Constants
 
@@ -8,6 +9,7 @@ const ADD_TO_WATCHLIST = "ADD_TO_WATCHLIST";
 const SET_SEARCH_TERMS = "SET_SEARCH_TERMS";
 const FILTER_FLIGHTS = "FILTER_FLIGHTS";
 const FLIGHT_COORDS = "FLIGHT_COORDS";
+const UNFILTER = "UNFILTER"
 
 const initialState = {
   flights: [],
@@ -15,7 +17,8 @@ const initialState = {
   trips:[],
   searchTerms: {},
   filteredFlights: [],
-  coords: []
+  coords: [],
+
 };
 export default function flights(state = initialState, action) {
   switch (action.type) {
@@ -45,8 +48,16 @@ export default function flights(state = initialState, action) {
       }
     case FLIGHT_COORDS:
       return Object.assign({}, state, {coords: action.payload})
+    case UNFILTER:
+      return Object.assign({}, state, {filteredFlights: action.payload})
     default:
       return state;
+  }
+}
+export function unfilterFlights(flights) {
+  return {
+    type: UNFILTER,
+    payload: flights
   }
 }
 export function setCoords(coords) {
