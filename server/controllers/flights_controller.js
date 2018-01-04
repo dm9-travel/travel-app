@@ -201,17 +201,17 @@ module.exports = {
   },
    getLocations:(req, res, next)=>{
      var geocodio = new Geocodio(config);
-     
+     var coords = [];
      var {
        cities
      } = req.body;
 
      geocodio.post('geocode', cities, function(err, locations) {
        if(err) throw err;
-       console.log((locations.results[1].response.results[0].location))
-       
-     }).then((locations) => res.status(200).send(locations))
-     .catch(() => res.status(500).send())
+      coords = locations.results.map((cur, ind) => cur.response.results[0].location)
+       res.status(200).send(coords)
+     })
+     
    },
    Delete_Trip:(req,res,next)=>{
      const tripId = req.params.id;
