@@ -58,7 +58,7 @@ class Quote extends Component {
         </div>
         
         <div className="card-img-overlay">
-          <h3 className="card-title">{this.props.cityName}</h3>
+          <span><h3 className="card-title result-item">{this.props.cityName}</h3></span>
           <h5 className="card-subtitle">
             {this.props.countryName}
           </h5>
