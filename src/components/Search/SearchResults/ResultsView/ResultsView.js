@@ -55,7 +55,7 @@ class ResultsView extends Component {
         var carrier = flight.carrierObj.Name;
       }
       return (
-        <Element name={`flight:${flight.QuoteId}`} key={flight.QuoteId}>
+        <Element name={`flight:${flight.QuoteId}`} key={flight.QuoteId} activeClass="active" >
           <ResultsItem
             key={flight.QuoteId}
             destinationPlace={flight.destinationObj.Name}

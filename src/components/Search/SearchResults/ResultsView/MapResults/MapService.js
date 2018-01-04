@@ -6,7 +6,7 @@ export default {
     coordinateCalculator: async (coords, flightsData, markers) => {
         let geocodePromises = []
         var geocoder = new google.maps.Geocoder;
-        for (let i =0; i <10; i++) {
+        for (let i =0; i <flightsData.length; i++) {
             geocodePromises.push( new Promise( (resolve, reject) => {
                 geocoder.geocode({'address': `${flightsData[i].destinationObj.CityName}, ${flightsData[i].destinationObj.CountryName} `}, function(results, status) {
                 if(status === 'OK') { 
@@ -24,11 +24,11 @@ export default {
 
       
 
-      coords = await Promise.all(geocodePromises)
+        coords = await Promise.all(geocodePromises)
   
-  var geocoder = new google.maps.Geocoder;
-  var scrollevents = scroller;
-  var markers = [];
+        var geocoder = new google.maps.Geocoder;
+        var scrollevents = scroller;
+        var markers = [];
 
   coords.forEach((cur, ind) => {
       var marker = new google.maps.Marker({
