@@ -96,26 +96,31 @@ class Details extends Component {
 
         <div className="details-main">
           <header className="d-flex flex-column justify-content-center align-items-center details-jumbotron" style={jumbotronStyle}>
-            <h1 className="display-3 text-white">
-              <span>DFW</span>
-              <i className="fa fa-arrow-right" aria-hidden="true" />
+            <h1 className="flight-info display-3 text-white">
+              <span>{'DFW' || this.state.listItem.origin}</span>
+              <i className="fa fa-arrow-right animated shake" aria-hidden="true" />
               <span>{IATAcode}</span>
             </h1>
-            <h1 className="display-6 text-white">${price}</h1>
-            {!this.state.buttonState && <button type="button" class="btn btn-success" onClick={this.handleClick}>
-              Add To Watchlist
-              </button>}
-            {this.state.buttonState && <button type="button" class="btn btn-danger" onClick={this.handleRemove}>
-              Remove From Watchlist
-              </button>}
-            <button type="button" className="btn btn-success" onClick={this.bookFlight}>
-              Book Now!
-            </button>
+            <h1 className="display-4 text-white">${price}</h1>
+
+            <div className="row mt-3">
+              {!this.state.buttonState && <button type="button" class="btn btn-primary btn-lg mr-3" onClick={this.handleClick}>
+                Add To Watchlist
+                </button>}
+              {this.state.buttonState && <button type="button" class="btn btn-primary btn-lg mr-3" onClick={this.handleRemove}>
+                Remove From Watchlist
+                </button>}
+              <button type="button" className="btn btn-primary btn-lg ml-3" onClick={this.bookFlight}>
+                Book Now!
+              </button>
+            </div>
           </header>
-          <main>
-            <div className="container">
-              <div className="row">
-                <section className="card">
+
+
+          <div className="container flight-details">
+            <div className="row">
+              <div className="col-10 mx-auto">
+                <div className="card">
                   <div className="card-header">
                     <h3 className="text-left">Departing</h3>
                   </div>
@@ -156,10 +161,15 @@ class Details extends Component {
                       </div>
                     </div>
                   </div>
-                </section>
+                </div>
               </div>
+
+
+
+
             </div>
-          </main>
+          </div>
+
         </div>
       </div>
     );

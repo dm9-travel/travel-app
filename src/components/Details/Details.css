@@ -1,18 +1,52 @@
 .some-margin{
   margin:0 1.25rem;
 }
-main{
+
+main {
   padding:0 1rem;
 }
+
 .details-jumbotron{
   background-image: url('http://cdn.wonderfulengineering.com/wp-content/uploads/2015/05/Dallas-Wallpaper-10.jpg');
   background-color: #fff;
-  background-size: contain;
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: bottom center;
-  height: 70vh;
+  height: 80vh;
   padding-top: 1rem;
 }
+
 .card{
     margin:1rem;
+}
+
+.flight-info {
+  background-color: #000;
+  padding: 0.5rem 2rem;
+}
+
+.flight-info .fa {
+  margin: 0 2rem;
+  animation-timing-function: ease-in-out;
+  animation-duration: 5s;
+  animation-iteration-count: infinite;
+}
+
+.flight-details {
+  position: relative;
+  top: -7rem;  
+}
+
+.flight-details {
+  position: relative;
+  top: -7rem;
+}
+
+.flight-details .fa {
+  color: rgb(216, 216, 216);
+}
+
+.details-main .btn {
+  cursor: pointer;
+  width: 12rem;
 }
