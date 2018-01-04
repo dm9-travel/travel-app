@@ -54,7 +54,7 @@ class Quote extends Component {
         <Link to="/details/" onClick={this.handleClick}>
         
         <div className="img-gradient">
-          <img className="card-img-top sized" src={this.state.imageUrl} alt="Card image cap"></img>
+          <img className="card-img-top sized img-responsive" src={this.state.imageUrl} alt="Card image cap"></img>
         </div>
         
         <div className="card-img-overlay">

@@ -7,9 +7,10 @@ main{
 .details-jumbotron{
   background-image: url('http://cdn.wonderfulengineering.com/wp-content/uploads/2015/05/Dallas-Wallpaper-10.jpg');
   background-color: #fff;
-  background-size: cover;
+  background-size: contain;
   background-repeat: no-repeat;
-  height: 50vh;
+  background-position: bottom center;
+  height: 70vh;
   padding-top: 1rem;
 }
 .card{
