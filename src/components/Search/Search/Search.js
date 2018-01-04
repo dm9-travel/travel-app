@@ -9,12 +9,11 @@ import "./Search.css";
 class Search extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       country: "US",
       currency: "USD",
       locale: "en-US",
-      originPlace: this.props.users.userLocation.airport.PlaceName,
+      originPlace: "",
       destinationPlace: "Anywhere",
       outboundPartialDate: "",
       inboundPartialDate: "",
@@ -25,14 +24,18 @@ class Search extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   componentDidMount() {
-    //   this.setState({
-    //       originPlace: this.props.user_location
-    //   })
   }
+  componentDidUpdate(prevProps,prevState){
+    if (this.props.users.userLocation.airport && this.props.users.userLocation.airport.CityId !== this.state.originPlace) {
+            this.setState({
+              originPlace: this.props.users.userLocation.airport.CityId
+          })
+        }
+      }
   handleChange(event) {
     const value = event.target.value;
     const name = event.target.name;
-
+    console.log(name,value)
     this.setState({
       [name]: value
     });
@@ -41,10 +44,10 @@ class Search extends Component {
   async handleSubmit(event) {
     // alert("Values entered: " + JSON.stringify(this.state));
     event.preventDefault();
-    this.props.getFlights(this.state).then(() => this.props.history.push('/searchResults'));
-
     this.props.setSearch(this.state);
     this.props.sendBudget(this.state.budget);
+    this.props.getFlights(this.state).then(() => this.props.history.push('/searchResults'));
+
     
   }
 

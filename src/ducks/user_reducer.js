@@ -12,11 +12,7 @@ const DEL_TRIP = "DEL_TRIP";
 const initialState = {
   currentUser: {},
   watchlist: [],
-  userLocation: {
-    airport: {
-      PlaceName: "DFW"
-    }
-  },
+  userLocation: {},
   budget: null
 };
 
