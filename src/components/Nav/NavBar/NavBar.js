@@ -11,7 +11,8 @@ class NavBar extends Component {
     super(props);
 
     this.state = {
-      auth_id: null
+      auth_id: null,
+      picture: ''
     };
 
     this.handleLogin = this.handleLogin.bind(this);
@@ -80,7 +81,7 @@ class NavBar extends Component {
                 </li>
                 :
                 <li className="nav-item">
-                  <img src={this.props.picture} className="rounded-circle mr-4" height="40"></img>
+                  <img src={this.props.users.currentUser.user_picture} className="rounded-circle mr-4" height="40" alt="Avatar"></img>
                   <button className="btn btn-outline-danger log" onClick={this.handleLogout}>LOG OUT</button>
                 </li>
               }
