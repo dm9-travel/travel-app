@@ -89,7 +89,7 @@ app.get("/api/logout", function(req, res) {
 
 app.get("/api/me", function(req, res) {
 
-  if (!req.user) return res.status(404);
+  if (!req.user) return res.status(404).send();
 
   req.app
     .get("db")
