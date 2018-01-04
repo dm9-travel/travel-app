@@ -66,7 +66,7 @@ class Header extends Component {
 
         <div className="container">
           <div className="row">
-            <div className="location text-muted">
+            <div className="location">
               {bgLocation}
             </div>
           </div>

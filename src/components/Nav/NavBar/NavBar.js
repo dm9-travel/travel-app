@@ -28,30 +28,26 @@ class NavBar extends Component {
   }
 
   componentDidMount() {
-    this.props.requestUser()
+    if(!this.props.users.currentUser.auth_id){
+      this.props.requestUser()
+    }
 
-    axios.get('/api/me').then((response) => {
-    console.log(response.data[0].auth_id);
-    this.setState({auth_id: response.data[0].auth_id})
-        });
-    
-    
   }
 
 
   render() {
-   console.log(this.state.auth_id);
     let username = this.props.users.currentUser.user_name
     let navBarStyle = 'navbar sticky-top navbar-expand-lg navbar-light';
-    let containerType = 'container';
+    let containerType = 'container pl-0 pr-0';
     let greeting = username ? <h5>Welcome {this.props.users.currentUser.user_name}!</h5> : null
     let renderAuth = !username
-
+    let logoStyle = 'dark-logo';
 
 
     if (this.props.location.pathname !== '/') {
       containerType = 'container-fluid';
-      navBarStyle = 'navbar sticky-top navbar-expand-lg navbar-dark bg-dark';
+      navBarStyle = 'navbar sticky-top navbar-expand-lg navbar-dark';
+      logoStyle = 'logo'
     }
 
     // console.log(this.props.users.currentUser.user_name);
@@ -59,7 +55,7 @@ class NavBar extends Component {
     return (
       <nav className={navBarStyle}>
         <div className={containerType}>
-          <img src={logo} className="logo" alt="logo" />
+          <img src={logo} className={logoStyle} alt="logo" />
           <Link to="/" className="navbar-brand">Wayz</Link>
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
@@ -74,9 +70,10 @@ class NavBar extends Component {
                 <Link className="nav-link" to="/watchlist">Watchlist</Link>
               </li>
 
+
                 {renderAuth}
 
-                {this.state.auth_id === null
+                {!this.props.users.currentUser.auth_id
                 ?
                 <li className="nav-item">
                   <button className="btn btn-outline-primary log" onClick={this.handleLogin}>LOG IN</button>
@@ -87,6 +84,7 @@ class NavBar extends Component {
                   <button className="btn btn-outline-danger log" onClick={this.handleLogout}>LOG OUT</button>
                 </li>
               }
+
 
             </ul>
           </div>
