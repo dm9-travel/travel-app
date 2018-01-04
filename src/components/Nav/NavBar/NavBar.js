@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios'
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux'
-import { requestUser } from '../../../ducks/user_reducer';
+import { requestUser, getWatchlist } from '../../../ducks/user_reducer';
 import logo from './logo.svg';
 import './NavBar.css';
 
@@ -18,8 +18,9 @@ class NavBar extends Component {
     this.handleLogout = this.handleLogout.bind(this);
   }
 
-  handleLogin() {
+   handleLogin() {
     window.location.href = "http://localhost:3001/api/login";
+    this.props.getWatchlist(this.props.currentUser[0].user_id);
   }
 
   handleLogout() {
@@ -32,7 +33,9 @@ class NavBar extends Component {
     axios.get('/api/me').then((response) => {
     console.log(response.data[0].auth_id);
     this.setState({auth_id: response.data[0].auth_id})
-        })
+        });
+    
+    
   }
 
 
@@ -99,4 +102,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default withRouter(connect(mapStateToProps, { requestUser })(NavBar));
+export default withRouter(connect(mapStateToProps, { requestUser, getWatchlist })(NavBar));
