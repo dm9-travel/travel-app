@@ -42,7 +42,7 @@ export default function flights(state = initialState, action) {
       return Object.assign({}, state, {searchTerms: action.payload})
     case FILTER_FLIGHTS:
       {
-        var flightsCopy = [...state.filteredFlights];
+        var flightsCopy = [...state.flights];
         flightsCopy = flightsCopy.filter(flight => flight.destinationObj.CountryName == action.payload)
         return Object.assign({}, state, {filteredFlights: flightsCopy})
       }

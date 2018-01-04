@@ -26,6 +26,9 @@ class UpdateSearch extends Component {
     componentDidMount() {
         
     }
+    componentDidUpdate(){
+
+    }
     handleBudgetUpdate(val) {
         this.setState({
             budget: val
@@ -79,6 +82,7 @@ class UpdateSearch extends Component {
 
         if(flightProps.budget != this.state.budget) {
             this.props.getFlights(flightProps)
+            this.setState({budget: this.props.flights.searchTerms.budget})
         }
         else {
             this.props.unfilterFlights(this.props.flights.flights);
@@ -104,7 +108,7 @@ class UpdateSearch extends Component {
                 </select>
                 <Collapsible trigger="Select a new budget" >
                     <div className="priceSelector" >
-                        <input type="range" min="1" max="1000" className="slider" id="myRange" onChange={(e) => this.handleBudgetUpdate(e.target.value)} />
+                        <input type="range" min="1" max="1500" className="slider" id="myRange" ref={ref => this.budgetSelector} value={this.state.budget} onChange={(e) => this.handleBudgetUpdate(e.target.value)} />
                     </div>
                 </Collapsible>
                 <button onClick={this.handleSubmit} >Apply Filters</button>
