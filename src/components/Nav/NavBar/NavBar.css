@@ -1,8 +1,23 @@
 .logo {
   height: 25px;
   margin-right: 20px;
+  filter: invert(100%);
+}
+
+.dark-logo {
+  height: 25px;
+  margin-right: 20px;
+
+}
+
+.navbar {
+  padding: .3rem 1rem;
 }
 
 .navbar-brand {
   font-size: 1.6rem;
+}
+
+.navbar-dark {
+  background-color: #000;
 }
