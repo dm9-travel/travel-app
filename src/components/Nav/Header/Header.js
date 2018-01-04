@@ -55,7 +55,7 @@ class Header extends Component {
     return (
       <div className="jumbotron jumbotron-fluid bg-info" style={jumbotronStyle}>
         <NavBar />
-        <div className="container header-title">
+        <div className="container header-title d-flex align-items-center">
           <div className="w-80">
             <h1 className="display-3">Explore the World</h1>
             <p className="lead">This is a simple hero unit, a jumbotron component for calling extra attention to featured content.</p>

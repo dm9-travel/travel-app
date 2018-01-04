@@ -19,10 +19,24 @@
 }
 
 .header-title {
-  padding-top: 4rem;
+  /* border: 1px solid black; */
+  height: 100%;
 }
 
-.w-80 {
+.header-title .display-3 {
+  font-family: "northregular";
+  font-size: 4rem;
+  color: white;
+  text-shadow: -1px -px black;
+       -moz-text-fill-color: #fff;
+  -webkit-text-fill-color: #fff;
+     -moz-text-stroke-color: #000;
+  -webkit-text-stroke-color: #000;
+     -moz-text-stroke-width: 1px;  
+  -webkit-text-stroke-width: 1px;
+}
+
+.header-title .w-80 {
   width: 80%;
-  margin: 0 auto;
+  margin: -5rem auto 0;
 }
