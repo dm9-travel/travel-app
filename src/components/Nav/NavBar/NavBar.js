@@ -37,14 +37,16 @@ class NavBar extends Component {
   render() {
     let username = this.props.users.currentUser.user_name
     let navBarStyle = 'navbar sticky-top navbar-expand-lg navbar-light';
-    let containerType = 'container';
+    let containerType = 'container pl-0 pr-0';
     let greeting = username ? <h5>Welcome {this.props.users.currentUser.user_name}!</h5> : null
     let renderAuth = !username
+    let logoStyle = 'dark-logo';
 
 
     if (this.props.location.pathname !== '/') {
       containerType = 'container-fluid';
-      navBarStyle = 'navbar sticky-top navbar-expand-lg navbar-dark bg-dark';
+      navBarStyle = 'navbar sticky-top navbar-expand-lg navbar-dark';
+      logoStyle = 'logo'
     }
 
     // console.log(this.props.users.currentUser.user_name);
@@ -52,7 +54,7 @@ class NavBar extends Component {
     return (
       <nav className={navBarStyle}>
         <div className={containerType}>
-          <img src={logo} className="logo" alt="logo" />
+          <img src={logo} className={logoStyle} alt="logo" />
           <Link to="/" className="navbar-brand">Wayz</Link>
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
