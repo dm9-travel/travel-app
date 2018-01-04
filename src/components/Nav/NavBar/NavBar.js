@@ -27,23 +27,19 @@ class NavBar extends Component {
   }
 
   componentDidMount() {
-    this.props.requestUser()
+    if(!this.props.users.currentUser.auth_id){
+      this.props.requestUser()
+    }
 
-    axios.get('/api/me').then((response) => {
-    console.log(response.data[0].auth_id);
-    this.setState({auth_id: response.data[0].auth_id})
-        })
   }
 
 
   render() {
-   console.log(this.state.auth_id);
     let username = this.props.users.currentUser.user_name
     let navBarStyle = 'navbar sticky-top navbar-expand-lg navbar-light';
     let containerType = 'container';
     let greeting = username ? <h5>Welcome {this.props.users.currentUser.user_name}!</h5> : null
     let renderAuth = !username
-
 
 
     if (this.props.location.pathname !== '/') {
@@ -71,9 +67,10 @@ class NavBar extends Component {
                 <Link className="nav-link" to="/watchlist">Watchlist</Link>
               </li>
 
+
                 {renderAuth}
 
-                {this.state.auth_id === null
+                {!this.props.users.currentUser.auth_id
                 ?
                 <li className="nav-item">
                   <button className="btn btn-outline-primary log" onClick={this.handleLogin}>LOG IN</button>
@@ -84,6 +81,7 @@ class NavBar extends Component {
                   <button className="btn btn-outline-danger log" onClick={this.handleLogout}>LOG OUT</button>
                 </li>
               }
+
 
             </ul>
           </div>
