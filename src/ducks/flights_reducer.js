@@ -1,4 +1,5 @@
 import axios from "axios";
+import { stat } from "fs";
 
 //Action Constants
 
@@ -7,12 +8,17 @@ const SELECTED_FLIGHT = "SELECTED_FLIGHT";
 const ADD_TO_WATCHLIST = "ADD_TO_WATCHLIST";
 const SET_SEARCH_TERMS = "SET_SEARCH_TERMS";
 const FILTER_FLIGHTS = "FILTER_FLIGHTS";
+const FLIGHT_COORDS = "FLIGHT_COORDS";
+const UNFILTER = "UNFILTER"
 
 const initialState = {
   flights: [],
   selectedFlight: {},
   trips:[],
-  searchTerms: {}
+  searchTerms: {},
+  filteredFlights: [],
+  coords: [],
+
 };
 export default function flights(state = initialState, action) {
   switch (action.type) {
@@ -21,7 +27,8 @@ export default function flights(state = initialState, action) {
     case GET_FLIGHTS + "_FULFILLED":
       return Object.assign({}, state, {
         isLoading: false,
-        flights: action.payload
+        flights: action.payload,
+        filteredFlights: action.payload
       });
     case SELECTED_FLIGHT:
       return Object.assign({}, state, {
@@ -35,12 +42,28 @@ export default function flights(state = initialState, action) {
       return Object.assign({}, state, {searchTerms: action.payload})
     case FILTER_FLIGHTS:
       {
-        var flightsCopy = [...state.flights];
+        var flightsCopy = [...state.filteredFlights];
         flightsCopy = flightsCopy.filter(flight => flight.destinationObj.CountryName == action.payload)
-        return Object.assign({}, state, {flights: flightsCopy})
+        return Object.assign({}, state, {filteredFlights: flightsCopy})
       }
+    case FLIGHT_COORDS:
+      return Object.assign({}, state, {coords: action.payload})
+    case UNFILTER:
+      return Object.assign({}, state, {filteredFlights: action.payload})
     default:
       return state;
+  }
+}
+export function unfilterFlights(flights) {
+  return {
+    type: UNFILTER,
+    payload: flights
+  }
+}
+export function setCoords(coords) {
+  return {
+    type: FLIGHT_COORDS,
+    payload: coords
   }
 }
 export function filterFlights(country) {

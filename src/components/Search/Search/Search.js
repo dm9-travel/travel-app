@@ -40,11 +40,12 @@ class Search extends Component {
 
   async handleSubmit(event) {
     // alert("Values entered: " + JSON.stringify(this.state));
-    this.props.getFlights(this.state);
+    event.preventDefault();
+    this.props.getFlights(this.state).then(() => this.props.history.push('/searchResults'));
 
     this.props.setSearch(this.state);
     this.props.sendBudget(this.state.budget);
-    this.props.history.push('/searchResults');
+    
   }
 
   render() {
