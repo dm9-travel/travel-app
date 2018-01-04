@@ -8,7 +8,6 @@ import {Link, DirectLink, Element, Events, animateScroll as scroll, scrollSpy, s
 import { setInterval, setTimeout } from 'timers';
 import { log } from 'util';
 import index from 'axios';
-
 const google = window.google;
 
 class MapResults extends Component {
@@ -45,6 +44,7 @@ class MapResults extends Component {
 
      MapMethods.initMap.call(this, this.gmap, userLoc);
       //get lat lng for destinations of searchResults
+      
           let geocodePromises = []
           for (let i =0; i <10; i++) {
               geocodePromises.push( new Promise( (resolve, reject) => {
@@ -109,9 +109,12 @@ markers.push(marker);
 }
 
 
-    componentDidUpdate(prevProps, prevState) {
+
+async componentDidUpdate(prevProps, prevState) {
+    // MapMethods.coordinateCalculator.call(this, this.coords, this.props.flights.filteredFlights)
         var geocoder = new google.maps.Geocoder;
         var self = this;
+        
         if (this.props.flights.filteredFlights != prevProps.flights.filteredFlights){
             var markersCopy = this.state.markers.map((cur, ind) => {
                 if(!this.props.flights.filteredFlights.find((x) => x.QuoteId == cur.id)) {
@@ -125,18 +128,80 @@ markers.push(marker);
                 
             })
         this.setState({markers: markersCopy})
+        var flightsData = this.props.flights.filteredFlights
+        let geocodePromises = []
+          for (let i =0; i <flightsData.length; i++) {
+              geocodePromises.push( new Promise( (resolve, reject) => {
+                  geocoder.geocode({'address': `${flightsData[i].destinationObj.CityName}, ${flightsData[i].destinationObj.CountryName} `}, function(results, status) {
+                  if(status === 'OK') { 
+                      let obj =  results[0].geometry.location            
+                      obj.id = flightsData[i].QuoteId;
+                      obj.destinationObj = flightsData[i].destinationObj;
+                      obj.MinPrice = flightsData[i].MinPrice;
+                      resolve(obj)
+                  } else {
+                      console.log(status)
+                  }
+              }) 
+              }) 
+          )}
+
+        
+
+        self.coords = await Promise.all(geocodePromises)
+        
+    var geocoder = new google.maps.Geocoder;
+    var scrollevents = scroller;
+    var markers = [];
+
+    self.coords.forEach((cur, ind) => {
+        var marker = new google.maps.Marker({
+        map: self.map,
+        position: {lat: cur.lat(), lng: cur.lng()},
+        animation: google.maps.Animation.DROP,
+        id: cur.id
+    });
+
+    var infowindow = new google.maps.InfoWindow;
+    var infowindowContent = (
+        `<div class="infowindow">
+            Fly to <span class="text-bold" >${cur.destinationObj.Name}</span> for just <span class="text-bold" >$</span><span class="text-bold" >${cur.MinPrice}</span>
+        </div>`
+    )
+
+    infowindow.setContent(infowindowContent);
+    marker.addListener( 'mouseover', function(){
+        infowindow.open(self.map, marker)
+    })
+    marker.addListener('mouseout', function() {
+        infowindow.close(self.map, marker)
+    })
+    marker.addListener('click', function() {
+        scrollevents.scrollTo(`flight:${marker.id}`, {
+            duration:800,
+            delay: 0,
+            smooth: true,
+            containerId: 'results-view',
+            offset: -100
+        })
+})
+
+markers.push(marker);
+})
     }
     
-        if (this.props.flights.coords.length ) {
-            var flightsData = this.props.flights.filteredFlights;
-            var self = this;
-            var geocoder = new google.maps.Geocoder;
-            var scrollevents = scroller;
+    //     if (this.props.flights.coords.length ) {
+    //         var flightsData = this.props.flights.filteredFlights;
+    //         var self = this;
+    //         var geocoder = new google.maps.Geocoder;
+    //         var scrollevents = scroller;
             
-    }
-        this.markers.forEach((cur, ind) => cur.setMap(self.map))
-        console.log(this.markers)
+    // }
+    //     this.markers.forEach((cur, ind) => cur.setMap(self.map))
+    //     console.log(this.markers)
+
 }
+
     componentWillUnmount() {
         Events.scrollEvent.remove('begin');
         Events.scrollEvent.remove('end');
