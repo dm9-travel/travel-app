@@ -4,8 +4,10 @@ const cors = require("cors");
 const session = require("express-session");
 const massive = require("massive");
 const passport = require("passport");
+
 const Auth0Strategy = require("passport-auth0");
 const app = express();
+
 
 require("dotenv").config();
 
@@ -102,7 +104,8 @@ const flightCtrl = require("./controllers/flights_controller");
 app.post("/api/getFlights", flightCtrl.Get_Flights);
 app.get("/api/getWatchlist/:id", userCtrl.Get_Watchlist);
 app.get("/api/getImages/:id", flightCtrl.Get_Images);
-
+//get coordinates from results
+app.post('/api/getLocations', flightCtrl.getLocations);
 app.post("/api/getQuote",flightCtrl.Get_Quote);
 app.post("/api/addTrip",flightCtrl.Add_Trip);
 
