@@ -95,6 +95,9 @@ ul {
 .text-bold {
     font-weight: bold;
 }
+.active {
+  background: blue; 
+}
 
 @media (min-width: 576px) {
   .card-columns {

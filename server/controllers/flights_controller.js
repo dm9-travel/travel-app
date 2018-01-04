@@ -50,7 +50,7 @@ module.exports = {
           })
         );
       })
-      .catch(err => res.send(err.response.data));
+      .catch(err => res.status(500).send(err.response.data));
   },
   Get_Quote: (req, res, next)=>{
       const {
@@ -137,21 +137,22 @@ module.exports = {
             .catch(err => res.status(500).send(err.response.data));
         },
   Get_Images: (req, res, next) => {
-    console.log("hitter");
+    // console.log("hitter");
     const { params } = req;
-    console.log("params", params.id);
-
-    axios
-      .get(
-        `https://pixabay.com/api/?key=${pixKey}&q=${
-          params.id
-        }&image_type=photo&orientation=horizontal&category=places&pretty=true`
-      )
-      .then(response => {
-        console.log(response);
-        res.status(200).send(response.data.hits[0].webformatURL);
-      })
-      .catch(err => console.log(err));
+    // console.log("params", params.id);
+    console.log('got images')
+    res.status(200).send("gotimages")
+    // axios
+    //   .get(
+    //     `https://pixabay.com/api/?key=${pixKey}&q=${
+    //       params.id
+    //     }&image_type=photo&orientation=horizontal&category=places&pretty=true`
+    //   )
+    //   .then(response => {
+    //     // console.log(response);
+    //     res.status(200).send(response.data.hits[0].webformatURL);
+    //   })
+    //   .catch(err => console.log(err));
   },
   Add_Trip:(req,res,next)=>{
     const { 
