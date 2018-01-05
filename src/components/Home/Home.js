@@ -16,16 +16,16 @@ class Home extends Component {
     };
   }
   async componentDidMount() {
-    // await axios
-    //   .get("/api/me")
-    //   .then(response => {
-    //     if (response) {
-    //       this.setState({ user: response.data[0] });
-    //     }
-    //   })
-    //   .catch(err => err);
+    await axios
+      .get("/api/me")
+      .then(response => {
+        if (response) {
+          this.setState({ user: response.data[0] });
+        }
+      })
+      .catch(err => err);
 
-    // this.props.lockUser(this.state.user);
+    this.props.lockUser(this.state.user);
   }
   render() {
     return (

@@ -38,5 +38,10 @@
 
 .header-title .w-80 {
   width: 80%;
-  margin: -5rem auto 0;
+  /* margin: -5rem auto 0; */
+  
+}
+
+.w-80 {
+  margin: 0 auto;
 }
