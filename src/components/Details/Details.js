@@ -35,7 +35,6 @@ class Details extends Component {
           buttonState: true
         })
       );
-    // this.setState({ buttonState: true });
   }
   handleRemove() {
     this.props
@@ -43,10 +42,11 @@ class Details extends Component {
       .then(this.setState({ buttonState: false }));
   }
   componentDidMount() {
-    if (this.props.users.currentUser[0]) {
+    if (this.props.users.currentUser) {
+      console.log("hello here");
       this.setState({
         listItem: {
-          user_id: this.props.users.currentUser[0].user_id,
+          user_id: this.props.users.currentUser.user_id,
           country: this.props.flights.selectedFlight.countryName,
           currency: this.props.flights.searchTerms.currency,
           locale: this.props.flights.searchTerms.locale,
@@ -104,10 +104,10 @@ class Details extends Component {
             <h1 className="display-4 text-white">${price}</h1>
 
             <div className="row mt-3">
-              {!this.state.buttonState && <button type="button" class="btn btn-primary btn-lg mr-3" onClick={this.handleClick}>
+              {!this.state.buttonState && <button type="button" className="btn btn-primary btn-lg mr-3" onClick={this.handleClick}>
                 Add To Watchlist
                 </button>}
-              {this.state.buttonState && <button type="button" class="btn btn-primary btn-lg mr-3" onClick={this.handleRemove}>
+              {this.state.buttonState && <button type="button" className="btn btn-primary btn-lg mr-3" onClick={this.handleRemove}>
                 Remove From Watchlist
                 </button>}
               <button type="button" className="btn btn-primary btn-lg ml-3" onClick={this.bookFlight}>
