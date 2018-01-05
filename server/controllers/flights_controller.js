@@ -197,10 +197,10 @@ module.exports = {
      
    },
    Delete_Trip:(req,res,next)=>{
-     const tripId = req.params.id;
-     const dbInstance = req.app.get("db");
-     dbInstance
-        .delete_trip([tripId])
+    const dbInstance = req.app.get("db");
+    const { tripId, userId } = req.body;
+    dbInstance
+        .delete_trip([tripId,userId])
         .then(trip => res.status(200).send(trip));
    }
 };

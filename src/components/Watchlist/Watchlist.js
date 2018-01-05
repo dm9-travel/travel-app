@@ -10,7 +10,6 @@ class Watchlist extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      trips: [],
       index: 0,
       fireRedirect: false
     };
@@ -21,26 +20,28 @@ class Watchlist extends Component {
   }
   componentDidMount(props) {
     this.props
-      .getWatchlist(this.props.users.currentUser.user_id)
-      .then(trips => {
-        this.setState({ trips: trips.value });
-      });
+      .getWatchlist(this.props.users.currentUser.user_id);
+
     if (!this.props.users.currentUser.user_id) {
-      console.log("Zach Rocks");
       alert("login to create a watch list!")
       this.handleLogin();
     }
   }
 
+
+
   render() {
-    this.state.fireRedirect ? this.handleLogin : console.log("No");
+    //Redirect if user is not logged in
+    this.state.fireRedirect ? this.handleLogin : this.state.index;
+
+
+
     return (
       <div>
         <NavBar />
         <div className="d.flex flex-row justify-content-center bg-white">
           <h3 className="display-3">My Trips</h3>
-          {this.state.trips[0] &&
-            this.state.trips.map(trip => (
+            {this.props.users.watchlist.map(trip => (
               <Trip
                 key={trip.trip_id}
                 tripId={trip.trip_id}
@@ -55,8 +56,7 @@ class Watchlist extends Component {
                 watchlistUpdate={i =>
                   this.setState({ index: this.state.index + i })
                 }
-              />
-            ))}
+            />))}
         </div>
       </div>
     );

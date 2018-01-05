@@ -35,21 +35,22 @@ export default function users(state = initialState, action) {
         isLoading: false,
         userLocation: action.payload
       });
-
-    case GET_WATCHLIST:
+    case GET_WATCHLIST + "_PENDING":
+      return Object.assign({}, state, { isLoading: true });
+    case GET_WATCHLIST + "_FULFILLED":
       return Object.assign({}, state, { watchlist: action.payload });
-    case DEL_TRIP:
-      return Object.assign({},state,{ watchlist:action.payload });
+    case DEL_TRIP + "_PENDING":
+      return Object.assign({},state,{isLoading: true});
+    case DEL_TRIP + "_FULFILLED":
+      return Object.assign({}, state, { watchlist: action.payload });
     case LOCK_USER:
       return Object.assign({}, state, { currentUser: action.payload });
     case LOGOUT:
-      return Object.assign({}, state, {
-        currentUser: action.payload
-      });
+      return Object.assign({}, state, { currentUser: action.payload });
     case SEND_BUDGET:
-      return Object.assign({}, state, {budget: action.payload});
+      return Object.assign({}, state, { budget: action.payload });
     case GET_WATCHLIST:
-      return Object.assign({}, state, {watchlist: action.payload});
+      return Object.assign({}, state, { watchlist: action.payload });
     default:
       return state;
   }
@@ -58,7 +59,7 @@ export default function users(state = initialState, action) {
 export function requestUser() {
   return {
     type: REQ_USER,
-    payload: axios.get("/api/me").then(response => {console.log(response.data); return response.data})
+    payload: axios.get("/api/me").then(response => response.data)
   };
 }
 export function getWatchlist(user_id) {
@@ -72,14 +73,13 @@ export function getWatchlist(user_id) {
       .catch(err => err)
   };
 }
-export function deleteTrip(trip_id){
-  return{
-    type:DEL_TRIP,
+export function deleteTrip(tripBody){
+  return { 
+    type: DEL_TRIP, 
     payload: axios
-    .delete(`/api/trip/${trip_id}`)
-    .then(response => response.data)
-    .catch(err => err)
-  }
+      .put(`/api/deleteTrip`, tripBody)
+      .then(response => {return response.data})
+      .catch(err => err) };
 }
 export function getLocation(location) {
   return {

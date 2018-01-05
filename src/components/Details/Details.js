@@ -32,7 +32,6 @@ class Details extends Component {
           buttonState: true
         })
       );
-    // this.setState({ buttonState: true });
   }
   handleRemove(){
     this.props
@@ -41,6 +40,7 @@ class Details extends Component {
   }
   componentDidMount(){
     if (this.props.users.currentUser[0]){
+      
       this.setState({
         listItem: {
           user_id: this.props.users.currentUser[0].user_id,
@@ -59,10 +59,7 @@ class Details extends Component {
   }
   bookFlight(){
     var redirector = `http://partners.api.skyscanner.net/apiservices/referral/v1.0/US/USD/en-US/${this.props.users.userLocation.airport.PlaceId}/${this.props.flights.selectedFlight.IATAcode}/${moment(this.props.flights.selectedFlight.outboundDate).format('YYYY-MM-DD')}/${moment(this.props.flights.searchTerms.inboundPartialDate).format('YYYY-MM-DD')}?apiKey=so91596320528724`;
-    console.log(redirector);
-
     window.location.href= redirector;
-
   }
 
   render() {
@@ -94,10 +91,10 @@ class Details extends Component {
               <span>{IATAcode}</span>
             </h1>
             <h1 className="display-6 text-white">${price}</h1>
-            {!this.state.buttonState && <button type="button" class="btn btn-success" onClick={this.handleClick}>
+            {!this.state.buttonState && <button type="button" className="btn btn-success" onClick={this.handleClick}>
                 Add To Watchlist
               </button>}
-            {this.state.buttonState && <button type="button" class="btn btn-danger" onClick={this.handleRemove}>
+            {this.state.buttonState && <button type="button" className="btn btn-danger" onClick={this.handleRemove}>
                 Remove From Watchlist
               </button>}
             <button type="button" className="btn btn-success" onClick={this.bookFlight}>
