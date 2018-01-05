@@ -11,52 +11,56 @@ class Popular extends Component {
     constructor(props){
         super(props);
         this.state={
-            budget:750
+            budget:1000
         };
         this.updateRange=this.updateRange.bind(this);
     }
     updateRange(e){
         this.setState({budget:parseInt(e.target.value)})
     }
-    render() {
-        let popularDestination = [{ key: 1, city: "London", destination: "LON", image: "https://images.unsplash.com/photo-1494922275507-58dc039ed337" }, { key: 2, city: "Paris", destination: "PAR", image: "https://images.unsplash.com/photo-1503917988258-f87a78e3c995?auto=format&fit=crop&w=334&q=80" }, { key: 3, city: "Rome", destination: "ROM", image: "https://images.unsplash.com/photo-1503970999490-4404449dc349?auto=format&fit=crop&w=669&q=80" }, { key: 4, city: "Buenos Aires", destination: "BUE", image: "https://images.unsplash.com/photo-1493837417577-baec364a53eb?auto=format&fit=crop&w=667&q=80" }, { key: 5, city: "Cape Town", destination: "CPT", image: "https://images.unsplash.com/photo-1495492429145-2c82ff875f67?auto=format&fit=crop&w=747&q=80" }, { key: 6, city: "New York City", destination: "NYC", image: "https://images.unsplash.com/photo-1503179008861-d1e2b41f8bec?auto=format&fit=crop&w=749&q=80" }, { key: 7, city: "Bangkok", destination: "BKK", image: "https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=647&q=80" }, { key: 8, city: "Hong Kong", destination: "HKG", image: "https://images.unsplash.com/photo-1506970845246-18f21d533b20?auto=format&fit=crop&w=750&q=80" }, { key: 9, city: "Sydney", destination: "SYD", image: "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=750&q=80" }, { key: 10, city: "Grand Cayman", destination: "GCM", image: "https://images.unsplash.com/photo-1502208327471-d5dde4d78995?auto=format&fit=crop&w=750&q=80" }];
-
-        let destinationArray = popularDestination.sort((a,b)=> b-a).map(
-          i => (
-            <PopularCard
-              key={i.key}
-              city={i.city}
-              destination={i.destination}
-              budget={this.state.budget}
-              image={i.image}
-            />
-          )
-        );
-
-        
-        return(
-        <section className="container-fluid">
-            <div className="row d-flex justify-content-center">
-              <h1>Popular Destination under ${this.state.budget}</h1>
-            </div>
-            <div className="row d-flex justify-content-center py-3">
-                <h5 className="mr-4">Update budget</h5>
-                <input 
-                    id="range" 
-                    type="range"
-                    min={100}
-                    max={1000}
-                    step={25}
-                    value={this.state.budget}
-                    onChange={this.updateRange}
-                    />
+    render() {  
+        return (
+        <section className="container">
+            <div className="row pt-5 pb-4">
+              <div className="w-80">
+                <h1 className="display-6">Explore the World</h1>
+                <p className="lead">
+                  This is a simple hero unit, a jumbotron component for
+                  calling extra attention to featured content.
+                </p>
+              </div>
             </div>
             <div className="row">
-                {destinationArray}
+              <div className="col-sm-7 pl-0">
+                <PopularCard city={"New York"} destination={"NYC"} budget={this.state.budget} image={"https://images.unsplash.com/photo-1479660095429-2cf4e1360472?auto=format&fit=crop&w=951&q=80"} />
+              </div>
+              <div className="col-sm-5 pl-0 pr-0">
+                <PopularCard city={"Paris"} destination={"PAR"} budget={this.state.budget} image={"https://images.unsplash.com/photo-1478391679764-b2d8b3cd1e94?auto=format&fit=crop&w=950&q=80"} />
+              </div>
             </div>
-        </section>
-    );
-    }
+            <div className="row mt-3">
+              <div className="col-sm-4 pl-0">
+                <PopularCard city={"Tokyo"} destination={"HND"} budget={this.state.budget} image={"https://images.unsplash.com/photo-1493780474015-ba834fd0ce2f?auto=format&fit=crop&w=926&q=80"} />
+              </div>
+              <div className="col-sm-4 pl-0">
+                <PopularCard city={"Rome"} destination={"ROM"} budget={this.state.budget} image={"https://images.unsplash.com/photo-1504802309034-73ef35653660?auto=format&fit=crop&w=767&q=80"} />
+              </div>
+              <div className="col-sm-4 pl-0">
+                <PopularCard city={"Shanghai"} destination={"PVG"} budget={this.state.budget} image={"https://images.unsplash.com/photo-1474181487882-5abf3f0ba6c2?auto=format&fit=crop&w=950&q=80"} />
+              </div>
+            </div>
+            <div className="row mt-3">
+              {/* Los Angeles Card */}
+              <div className="col-sm-6 pl-0">
+                <PopularCard city={"Los Angeles"} destination={"LAX"} budget={this.state.budget} image={"https://images.unsplash.com/photo-1444723121867-7a241cacace9?auto=format&fit=crop&w=1650&q=80"} />
+              </div>
+              {/* London Card  */}
+              <div className="col-sm-6 pl-0 pr-0">
+                <PopularCard city={"London"} destination={"LON"} budget={this.state.budget} image={"https://images.unsplash.com/photo-1454537468202-b7ff71d51c2e?auto=format&fit=crop&w=1049&q=80"} />
+              </div>
+            </div>
+      </section>
+      )}
 }
 const mapStateToProps = state => state;
 export default withRouter(connect(mapStateToProps, { getFlights, setSearch, sendBudget })(Popular));
