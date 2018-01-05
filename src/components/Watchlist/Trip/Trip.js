@@ -35,7 +35,7 @@ class Trip extends Component {
     handleClick() {
     this.props.deleteTrip(
         {tripId:this.props.tripId,
-        userId:this.props.users.currentUser[0].user_id}
+        userId:this.props.users.currentUser.user_id}
     );
     this.props.watchlistUpdate(7);
     }
