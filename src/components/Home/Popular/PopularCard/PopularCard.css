@@ -1,0 +1,14 @@
+.card-price{
+    color:white;
+    text-align: center;
+    position: absolute;
+    right: 0.5rem;
+    top: 0.5rem;
+    width:7.5rem;
+    padding: 0.5rem;
+    border-radius: 5px;  
+}
+.card{
+  border-radius: 5px;
+  margin-bottom: 2rem !important;
+}

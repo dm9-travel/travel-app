@@ -15,7 +15,6 @@ class Trip extends Component {
     }
 
     componentDidMount(){
-        console.log("trip id:",this.props.tripId);
         let tripBody = { 
             country: this.props.country, 
             currency: this.props.currency, 
@@ -30,12 +29,14 @@ class Trip extends Component {
           .post("http://localhost:3001/api/getQuote", tripBody)
           .then(response => {
             if(response){
-            console.log("quote:", response.data);
             this.setState({ quotes: response.data });
           }});
     }
     handleClick() {
-    this.props.deleteTrip(this.props.tripId);
+    this.props.deleteTrip(
+        {tripId:this.props.tripId,
+        userId:this.props.users.currentUser[0].user_id}
+    );
     this.props.watchlistUpdate(7);
     }
     render() {

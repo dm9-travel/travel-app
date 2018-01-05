@@ -35,7 +35,6 @@ class Details extends Component {
           buttonState: true
         })
       );
-    // this.setState({ buttonState: true });
   }
   handleRemove() {
     this.props
