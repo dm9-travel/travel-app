@@ -7,7 +7,6 @@ import { lockUser } from "../../ducks/user_reducer.js";
 import { Link, withRouter } from "react-router-dom";
 
 import { connect } from "react-redux";
-import Popular from "./Popular/Popular";
 
 class Home extends Component {
   constructor(props) {

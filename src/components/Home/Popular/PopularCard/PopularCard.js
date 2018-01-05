@@ -12,16 +12,6 @@ class PopularCard extends Component {
     constructor(props){
         super(props);
         this.state = { 
-        //     search:{
-        //         country: "US", 
-        //         currency: "USD", 
-        //         locale: "en-US", 
-        //         originPlace: "DFW",//this.props.users.userLocation.airport.PlaceName, 
-        //         destinationPlace: this.props.destination, 
-        //         outboundPartialDate: moment().format("YYYY-MM"), 
-        //         inboundPartialDate: "", 
-        //         budget: this.props.budget 
-        // },
         price:0,
         flightList:[]
         };
@@ -29,7 +19,7 @@ class PopularCard extends Component {
                 country: "US", 
                 currency: "USD", 
                 locale: "en-US", 
-                originPlace: this.props.users.userLocation.airport.PlaceName, 
+                originPlace: "DFW", 
                 destinationPlace: this.props.destination, 
                 outboundPartialDate: moment().format("YYYY-MM"), 
                 inboundPartialDate: "", 
