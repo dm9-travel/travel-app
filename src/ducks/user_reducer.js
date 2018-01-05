@@ -12,11 +12,7 @@ const DEL_TRIP = "DEL_TRIP";
 const initialState = {
   currentUser: {},
   watchlist: [],
-  userLocation: {
-    airport: {
-      PlaceName: "DFW"
-    }
-  },
+  userLocation: {},
   budget: null
 };
 
@@ -59,7 +55,13 @@ export default function users(state = initialState, action) {
 export function requestUser() {
   return {
     type: REQ_USER,
+<<<<<<< HEAD
     payload: axios.get("/api/me").then(response => response.data)
+=======
+    payload: axios.get("/api/me").then(response => {
+              // console.log(response.data); 
+              return response.data})
+>>>>>>> master
   };
 }
 export function getWatchlist(user_id) {

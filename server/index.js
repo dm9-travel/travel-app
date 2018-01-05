@@ -55,12 +55,13 @@ passport.use(
               .create_user_by_auth_id([
                 profile.id,
                 profile.displayName,
-                profile.email
+                profile.email,
+                profile.picture
               ])
               .then(created => {
                 return done(null, created[0]);
               });
-            
+
           } else {
             return done(null, response[0]);
           }
@@ -87,8 +88,8 @@ app.get("/api/logout", function(req, res) {
 });
 
 app.get("/api/me", function(req, res) {
-  
-  if (!req.user) return res.status(404);
+
+  if (!req.user) return res.status(404).send();
 
   req.app
     .get("db")

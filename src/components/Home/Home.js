@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import ResultsView from "./../Search/SearchResults/ResultsView/ResultsView";
 import Header from "./../Nav/Header/Header";
+import Popular from "../Home/Popular/Popular";
 import axios from "axios";
 import { lockUser } from "../../ducks/user_reducer.js";
 import { Link, withRouter } from "react-router-dom";
@@ -31,12 +32,7 @@ class Home extends Component {
     return (
       <div className="homePage">
         <Header />
-        <div>
-          {/* <Link to="/searchResults">
-            <button>Search results</button>
-          </Link> */}
-          <Popular/>
-        </div>
+        <Popular />
       </div>
     );
   }

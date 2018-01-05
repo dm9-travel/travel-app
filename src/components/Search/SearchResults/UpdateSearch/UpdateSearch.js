@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Collapsible from 'react-collapsible';
 import {connect} from 'react-redux';
-import flights, {getFlights, filterFlights} from './../../../../ducks/flights_reducer';
+import flights, {getFlights, filterFlights, unfilterFlights} from './../../../../ducks/flights_reducer';
 
 import './UpdateSearch.css';
 const countries = require('./Countries.json');
@@ -21,9 +21,13 @@ class UpdateSearch extends Component {
         this.handleBudgetUpdate = this.handleBudgetUpdate.bind(this);
         this.handleCountrySelect = this.handleCountrySelect.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleClear = this.handleClear.bind(this)
     }
     componentDidMount() {
         
+    }
+    componentDidUpdate(){
+
     }
     handleBudgetUpdate(val) {
         this.setState({
@@ -71,6 +75,19 @@ class UpdateSearch extends Component {
         }
 
     }
+    handleClear() {
+        var flightProps = this.props.flights.searchTerms;
+        var countriesList = countries;
+        var selectedCountry = countriesList.find(x => x.name == this.state.destinationPlace)
+
+        if(flightProps.budget != this.state.budget) {
+            this.props.getFlights(flightProps)
+            this.setState({budget: this.props.flights.searchTerms.budget})
+        }
+        else {
+            this.props.unfilterFlights(this.props.flights.flights);
+        }
+    }
     // handleUpdateSearch() {
     //     this.setState({
     //         destinationPlace: "Anywhere"
@@ -91,18 +108,18 @@ class UpdateSearch extends Component {
                 </select>
                 <Collapsible trigger="Select a new budget" >
                     <div className="priceSelector" >
-                        <input type="range" min="1" max="1000" className="slider" id="myRange" onChange={(e) => this.handleBudgetUpdate(e.target.value)} />
+                        <input type="range" min="1" max="1500" className="slider" id="myRange" ref={ref => this.budgetSelector} value={this.state.budget} onChange={(e) => this.handleBudgetUpdate(e.target.value)} />
                     </div>
                 </Collapsible>
                 <button onClick={this.handleSubmit} >Apply Filters</button>
-                <button onClick={() => this.props.getFlights(this.props.flights.searchTerms)} >Clear Filters</button>
+                <button onClick={this.handleClear} >Clear Filters</button>
                
             </div>
         )
     }
 }
 const mapStateToProps = state => state;
-export default connect(mapStateToProps, {getFlights, filterFlights})(UpdateSearch);
+export default connect(mapStateToProps, {getFlights, filterFlights, unfilterFlights})(UpdateSearch);
 
 // country: "US",
 //       currency: "USD",
