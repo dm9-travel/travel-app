@@ -60,25 +60,38 @@ class PopularCard extends Component {
     }
     render() {
 
-        return ( 
-        <div className="col-12 col-sm-6 col-md-4">
-            <div className="card">
-                <img className="card-img-top" src={this.props.image} alt="Card image cap" />
+        return (
+          // <div className="col-12 col-sm-6 col-md-4">
+          //     <div className="card">
+          //         <img className="card-img-top" src={this.props.image} alt="Card image cap" />
+          //         {this.state.flightList.length > 0 ?
+          //             <button className="btn btn-warning btn-lg btn-block card-price" onClick={this.handleSubmit}>
+          //                 See Flights
+          //             </button> :
+          //             <button className="btn btn-danger btn-lg btn-block card-price">
+          //                 No Flights
+          //             </button>}
+          //         <div className="card-body d-flex flex-column flex-wrap align-items-start">
+          //         <span>Dallas-Fort Worth to {this.props.city}</span>
+          //         {this.state.flightList.length > 0 ?
+          //             <span>Flights starting at ${this.state.price}</span> :
+          //             <span>No flights at this budget for{moment().format("MMMM")}</span>}
+          //         </div>
+          //     </div>
+          // </div>
+          <div className="card bg-dark text-white h-100">
+            <img className="card-img" src={this.props.image} alt="Card image" />
+            <div className="card-img-overlay d-flex flex-column flex-wrap justify-content-center align-items-center">
+              <h1 className="card-title text-left">{this.props.city}</h1>
                 {this.state.flightList.length > 0 ?
-                    <button className="btn btn-warning btn-lg btn-block card-price" onClick={this.handleSubmit}>
+                    <button className="btn btn-warning btn-block custom-button" onClick={this.handleSubmit}>
                         See Flights
-                    </button> : 
-                    <button className="btn btn-danger btn-lg btn-block card-price">
+                    </button> :
+                    <button className="btn btn-danger btn-block custom-button ">
                         No Flights
                     </button>}
-                <div className="card-body d-flex flex-column flex-wrap align-items-start">
-                <span>Dallas-Fort Worth to {this.props.city}</span>
-                {this.state.flightList.length > 0 ? 
-                    <span>Flights starting at ${this.state.price}</span> : 
-                    <span>No flights at this budget for{moment().format("MMMM")}</span>}
-                </div>
             </div>
-        </div> 
+          </div>
         );
     }
 }

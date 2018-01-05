@@ -19,22 +19,28 @@ class Details extends Component {
       listItem: {},
       buttonState: false,
       tripId: null,
-      redirect: '',
-    }
+      redirect: ""
+    };
     this.handleClick = this.handleClick.bind(this);
     this.handleRemove = this.handleRemove.bind(this);
     this.bookFlight = this.bookFlight.bind(this);
-
+    this.handleLogin = this.handleLogin.bind(this);
+  }
+  handleLogin() {
+    window.location.href = "http://localhost:3001/api/login";
   }
   handleClick() {
-    this.props
-      .addToWatchlist(this.state.listItem)
-      .then(trip =>
+    if (!this.props.users.currentUser.user_id) {
+      alert("login to create a watch list!");
+      this.handleLogin();
+    } else {
+      this.props.addToWatchlist(this.state.listItem).then(trip =>
         this.setState({
           tripId: trip.value.data[0].trip_id,
           buttonState: true
         })
       );
+    }
   }
   handleRemove() {
     this.props
@@ -57,12 +63,17 @@ class Details extends Component {
           budget: this.props.users.budget
         }
       });
-    };
-
+    }
   }
 
   bookFlight() {
-    var redirector = `http://partners.api.skyscanner.net/apiservices/referral/v1.0/US/USD/en-US/${this.props.users.userLocation.airport.PlaceId}/${this.props.flights.selectedFlight.IATAcode}/${moment(this.props.flights.selectedFlight.outboundDate).format('YYYY-MM-DD')}/${moment(this.props.flights.searchTerms.inboundPartialDate).format('YYYY-MM-DD')}?apiKey=so91596320528724`;
+    var redirector = `http://partners.api.skyscanner.net/apiservices/referral/v1.0/US/USD/en-US/${
+      this.props.users.userLocation.airport.PlaceId
+    }/${this.props.flights.selectedFlight.IATAcode}/${moment(
+      this.props.flights.selectedFlight.outboundDate
+    ).format("YYYY-MM-DD")}/${moment(
+      this.props.flights.searchTerms.inboundPartialDate
+    ).format("YYYY-MM-DD")}?apiKey=so91596320528724`;
     // console.log(redirector);
 
     window.location.href = redirector;
@@ -87,7 +98,7 @@ class Details extends Component {
     } = this.props.flights.selectedFlight;
 
     const jumbotronStyle = {
-      backgroundImage: 'url(' + imageUrl + ')'
+      backgroundImage: "url(" + imageUrl + ")"
     };
 
     return (
@@ -95,27 +106,48 @@ class Details extends Component {
         <NavBar />
 
         <div className="details-main">
-          <header className="d-flex flex-column justify-content-center align-items-center details-jumbotron" style={jumbotronStyle}>
+          <header
+            className="d-flex flex-column justify-content-center align-items-center details-jumbotron"
+            style={jumbotronStyle}
+          >
             <h1 className="flight-info display-3 text-white">
-              <span>{'DFW' || this.state.listItem.origin}</span>
-              <i className="fa fa-arrow-right animated shake" aria-hidden="true" />
+              <span>{"DFW" || this.state.listItem.origin}</span>
+              <i
+                className="fa fa-arrow-right animated shake"
+                aria-hidden="true"
+              />
               <span>{IATAcode}</span>
             </h1>
             <h1 className="display-4 text-white">${price}</h1>
 
             <div className="row mt-3">
-              {!this.state.buttonState && <button type="button" className="btn btn-primary btn-lg mr-3" onClick={this.handleClick}>
-                Add To Watchlist
-                </button>}
-              {this.state.buttonState && <button type="button" className="btn btn-primary btn-lg mr-3" onClick={this.handleRemove}>
-                Remove From Watchlist
-                </button>}
-              <button type="button" className="btn btn-primary btn-lg ml-3" onClick={this.bookFlight}>
+              {!this.state.buttonState && (
+                <button
+                  type="button"
+                  className="btn btn-primary btn-lg mr-3"
+                  onClick={this.handleClick}
+                >
+                  Add To Watchlist
+                </button>
+              )}
+              {this.state.buttonState && (
+                <button
+                  type="button"
+                  className="btn btn-primary btn-lg mr-3"
+                  onClick={this.handleRemove}
+                >
+                  Remove From Watchlist
+                </button>
+              )}
+              <button
+                type="button"
+                className="btn btn-primary btn-lg ml-3"
+                onClick={this.bookFlight}
+              >
                 Book Now!
               </button>
             </div>
           </header>
-
 
           <div className="container flight-details">
             <div className="row">
@@ -136,7 +168,10 @@ class Details extends Component {
                       </div>
                     </div>
                     <div className="d-flex flex-row w-50 justify-content-start">
-                      <i className="fa fa-plane fa-3x fa-rotate-90" aria-hidden="true" />
+                      <i
+                        className="fa fa-plane fa-3x fa-rotate-90"
+                        aria-hidden="true"
+                      />
                       <div className="some-margin  d-flex flex-column align-items-start">
                         <h6>To</h6>
                         <h4>{cityName}</h4>
@@ -144,11 +179,15 @@ class Details extends Component {
                     </div>
                     <div className="d-flex flex-row w-100 justify-content-start flex-wrap">
                       <div className="d-flex flex-row w-50 justify-content-start flex-wrap">
-                        <i className="fa fa-calendar fa-3x" aria-hidden="true" />
+                        <i
+                          className="fa fa-calendar fa-3x"
+                          aria-hidden="true"
+                        />
                         <div className="d-flex flex-column align-items-start some-margin">
                           <h6>Departing</h6>
                           <h4>
-                            {moment(outboundDate).format("ddd, MMMM Do")} at {moment("2013-02-08T" + time).format("h:mm a")}
+                            {moment(outboundDate).format("ddd, MMMM Do")} at{" "}
+                            {moment("2013-02-08T" + time).format("h:mm a")}
                           </h4>
                         </div>
                       </div>
@@ -163,13 +202,8 @@ class Details extends Component {
                   </div>
                 </div>
               </div>
-
-
-
-
             </div>
           </div>
-
         </div>
       </div>
     );
