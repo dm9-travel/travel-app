@@ -51,16 +51,19 @@ ul {
 } */
 
 #results-view {
-  /* background-color: greenyellow; */
+  font-family: 'Lato', sans-serif;
   padding-top: 80px;
   height: 100%;
   top: 0px;
   bottom: 0px;
   left: 0px;
   width: 50%;
-  position: absolute;
-  
+  position: absolute; 
   overflow-y: scroll;
+}
+
+#results-view > h6 {
+  margin-bottom: 1rem;
 }
 
 #map-view {
@@ -75,9 +78,9 @@ ul {
 }
 
 .filters {
-  border: 5px solid #000;
+  /* border: 5px solid #000; */
   height: auto;
-  margin: 0 0 1em 0;
+  margin: 0 0 0.25rem 0;
   overflow-x: scroll;
   display: flex;
   flex-direction: column;
@@ -86,6 +89,7 @@ ul {
   flex-wrap: wrap;
   align-content: center;
   width: 100%;
+  padding: 0 0 0;
 }
 
 .infowindow {
