@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
+import {PersistGate} from 'redux-persist/es/integration/react';
 import "./App.css";
 
 import axios from "axios";
@@ -11,6 +12,7 @@ import NavBar from "./components/Nav/NavBar/NavBar";
 import Header from "./components/Nav/Header/Header";
 import Footer from "./components/Nav/Footer/Footer";
 import router from "./router";
+import store from "./store";
 
 class App extends Component {
   constructor(props) {
@@ -55,6 +57,7 @@ class App extends Component {
         {router}
         {/*<Footer />*/}
       </div>
+      
     );
   }
 }

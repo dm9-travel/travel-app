@@ -45,8 +45,11 @@ class MapResults extends Component {
 
      MapMethods.initMap.call(this, this.gmap, userLoc);
       //get lat lng for destinations of searchResults
-      
+    //   const cities = flightsData.map((cur, ind) => cur.destinationObj.CityName)
           let geocodePromises = []
+    //       for (let i = 0; i<cities.length; i++) {
+    //           axios.post('/api/getLocations', cities).then(response => self.coords = response.data)
+    //       }
           for (let i =0; i <10; i++) {
               geocodePromises.push( new Promise( (resolve, reject) => {
                   geocoder.geocode({'address': `${flightsData[i].destinationObj.CityName}, ${flightsData[i].destinationObj.CountryName} `}, function(results, status) {
