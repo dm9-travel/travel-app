@@ -1,3 +1,7 @@
 .search-inputs {
   padding: 2em 0;
 }
+
+.btn {
+  cursor: pointer;
+}

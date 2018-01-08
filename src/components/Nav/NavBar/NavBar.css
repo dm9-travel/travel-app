@@ -15,9 +15,20 @@
 }
 
 .navbar-brand {
+  font-family: "northregular";
   font-size: 1.6rem;
 }
 
 .navbar-dark {
   background-color: #000;
+}
+
+.nav-link {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: rgb(0, 0, 0, 0.1);
+}
+
+.avatar {
+  border: 1px solid #000;
 }

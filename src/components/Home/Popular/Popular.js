@@ -21,12 +21,11 @@ class Popular extends Component {
     render() {  
         return (
         <section className="container">
-            <div className="row pt-5 pb-4">
+            <div className="row pt-3 pb-4">
               <div className="w-80">
-                <h1 className="display-6">Explore the World</h1>
+                <h1 className="display-6">The most popular destinations</h1>
                 <p className="lead">
-                  This is a simple hero unit, a jumbotron component for
-                  calling extra attention to featured content.
+                  Find the perfect flight to one of the world's most visited cities
                 </p>
               </div>
             </div>

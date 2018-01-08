@@ -80,7 +80,7 @@ class PopularCard extends Component {
           //     </div>
           // </div>
           <div className="card bg-dark text-white h-100">
-            <img className="card-img" src={this.props.image} alt="Card image" />
+            <img className="card-img animated zoomIn" src={this.props.image} alt="Card image" />
             <div className="card-img-overlay d-flex flex-column flex-wrap justify-content-center align-items-center">
               <h1 className="card-title text-left">{this.props.city}</h1>
                 {this.state.flightList.length > 0 ?
