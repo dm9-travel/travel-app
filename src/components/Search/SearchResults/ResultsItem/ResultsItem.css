@@ -10,6 +10,10 @@
   padding: 0.25rem 1rem 0.25rem;
 }
 
+.card-body h3 {
+  font-family: 'Lato', sans-serif;
+}
+
 .card-img-overlay {
   padding: 0.5rem 1rem;
 }
@@ -22,9 +26,10 @@
   color: white;
   margin-bottom: 0.5rem;
   display: inline-block;
+  font-family: 'northregular', 'Dosis', 'Lato', sans-serif;
   font-size: 1.4rem;
   background-color: black;
-  padding: 0.25rem 1rem 0.25rem 0.5rem;
+  padding: 0.25rem 1rem 0.15rem 0.5rem;
   opacity: 0.8;
   margin-left: 0;
 }
@@ -35,7 +40,7 @@
   float: right;
   background-color: black;
   color: #46bcec;
-  padding: 0.25rem 0.5rem;
+  padding: 0.1rem 0.5rem 0.2rem;
   margin-top: 0.20rem;
   opacity: 0.8;
 }

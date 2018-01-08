@@ -44,10 +44,8 @@ class Trip extends Component {
           return <WatchlistItem price={quote.MinPrice} key={quote.QuoteId} outboundLeg={quote.OutboundLeg} inboundLeg={quote.InboundLeg} direct={quote.Direct} country={this.props.country}/>;
         });
 
-        const tripStyle = { width: "90%",padding:"1rem", margin:"1rem" };
-
         return (
-        <div className="bg-dark rounded" style={tripStyle}>
+        <div className="bg-dark rounded">
               <h4 className="text-light d-flex justify-content-between">
                 {this.props.originPlace} To {this.props.destinationPlace}
                 <span className="badge badge-light">

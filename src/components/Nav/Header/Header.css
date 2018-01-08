@@ -1,17 +1,24 @@
-.jumbotron {
+.jumbotron:before {
   background-image: url('https://images.unsplash.com/photo-1468296320602-73cc55315f25?auto=format&fit=crop&w=1212&q=80');
   background-color: #fff;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: bottom center;
+  background-position: bottom -50px center;
+  
+}
+
+.jumbotron {
   height: 80vh;
   padding-top: 1rem;
   position: relative;
+  background-size: cover;
+  background-repeat: no-repeat;
+  clip-path: polygon(0 0, 100% 0, 100% 93%, 0% 100%);
+  
+  
 }
 
 .location {
   position: absolute;
-  bottom: 1rem;
+  bottom: 3rem;
   padding-left: 1rem;
   background-color: #000;
   color: white;
@@ -19,10 +26,29 @@
 }
 
 .header-title {
-  padding-top: 4rem;
+  /* border: 1px solid black; */
+  height: 100%;
+}
+
+.header-title .display-3 {
+  font-family: "northregular";
+  font-size: 6rem;
+  color: white;
+  text-shadow: -4px -6px black;
+  /* -moz-text-fill-color: #fff;
+  -webkit-text-fill-color: #fff;
+  -moz-text-stroke-color: #000;
+  -webkit-text-stroke-color: #000;
+  -moz-text-stroke-width: 1px;  
+  -webkit-text-stroke-width: 1px; */
+}
+
+.header-title .w-80 {
+  width: 80%;
+  /* margin: -5rem auto 0; */
+  
 }
 
 .w-80 {
-  width: 80%;
   margin: 0 auto;
 }

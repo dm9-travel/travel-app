@@ -55,7 +55,7 @@ class Search extends Component {
     return (
       <form onSubmit={this.handleSubmit}>
       
-        <div className="row search-inputs">
+        <div className="row search-inputs mt-4">
           <div className="col-lg-4 mb-2">
             <div className="input-group input-group-lg">
               <input

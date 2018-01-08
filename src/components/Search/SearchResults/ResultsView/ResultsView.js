@@ -88,7 +88,7 @@ class ResultsView extends Component {
                 flightsArray={this.props.flights.flights}
               />
             </div>
-            <h6 className="text-left">Departure location: {this.props.users.userLocation.airport.PlaceName}, {this.props.users.userLocation.airport.CountryName} - Number of flights available: {this.props.flights.flights.length} - Budget:  GET VALUE</h6>
+            <h6 className="text-left">Departure location: {this.props.users.userLocation.airport.PlaceName}, {this.props.users.userLocation.airport.CountryName} - Number of flights available: {this.props.flights.flights.length}</h6>
             <div className="card-columns">{flightsList}</div>
           </div>
 
