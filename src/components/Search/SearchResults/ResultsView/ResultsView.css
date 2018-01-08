@@ -100,7 +100,7 @@ ul {
     font-weight: bold;
 }
 .active {
-  background: blue; 
+  background: blue!important; 
 }
 
 @media (min-width: 576px) {
