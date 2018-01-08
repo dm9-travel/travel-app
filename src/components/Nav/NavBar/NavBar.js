@@ -42,13 +42,13 @@ class NavBar extends Component {
     let containerType = 'container pl-0 pr-0';
     let greeting = username ? <h5>Welcome {this.props.users.currentUser.user_name}!</h5> : null
     let renderAuth = !username
-    let logoStyle = 'dark-logo';
+    let logoStyle = 'dark-logo animated rollIn';
 
 
     if (this.props.location.pathname !== '/') {
       containerType = 'container-fluid';
       navBarStyle = 'navbar sticky-top navbar-expand-lg navbar-dark';
-      logoStyle = 'logo'
+      logoStyle = 'logo rollIn'
     }
 
     // console.log(this.props.users.currentUser.user_name);
@@ -57,17 +57,17 @@ class NavBar extends Component {
       <nav className={navBarStyle}>
         <div className={containerType}>
           <img src={logo} className={logoStyle} alt="logo" />
-          <Link to="/" className="navbar-brand">Wayz</Link>
+          <Link to="/" className="navbar-brand">WAYZ</Link>
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
-          {greeting}
+          {/* {greeting} */}
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav ml-auto text-uppercase">
               <li className="nav-item mr-4">
                 <Link className="nav-link" to="/">Home <span className="sr-only">(current)</span></Link>
               </li>
-              <li className="nav-item mr-4">
+              <li className="nav-item mr-5">
                 <Link className="nav-link" to="/watchlist">Watchlist</Link>
               </li>
 
@@ -76,12 +76,12 @@ class NavBar extends Component {
 
                 {!this.props.users.currentUser.auth_id
                 ?
-                <li className="nav-item">
+                <li className="nav-item d-flex align-items-center ml-5">
                   <button className="btn btn-outline-primary log" onClick={this.handleLogin}>LOG IN</button>
                 </li>
                 :
-                <li className="nav-item">
-                  <img src={this.props.users.currentUser.user_picture} className="rounded-circle mr-4" height="40" alt="Avatar"></img>
+                <li className="nav-item d-flex align-items-center ml-5">
+                  <img src={this.props.users.currentUser.user_picture} className="avatar rounded-circle mr-4" height="40" alt="Avatar"></img>
                   <button className="btn btn-outline-danger log" onClick={this.handleLogout}>LOG OUT</button>
                 </li>
               }

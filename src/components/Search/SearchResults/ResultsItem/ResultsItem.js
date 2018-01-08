@@ -30,7 +30,9 @@ class Quote extends Component {
       originId: this.props.originId,
       carrierId: this.props.carrierId,
       time: "",
-      imageUrl: "https://openclipart.org/download/168858/sydney-skyline.svg",
+      imageUrl: "https://images.unsplash.com/photo-1452561802015-953ab78c4526?auto=format&fit=crop&w=1568&q=80",
+      
+      // imageUrl: "https://openclipart.org/download/168858/sydney-skyline.svg",
       duration: ""
     };
     this.handleClick = this.handleClick.bind(this);
@@ -40,7 +42,7 @@ class Quote extends Component {
     await this.setState({ time: getTime(), duration: getDuration() });
     // await axios.get(`/api/getImages/${this.state.cityName}`).then(response => {
     //   // console.log('CITY IMAGE: ', response);
-      // this.setState({ imageUrl: response.data });
+    //   this.setState({ imageUrl: response.data });
     // });
   }
 
