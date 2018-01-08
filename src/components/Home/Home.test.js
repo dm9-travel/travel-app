@@ -7,5 +7,5 @@ import renderer from "react-test-renderer";
 import Home from "./Home";
 
 test("Popular should render", () => {
-  configure(<Popular />);
+  expect(<Popular />);
 });
