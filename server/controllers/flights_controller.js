@@ -1,9 +1,14 @@
 const axios = require("axios");
 const moment = require("moment");
+const Geocodio = require('geocodio')
+
 require("dotenv").config();
 
 const key = process.env.KEY;
 const pixKey = process.env.PIXABAYKEY;
+const config = {
+  api_key: process.env.GEOCODIO_KEY
+}
 
 module.exports = {
   Get_Flights: (req, res, next) => {
@@ -195,6 +200,17 @@ module.exports = {
 
   },
    getLocations:(req, res, next)=>{
+     var geocodio = new Geocodio(config);
+     var coords = [];
+     var {
+       cities
+     } = req.body;
+
+     geocodio.post('geocode', cities, function(err, locations) {
+       if(err) throw err;
+      coords = locations.results.map((cur, ind) => cur.response.results[0].location)
+       res.status(200).send(coords)
+     })
      
    },
    Delete_Trip:(req,res,next)=>{
