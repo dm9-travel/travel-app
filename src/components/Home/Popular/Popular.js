@@ -4,7 +4,7 @@ import { Link, withRouter } from "react-router-dom";
 
 import {sendBudget} from "../../../ducks/user_reducer";
 import { getFlights, setSearch } from "../../../ducks/flights_reducer";
-import PopularCard from './PopularCard/PopularCard';
+import PopularCard from './PopularCard/PopularCard.js';
 import './Popular.css';
 
 class Popular extends Component {
