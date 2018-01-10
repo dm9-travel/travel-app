@@ -1,0 +1,44 @@
+{
+	"id": "d9a9ea23-cb20-6e96-7c69-41be73fc38b0",
+	"name": "Endpoint Testing - Connor",
+	"description": "",
+	"order": [
+		"f8e1e3a3-a9ff-b2d0-38c5-e8f97efececb"
+	],
+	"folders": [],
+	"folders_order": [],
+	"timestamp": 0,
+	"owner": "2965959",
+	"public": false,
+	"requests": [
+		{
+			"id": "f8e1e3a3-a9ff-b2d0-38c5-e8f97efececb",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:3001/api/getFlights",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": "const res = pm.response.json();\nconst req = pm.request.body\n\npm.test('description of test here', function() {\n  // What we want tested here\n  pm.response.to.have.status(200)\n})\npm.test('Response should be an array', function() {\n    pm.expect(Array.isArray(res)).to.eql(true);\n})\npm.test('All results should end in Mexico', function () {\n    let correctInfo = true;\n    for (var i = 0; i< res.length; i++) {\n        if (res[i].destinationObj.CountryName !== \"Mexico\") {\n            correctInfo = false;\n        }\n    }\n    pm.expect(correctInfo).to.eql(true)\n})\npm.test('All results should have same Origin Id', function() {\n    let correctInfo = true;\n    for (var i = 0; i<res.length; i++) {\n        if (res[i].OutboundLeg.OriginId != 47175) {\n            correctInfo =false;\n        }\n    }\n})\npm.test('All results should be below specified budget', function() {\n    let correctInfo = true;\n    for(var i = 0; i<res.length; i++) {\n        if (res[i].MinPrice > req.budget) {\n            correctInfo = false;\n        }\n    }\n})",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1515378656100,
+			"name": "POST - Flights to Mexico",
+			"description": "POST - Get flights only to Mexico, only from DFW for $1000",
+			"collectionId": "d9a9ea23-cb20-6e96-7c69-41be73fc38b0",
+			"responses": [],
+			"rawModeData": "{\n\t\"country\": \"US\",\n\t\"currency\": \"USD\",\n\t\"locale\": \"en-US\",\n\t\"originPlace\": \"DFWA-sky\",\n\t\"destinationPlace\": \"MX\",\n\t\"outboundPartialDate\": \"2018-01-31\",\n\t\"inboundPartialDate\": \"\",\n\t\"budget\": \"1000\"\n}"
+		}
+	]
+}
