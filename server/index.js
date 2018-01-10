@@ -17,6 +17,9 @@ const port = 3001;
 const userCtrl = require("./controllers/user_controller");
 const airportCtrl = require("./controllers/airport_controller");
 
+// Server build files
+app.use(express.static(`${__dirname}/../build`));
+
 // middleware
 app.use(json());
 app.use(cors());
@@ -46,7 +49,7 @@ passport.use(
       clientSecret: process.env.CLIENTSECRET,
       callbackURL: "/api/login"
     },
-    function(accessToken, refreshToken, extraParams, profile, done) {
+    function (accessToken, refreshToken, extraParams, profile, done) {
       app
         .get("db")
         .get_user_by_auth_id(profile.id)
@@ -72,24 +75,24 @@ passport.use(
   )
 );
 
-passport.serializeUser(function(user, done) {
+passport.serializeUser(function (user, done) {
   done(null, user);
 });
 
-passport.deserializeUser(function(obj, done) {
+passport.deserializeUser(function (obj, done) {
   done(null, obj);
 });
 
 app.get(
   "/api/login",
-  passport.authenticate("auth0", { successRedirect: "http://localhost:3000/" })
+  passport.authenticate("auth0", { successRedirect: process.env.SUCCESS_REDIRECT })
 );
-app.get("/api/logout", function(req, res) {
+app.get("/api/logout", function (req, res) {
   req.logout();
-  res.redirect("http://localhost:3000/");
+  res.redirect(process.env.SUCCESS_REDIRECT);
 });
 
-app.get("/api/me", function(req, res) {
+app.get("/api/me", function (req, res) {
 
   if (!req.user) return res.status(404).send();
 
@@ -106,13 +109,13 @@ app.get("/api/getWatchlist/:id", userCtrl.Get_Watchlist);
 app.get("/api/getImages/:id", flightCtrl.Get_Images);
 //get coordinates from results
 app.post('/api/getLocations', flightCtrl.getLocations);
-app.post("/api/getQuote",flightCtrl.Get_Quote);
-app.post("/api/addTrip",flightCtrl.Add_Trip);
+app.post("/api/getQuote", flightCtrl.Get_Quote);
+app.post("/api/addTrip", flightCtrl.Add_Trip);
 
-app.put("/api/deleteTrip",flightCtrl.Delete_Trip);
-app.delete("/api/trip/:id",flightCtrl.Delete_Trip);
+app.put("/api/deleteTrip", flightCtrl.Delete_Trip);
+app.delete("/api/trip/:id", flightCtrl.Delete_Trip);
 
-app.get("/api/getAirport",airportCtrl.Get_Airport);
+app.get("/api/getAirport", airportCtrl.Get_Airport);
 
 app.get("/api/test", (req, res, next) => {
   req.app
@@ -123,6 +126,11 @@ app.get("/api/test", (req, res, next) => {
     })
     .catch(console.log);
 });
+
+const path = require('path')
+app.get('*', (req, res)=>{
+  res.sendFile(path.join(__dirname, '../build/index.html'));
+})
 
 app.listen(port, () => {
   console.log(`Listening at port: ${port}`);
