@@ -7,7 +7,6 @@ import Trip from './Trip/Trip';
 import NavBar from "../Nav/NavBar/NavBar";
 
 import './Watchlist.css';
-require("dotenv").config();
 
 class Watchlist extends Component {
   constructor(props) {
@@ -19,7 +18,7 @@ class Watchlist extends Component {
     this.handleLogin = this.handleLogin.bind(this);
   }
   handleLogin() {
-    window.location.href = process.env.APP_URL + "/api/login";
+    window.location.href = "/api/login";
   }
   componentDidMount(props) {
     this.props
