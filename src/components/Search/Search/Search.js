@@ -13,7 +13,7 @@ class Search extends Component {
       country: "US",
       currency: "USD",
       locale: "en-US",
-      originPlace: "DFW",
+      originPlace: "",
       destinationPlace: "Anywhere",
       outboundPartialDate: "",
       inboundPartialDate: "",
