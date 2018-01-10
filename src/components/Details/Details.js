@@ -9,8 +9,6 @@ import flights, { addToWatchlist } from "../../ducks/flights_reducer";
 import NavBar from "../Nav/NavBar/NavBar";
 import "./Details.css";
 
-require("dotenv").config();
-
 class Details extends Component {
   constructor(props) {
     super(props);
@@ -26,7 +24,7 @@ class Details extends Component {
     this.handleLogin = this.handleLogin.bind(this);
   }
   handleLogin() {
-    window.location.href = "http://localhost:3001/api/login";
+    window.location.href = "/api/login";
   }
   handleClick() {
     if (!this.props.users.currentUser.user_id) {
