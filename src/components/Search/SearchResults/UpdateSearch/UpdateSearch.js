@@ -31,7 +31,7 @@ class UpdateSearch extends Component {
         this.handleClear = this.handleClear.bind(this)
     }
     componentDidMount() {
-
+ 
     }
     componentDidUpdate() {
 

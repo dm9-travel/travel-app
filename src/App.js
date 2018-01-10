@@ -18,36 +18,44 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      latitude: null,
-      longitude: null,
-      airport: {}
-    };
+      latitude: 32.777575399999996,
+      longitude: -96.7957301,
+      airport: {
+                 PlaceId: "DFWA-sky",
+                 PlaceName: "Dallas",
+                 CountryId: "US-sky",
+                 CityId: "DFWA-sky",
+                 CountryName: "United States"
+      }
+    }
   }
 
   componentDidMount() {
-    //find user position
-    if ("geolocation" in navigator) {
-      //geolocation is available
-      navigator.geolocation.getCurrentPosition(position => {
-        //Call getAirport endpoint on server
-        axios
-          .get(
-            `/api/getAirport?lat=${position.coords.latitude}&long=${
-              position.coords.longitude
-            }`
-          )
-          .then(response => {
-            this.setState({
-              latitude: position.coords.latitude,
-              longitude: position.coords.longitude,
-              airport: response.data
-            });
-          })
-          .then(() => {
-            this.props.getLocation(this.state);
-          });
-      });
-    }
+    
+      this.props.getLocation(this.state);
+
+    // if ("geolocation" in navigator) {
+    //   //geolocation is available
+    //   navigator.geolocation.getCurrentPosition(position => {
+    //     //Call getAirport endpoint on server
+    //     axios
+    //       .get(
+    //         `/api/getAirport?lat=${position.coords.latitude}&long=${
+    //           position.coords.longitude
+    //         }`
+    //       )
+    //       .then(response => {
+    //         this.setState({
+    //           latitude: position.coords.latitude,
+    //           longitude: position.coords.longitude,
+    //           airport: response.data
+    //         });
+    //       })
+    //       .then(() => {
+    //         this.props.getLocation(this.state);
+    //       });
+    //   });
+    // }
 
   }
 
