@@ -6,6 +6,8 @@ import { getWatchlist } from '../../ducks/user_reducer.js';
 import Trip from './Trip/Trip';
 import NavBar from "../Nav/NavBar/NavBar";
 
+require("dotenv").config();
+
 import './Watchlist.css';
 
 class Watchlist extends Component {
@@ -18,7 +20,7 @@ class Watchlist extends Component {
     this.handleLogin = this.handleLogin.bind(this);
   }
   handleLogin() {
-    window.location.href = "http://localhost:3001/api/login";
+    window.location.href = process.env.APP_URL + "/api/login";
   }
   componentDidMount(props) {
     this.props
