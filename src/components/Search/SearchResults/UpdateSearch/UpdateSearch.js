@@ -33,8 +33,8 @@ class UpdateSearch extends Component {
     componentDidMount() {
  
     }
-    componentDidUpdate() {
-
+    componentDidUpdate(prevProps, prev) {
+       
     }
     handleBudgetUpdate(val) {
         console.log('BUDGET: ', val);
@@ -45,7 +45,7 @@ class UpdateSearch extends Component {
     handleCountrySelect(val) {
 
         this.setState({ destinationPlace: val })
-        this.handleSubmit();
+        // this.handleSubmit();
 
     }
 
@@ -53,19 +53,7 @@ class UpdateSearch extends Component {
         var flightProps = this.props.flights.searchTerms;
         var countriesList = countries;
         var selectedCountry = countriesList.find(x => x.name == this.state.destinationPlace)
-        // if(flightProps.destinationPlace == this.state.destinationPlace && flightProps.budget !== this.state.budget) {
-        //     this.props.getFlights(this.state)
-        // } else if (flightProps.destinationPlace !== this.state.destinationPlace && flightProps.budget == this.state.budget) {
-        //     this.props.filterFlights(this.state.destinationPlace)
-        // }
-        // else if (flightProps.destinationPlace !== this.state.destinationPlace && flightProps.budget !== this.state.budget) {
-
-        //     this.setState({
-        //         destinationPlace: selectedCountry.code
-        //     }, this.props.getFlights(this.state))
-
-        //     // this.props.history.push('/searchResults');
-        // }  
+         
         if (flightProps.budget != this.state.budget) {
             if (this.state.destinationPlace == "Anywhere") {
                 this.props.getFlights(this.state)
@@ -108,8 +96,9 @@ class UpdateSearch extends Component {
       }
 
     render() {
-        var countriesOptions = this.props.flights.flights.map((cur, ind) => {
-            return <option value={cur.destinationObj.CountryName} key={ind} >{cur.destinationObj.CountryName}</option>
+        var countriesOnly = this.props.flights.flights.map(cur => cur.destinationObj.CountryName)
+        var countriesOptions = [...(new Set(countriesOnly))].map((cur, ind) => {
+            return <option value={cur} key={ind} >{cur}</option>
         })
 
         const marks = {
@@ -138,7 +127,7 @@ class UpdateSearch extends Component {
                     </div>
                     <div className="col-lg-3 pl-0">
                         <SliderWithTooltip
-                            defaultValue={this.state.budget}
+                            defaultValue={this.props.flights.searchTerms.budget}
                             min={0} max={1500}
                             tipFormatter={this.currencyFormatter}
                             tipProps={ {placement: 'top', prefixCls: 'rc-slider-tooltip'} }
@@ -146,11 +135,13 @@ class UpdateSearch extends Component {
                             // dots
                             step={50}
                             onChange={this.handleBudgetUpdate}
-                            onAfterChange={this.handleSubmit}
+                            
                         />
                         
                     </div>
+                    
                     <div className="col-lg-2 pl-0 text-right">
+                        <button className="btn btn-outline-dark" onClick={this.handleSubmit} >Apply Filters</button>
                         <button className="btn btn-outline-dark" onClick={this.handleClear} >Clear Filters</button>
                     </div>
                 </div>
