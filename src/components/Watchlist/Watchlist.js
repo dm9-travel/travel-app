@@ -6,9 +6,8 @@ import { getWatchlist } from '../../ducks/user_reducer.js';
 import Trip from './Trip/Trip';
 import NavBar from "../Nav/NavBar/NavBar";
 
-require("dotenv").config();
-
 import './Watchlist.css';
+require("dotenv").config();
 
 class Watchlist extends Component {
   constructor(props) {
