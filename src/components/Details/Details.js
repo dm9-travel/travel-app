@@ -9,8 +9,7 @@ import flights, { addToWatchlist } from "../../ducks/flights_reducer";
 import NavBar from "../Nav/NavBar/NavBar";
 import "./Details.css";
 
-
-console.log('PIXKEY: ', process.env.PIXABAYKEY);
+require("dotenv").config();
 
 class Details extends Component {
   constructor(props) {
