@@ -52,3 +52,27 @@
 .w-80 {
   margin: 0 auto;
 }
+
+/* Responsive breakpoints  */
+
+@media (max-width: 800px) {
+  .header-title .display-3 {
+      font-size: 5rem;
+  }
+}
+
+@media (max-width: 500px) {
+  .header-title .display-3 {
+      font-size: 4rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .header-title .display-3 {
+      font-size: 3rem;
+  }
+
+  .jumbotron {
+    height: 80vh;
+  }
+}
