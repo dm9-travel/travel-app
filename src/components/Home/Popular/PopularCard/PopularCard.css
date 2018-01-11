@@ -1,3 +1,15 @@
+.popular-card {
+  background-image: url('https://images.unsplash.com/photo-1479660095429-2cf4e1360472?auto=format&fit=crop&w=951&q=80');
+  background-size: cover;
+  height: 100px;
+  margin-bottom: 2rem;
+}
+
+.card-img {
+  background-size: cover;
+  height: 100%;
+}
+
 .card-price{
     color:white;
     text-align: center;
@@ -10,7 +22,7 @@
 }
 .card{
   border-radius: 5px;
-  margin-bottom: 2rem !important;
+  /* margin-bottom: 2rem !important; */
 }
 .custom-button{
   width:7.5rem;

@@ -69,8 +69,6 @@ class Header extends Component {
         <div className="container header-title d-flex align-items-center">
           <div className="w-80">
             <h1 className="display-3 animated fadeInUp">Explore the World</h1>
-            {/* <p className="lead">This is a simple hero unit, a jumbotron component for calling extra attention to featured content.</p> */}
-
             <Search />
           </div>
         </div>
