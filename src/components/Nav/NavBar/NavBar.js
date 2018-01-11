@@ -6,8 +6,6 @@ import { requestUser, getWatchlist } from '../../../ducks/user_reducer';
 import logo from './logo.svg';
 import './NavBar.css';
 
-require("dotenv").config();
-
 class NavBar extends Component {
   constructor(props) {
     super(props);
@@ -22,12 +20,12 @@ class NavBar extends Component {
   }
 
    handleLogin() {
-    window.location.href = process.env.APP_URL + "/api/login";
+    window.location.href = "/api/login";
     this.props.getWatchlist(this.props.currentUser[0].user_id);
   }
 
   handleLogout() {
-    window.location.href = process.env.APP_URL + "/api/logout";
+    window.location.href = "/api/logout";
   }
 
   componentDidMount() {
