@@ -1,0 +1,80 @@
+{
+	"id": "75024b7d-eb83-07e7-c05b-862b35f66c5a",
+	"name": "Jacks-Endpoint-Tests",
+	"description": "",
+	"order": [
+		"cee034a9-5ad1-2930-d39b-a0df0d4cdc62"
+	],
+	"folders": [],
+	"folders_order": [],
+	"timestamp": 1515692145095,
+	"owner": "2965980",
+	"public": false,
+	"events": [],
+	"variables": [],
+	"auth": null,
+	"requests": [
+		{
+			"id": "cee034a9-5ad1-2930-d39b-a0df0d4cdc62",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:3001/api/getFlights",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"events": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e7ecaf34-49b3-408a-82db-9dea4f68b3c6",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"response is ok\", function() {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"response body has json with form data\", function (){",
+							"    pm.response.to.have.jsonBody;",
+							"});",
+							"pm.test(\"response should be okay to process\", function () { ",
+							"    pm.response.to.not.be.error; ",
+							"    ",
+							"});",
+							"pm.test(\"response should be okay to process\", function () { ",
+							"    pm.response.to.have.jsonBody(\"\"); ",
+							"});",
+							"pm.test(\"response should be okay to process\", function () { ",
+							"    pm.response.to.not.have.jsonBody(\"error\"); ",
+							"});",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"auth": null,
+			"method": "POST",
+			"collectionId": "75024b7d-eb83-07e7-c05b-862b35f66c5a",
+			"data": [],
+			"dataMode": "raw",
+			"name": "Get Flights Endpoint Testing",
+			"description": "Testing File",
+			"descriptionFormat": "html",
+			"time": 1515692147100,
+			"version": 2,
+			"responses": [],
+			"preRequestScript": null,
+			"tests": "pm.test(\"response is ok\", function() {\n    pm.response.to.have.status(200);\n});\n\npm.test(\"response body has json with form data\", function (){\n    pm.response.to.have.jsonBody;\n});\npm.test(\"response should be okay to process\", function () { \n    pm.response.to.not.be.error; \n    \n});\npm.test(\"response should be okay to process\", function () { \n    pm.response.to.have.jsonBody(\"\"); \n});\npm.test(\"response should be okay to process\", function () { \n    pm.response.to.not.have.jsonBody(\"error\"); \n});\n\n",
+			"currentHelper": null,
+			"helperAttributes": null,
+			"rawModeData": "{\n\t\"country\": \"US\",\n\t\"currency\": \"USD\",\n\t\"locale\": \"en-US\",\n\t\"originPlace\": \"DFW\",\n\t\"destinationPlace\" : \"Anywhere\",\n\t\"outboundPartialDate\": \"2018-03-03\",\n\t\"budget\": 300\n\t\n}"
+		}
+	]
+}
