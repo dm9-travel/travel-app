@@ -18,7 +18,7 @@ class Watchlist extends Component {
     this.handleLogin = this.handleLogin.bind(this);
   }
   handleLogin() {
-    window.location.href = "http://localhost:3001/api/login";
+    window.location.href = "/api/login";
   }
   componentDidMount(props) {
     this.props

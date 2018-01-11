@@ -20,12 +20,12 @@ class NavBar extends Component {
   }
 
    handleLogin() {
-    window.location.href = "http://localhost:3001/api/login";
+    window.location.href = "/api/login";
     this.props.getWatchlist(this.props.currentUser[0].user_id);
   }
 
   handleLogout() {
-    window.location.href = 'http://localhost:3001/api/logout';
+    window.location.href = "/api/logout";
   }
 
   componentDidMount() {
