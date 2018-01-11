@@ -52,7 +52,7 @@ class Quote extends Component {
 
   render() {
     return (
-      <div className="card cart-title-bg text-left rounded-0">
+      <div className="card cart-title-bg text-left rounded-0 mb-4">
         <Link to="/details/" onClick={this.handleClick}>
         
         <div className="img-gradient">

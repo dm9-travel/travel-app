@@ -109,3 +109,16 @@ ul {
   }
 }
 
+@media screen and (max-width: 785px) {
+  #map-view {
+    display: none;
+  }
+
+  #results-view {
+    width: 100%;
+  }
+
+  .container {
+    max-width: 100%;
+  }
+} 

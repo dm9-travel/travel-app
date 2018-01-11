@@ -7,6 +7,7 @@ import Trip from './Trip/Trip';
 import NavBar from "../Nav/NavBar/NavBar";
 
 import './Watchlist.css';
+require("dotenv").config();
 
 class Watchlist extends Component {
   constructor(props) {
