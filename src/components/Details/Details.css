@@ -54,3 +54,15 @@ main {
   cursor: pointer;
   width: 12rem;
 }
+
+
+/* Responsive breakpoints */
+
+@media (max-width: 375px) {
+  .display-3 {
+    font-size: 3rem;
+  }
+  .details-main .btn {
+    width: 10rem;
+  }
+}
